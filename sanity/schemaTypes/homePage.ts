@@ -57,7 +57,8 @@ export const homePage = defineType({
 
     // 4 · Experience
     s("expTitle", "Section title", "experience"),
-    defineField({ name: "statNumber", title: "Pipeline figure (in millions of dollars)", type: "number", group: "experience", description: "Shown as $55M+ in English and +55 M$ in French." }),
+    s("statText", "Pipeline figure (text)", "experience", "Shown large next to the Experience title, e.g. Multimillion."),
+    defineField({ name: "statNumber", title: "Pipeline figure (old number)", type: "number", group: "experience", hidden: true }),
     s("statLabel", "Label next to the figure", "experience"),
     s("expLink", "Button label", "experience"),
     defineField({

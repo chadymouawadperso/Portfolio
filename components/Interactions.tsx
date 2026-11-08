@@ -5,7 +5,7 @@ import type { Lang } from "@/lib/i18n";
 
 // Page-wide behaviour: section reveal, the continuous blue thread, the pipeline counter,
 // the portrait parallax and the CV placeholder note. Renders nothing itself.
-export default function Interactions({ lang, stat = 55 }: { lang: Lang; stat?: number }) {
+export default function Interactions({ lang }: { lang: Lang }) {
   useEffect(() => {
     const root = document.documentElement;
     root.classList.add("js");
@@ -47,24 +47,6 @@ export default function Interactions({ lang, stat = 55 }: { lang: Lang; stat?: n
       window.addEventListener("pointermove", onMove, { passive: true });
       cleanups.push(() => window.removeEventListener("pointermove", onMove));
     }
-
-    /* Pipeline counter */
-    const statEl = document.getElementById("stat");
-    const fmt = (n: number) => (lang === "fr" ? "+" + n + " M$" : "$" + n + "M+");
-    let statDone = false;
-    const countUp = () => {
-      if (statDone || !statEl) return;
-      statDone = true;
-      if (reduce) return;
-      let t0 = 0;
-      const step = (t: number) => {
-        if (!t0) t0 = t;
-        const k = Math.min(1, (t - t0) / 1400), e = 1 - Math.pow(1 - k, 3);
-        statEl.textContent = fmt(Math.round(stat * e));
-        if (k < 1) requestAnimationFrame(step);
-      };
-      requestAnimationFrame(step);
-    };
 
     /* The thread: one continuous line through the page (large screens) */
     const NS = "http://www.w3.org/2000/svg";
@@ -136,8 +118,6 @@ export default function Interactions({ lang, stat = 55 }: { lang: Lang; stat?: n
           }
         });
       } else litBySection();
-      const exp = document.getElementById("experience");
-      if (exp && exp.getBoundingClientRect().top < vh * 0.7) countUp();
     };
     let ticking = false;
     const onScrollRaf = () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; onScroll(); }); } };
@@ -155,7 +135,7 @@ export default function Interactions({ lang, stat = 55 }: { lang: Lang; stat?: n
     });
 
     return () => cleanups.forEach((c) => c());
-  }, [lang, stat]);
+  }, [lang]);
 
   return null;
 }

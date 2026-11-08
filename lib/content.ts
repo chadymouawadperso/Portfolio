@@ -18,7 +18,6 @@ export type Content = {
   t: Dict;
   links: Links;
   portrait: string;
-  stat: number;
   experiences: Experience[];
   featured: { title: string; url: string };
   more: [string, string][];
@@ -62,7 +61,7 @@ export async function getContent(lang: Lang): Promise<Content> {
     set("hero_lead", h.heroLead); set("cta_connect", h.ctaConnect);
     set("sys_title", h.sysTitle); set("sys_intro", h.sysIntro); set("view_framework", h.viewFramework);
     set("think_a", h.thinkA); set("think_b", h.thinkB); set("think_p1", h.thinkP1); set("think_p2", h.thinkP2); set("think_link", h.thinkLink);
-    set("exp_title", h.expTitle); set("pl_stat", h.statLabel); set("exp_link", h.expLink);
+    set("exp_title", h.expTitle); set("pl_big", h.statText); set("pl_stat", h.statLabel); set("exp_link", h.expLink);
     set("pb_feat", h.pbFeatLabel); set("pb_sum", h.featuredSummary); set("pb_read", h.pbRead); set("pb_how", h.pbHow); set("pb_more", h.pbMore);
     set("c_title", h.cTitle); set("c_body", h.cBody); set("c_btn", h.cBtn);
     const caps = (h.capabilities as { line1?: L; line2?: L; description?: L }[] | undefined) ?? [];
@@ -122,7 +121,6 @@ export async function getContent(lang: Lang): Promise<Content> {
     t,
     links,
     portrait: imgUrl(hm.portrait, 900) ?? "/assets/portrait.webp",
-    stat: typeof hm.statNumber === "number" ? hm.statNumber : 55,
     experiences: exps.length ? exps : fallbackExp,
     featured: {
       title: str(hm.featuredTitle) ?? "The High-Intent Website Visitor Engine",

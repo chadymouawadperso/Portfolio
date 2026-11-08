@@ -36,7 +36,8 @@ const dict = {
         ["Intent &|Buying Signals","Reading behavioral and account-level data to see which companies are actively evaluating."],
         ["Sales|Activation","Turning buying signals into timely, relevant outreach and qualified sales conversations."]
       ],
-      pb:["Intent taxonomy","Website signal analysis","Account matching","Buying committee mapping","Signal scoring","Automated activation","Sales routing"]
+      pb:["Intent taxonomy","Website signal analysis","Account matching","Buying committee mapping","Signal scoring","Automated activation","Sales routing"],
+      pl_big:"Multimillion"
     },
     fr:{
       a_top:"Chady Mouawad, retour en haut", a_main:"Navigation principale", a_lang:"Langue", a_mobile:"Menu mobile", a_footer:"Pied de page", a_logo_an:"Logo Atelier N", a_logo_wm:"Logo Wminded", a_logo_pl:"Logo Protolabs", a_portrait:"Chady Mouawad, GTM Engineer", m_title:"Chady Mouawad · GTM Engineer", m_desc:"Chady Mouawad, GTM Engineer. Je conçois des systèmes go-to-market qui alignent marketing et sales sur les comptes les plus susceptibles d’acheter.",
@@ -72,7 +73,8 @@ const dict = {
         ["Intention &|signaux d’achat","Lire la data comportementale et account-level pour voir quelles entreprises sont en phase d’évaluation."],
         ["Activation|commerciale","Transformer les signaux d’achat en prises de contact pertinentes et en conversations commerciales qualifiées."]
       ],
-      pb:["Taxonomie de l’intention","Analyse des signaux web","Matching des comptes","Cartographie du comité d’achat","Scoring des signaux","Activation automatisée","Routage vers l’équipe sales"]
+      pb:["Taxonomie de l’intention","Analyse des signaux web","Matching des comptes","Cartographie du comité d’achat","Scoring des signaux","Activation automatisée","Routage vers l’équipe sales"],
+      pl_big:"Plusieurs millions"
     }
   
 } as const;

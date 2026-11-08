@@ -8,8 +8,7 @@ import Footer from "./Footer";
 import { ArrowDown, ArrowRight, ArrowUpRight } from "./Icons";
 
 export default async function Home({ lang }: { lang: Lang }) {
-  const { t, links: LINKS, portrait, stat: statN, experiences, featured, more } = await getContent(lang);
-  const stat = lang === "fr" ? `+${statN}\u202fM$` : `$${statN}M+`;
+  const { t, links: LINKS, portrait, experiences, featured, more } = await getContent(lang);
   const cvHref = LINKS.cv || "#cv";
 
   const CtaRow = ({ linkedinLabel }: { linkedinLabel: string }) => (
@@ -112,7 +111,7 @@ export default async function Home({ lang }: { lang: Lang }) {
             <div className="sec-head" data-reveal>
               <h2 className="display" id="exp-title">{t.exp_title}</h2>
               <div className="sec-head-side">
-                <div className="stat" style={{ marginTop: "-.38em" }}><strong id="stat">{stat}</strong><span>{t.pl_stat}</span></div>
+                <div className="stat" style={{ marginTop: "-.38em" }}><strong>{t.pl_big}</strong><span>{t.pl_stat}</span></div>
                 <a className="link-arrow" href={LINKS.experience}><span>{t.exp_link}</span><ArrowRight /></a>
               </div>
             </div>
@@ -177,7 +176,7 @@ export default async function Home({ lang }: { lang: Lang }) {
 
       <Footer t={t} links={LINKS} />
 
-      <Interactions lang={lang} stat={statN} />
+      <Interactions lang={lang} />
     </>
   );
 }
