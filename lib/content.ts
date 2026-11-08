@@ -3,6 +3,7 @@ import { createImageUrlBuilder } from "@sanity/image-url";
 import { apiVersion, dataset, projectId } from "@/sanity/env";
 import { getDict, LINKS, type Dict, type Lang } from "./i18n";
 import { methodCopy, type MethodDict, type MethodKey } from "./methodology-copy";
+import { expCopy, type ExpDict, type ExpKey } from "./experience-copy";
 
 const client = createClient({ projectId, dataset, apiVersion, useCdn: true, perspective: "published" });
 const img = createImageUrlBuilder({ projectId, dataset });
@@ -86,7 +87,7 @@ export async function getContent(lang: Lang): Promise<Content> {
   const links: Links = {
     linkedin: str(st.linkedin) ?? LINKS.linkedin,
     methodology: lang === "fr" ? "/fr/methodology" : "/methodology",
-    experience: str(st.experienceUrl) ?? LINKS.experience,
+    experience: lang === "fr" ? "/fr/experience" : "/experience",
     playbooks: str(st.playbooksUrl) ?? LINKS.playbooks,
     about: str(st.aboutUrl) ?? LINKS.about,
     cv: str(st.cvUrl) ?? LINKS.cv,
@@ -170,4 +171,55 @@ export async function getMethodology(lang: Lang): Promise<MethodContent> {
       google: im(doc?.imgGoogle, DEFAULT_IMAGES.google),
     },
   };
+}
+
+export type ExpImage = { src: string; alt: string };
+export type ExpContent = { base: Content; x: ExpDict; images: Record<"pl" | "wm" | "an", ExpImage[]> };
+
+const EXP_IMAGES: Record<"pl" | "wm" | "an", [string, string, string][]> = {
+  pl: [
+    ["fa75ab10f31b9324bb712c259aca21242e74ee1f", "3D-printed anatomical skull model", "Modèle de crâne anatomique imprimé en 3D"],
+    ["d375826c2de40f182022dabf34d23a1405d6f1f8", "Drone built with manufactured parts", "Drone réalisé avec des pièces fabriquées"],
+    ["eec67ee0e36cd8f1dfec77bbf7766b961c710282", "Robot vehicle prototype", "Prototype de véhicule robotisé"],
+  ],
+  wm: [
+    ["56d700ec94ada850b1dbd574d845f1da8b3ed543", "Website design work", "Travail de design web"],
+    ["fb61aebce8c7ba2e2a99bc225fe306db6d3dd164", "E-commerce shopping cart", "Panier e-commerce"],
+    ["e1536f86a0304498162120bda37689383fcf9ab8", "Performance marketing dashboard", "Tableau de bord de marketing de performance"],
+  ],
+  an: [
+    ["2179fc3da416a31df07eeb76a1427de6d955fe64", "Atelier N white hoodie", "Hoodie blanc Atelier N"],
+    ["861150a19cada23300acd3d5f7c927b74d736ec9", "Atelier N sportswear", "Vêtements de sport Atelier N"],
+    ["d7c7fce079603543405f5515df80eb1260fdf35c", "Atelier N black hoodie", "Hoodie noir Atelier N"],
+  ],
+};
+
+/** Experience page content for one language: Sanity first, built-in copy as a fallback. */
+export async function getExperience(lang: Lang): Promise<ExpContent> {
+  const base = await getContent(lang);
+  const x = { ...expCopy[lang] } as ExpDict;
+  let doc: Record<string, unknown> | null = null;
+  try {
+    doc = await client.fetch<Record<string, unknown> | null>(`*[_id == "experiencePage"][0]`, {});
+  } catch {
+    // Sanity unreachable: built-in copy.
+  }
+  if (doc) {
+    (Object.keys(x) as ExpKey[]).forEach((k) => {
+      const v = (doc![k] as L)?.[lang];
+      if (typeof v === "string" && v.trim()) x[k] = v;
+    });
+  }
+  const images = {} as ExpContent["images"];
+  (["pl", "wm", "an"] as const).forEach((co) => {
+    images[co] = EXP_IMAGES[co].map(([id, en, fr], i) => {
+      const field = doc?.[`img_${co}${i + 1}`] as (Img & { alt?: L }) | undefined;
+      const src = field?.asset?._ref
+        ? img.image(field as never).width(420).height(420).fit("crop").auto("format").quality(82).url()
+        : `${CDN}${id}-500x500.webp?w=420&fm=webp`;
+      const alt = (field?.alt as L)?.[lang] || (lang === "fr" ? fr : en);
+      return { src, alt };
+    });
+  });
+  return { base, x, images };
 }

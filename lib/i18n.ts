@@ -98,7 +98,7 @@ export function getDict(lang: Lang): Dict {
 export const LINKS = {
   linkedin: "https://www.linkedin.com/in/chady-mouawad-marketing/",
   methodology: "/methodology",
-  experience: "https://chadymouawad.com/experience/",
+  experience: "/experience",
   playbooks: "https://chadymouawad.com/gtm-playbooks/",
   about: "https://chadymouawad.com/about/",
   featured: "https://chadymouawad.com/gtm-playbooks/high-intent-website-visitor-engine/",

@@ -18,5 +18,5 @@ Run locally: `npm install`, then `npm run dev`.
 - Editor: `/studio` on the site (log in with your Sanity account).
 - Project ID `t88q36f5`, dataset `production`. Schema: `sanity/schemaTypes`.
 - Published changes appear on the site within about a minute (pages refresh every 60 seconds).
-- Documents: Homepage, Methodology page (`/methodology`, `/fr/methodology`) and Site settings.
-- If Sanity is unreachable, the site falls back to the built-in copy in `lib/i18n.ts` (homepage, header, footer) and `lib/methodology-copy.ts` (Methodology page).
+- Documents: Homepage, Methodology page (`/methodology`, `/fr/methodology`), Experience page (`/experience`, `/fr/experience`) and Site settings.
+- If Sanity is unreachable, the site falls back to the built-in copy in `lib/i18n.ts` (homepage, header, footer) , `lib/methodology-copy.ts` (Methodology) and `lib/experience-copy.ts` (Experience).

@@ -1,3 +1,4 @@
+import "../../inner.css";
 import "../../methodology.css";
 import Methodology from "@/components/Methodology";
 import { methodMetadata } from "@/lib/meta";

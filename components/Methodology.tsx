@@ -2,7 +2,7 @@ import type { Lang } from "@/lib/i18n";
 import { getMethodology } from "@/lib/content";
 import Header from "./Header";
 import Footer from "./Footer";
-import MethodInteractions from "./MethodInteractions";
+import PageInteractions from "./PageInteractions";
 import { ArrowRight, ArrowUpRight } from "./Icons";
 
 const PATHS = { en: "/methodology", fr: "/fr/methodology" };
@@ -310,7 +310,7 @@ export default async function Methodology({ lang }: { lang: Lang }) {
       </main>
 
       <Footer t={t} links={links} />
-      <MethodInteractions lang={lang} />
+      <PageInteractions lang={lang} />
     </>
   );
 }

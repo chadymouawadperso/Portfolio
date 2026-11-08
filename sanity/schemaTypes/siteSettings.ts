@@ -19,7 +19,7 @@ export const siteSettings = defineType({
     s("cvLabel", "CV button label", "links"),
     s("cvNote", "Note shown while the CV is not available", "links"),
     defineField({ name: "methodologyUrl", title: "Methodology page link", type: "url", group: "links", hidden: true }), // the page now lives on this site
-    defineField({ name: "experienceUrl", title: "Experience page link", type: "url", group: "links" }),
+    defineField({ name: "experienceUrl", title: "Experience page link", type: "url", group: "links", hidden: true }), // the page now lives on this site
     defineField({ name: "playbooksUrl", title: "GTM Playbooks page link", type: "url", group: "links" }),
     defineField({ name: "aboutUrl", title: "About page link", type: "url", group: "links" }),
 

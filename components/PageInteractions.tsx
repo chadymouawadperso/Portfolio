@@ -3,9 +3,9 @@
 import { useEffect } from "react";
 import type { Lang } from "@/lib/i18n";
 
-// Methodology page behaviour: section reveal, one-time scroll moments (stages, map, table,
-// sequence, loop), the blue thread on desktop and the CV placeholder note. Renders nothing.
-export default function MethodInteractions({ lang }: { lang: Lang }) {
+// Inner-page behaviour (Methodology, Experience): section reveal, one-time scroll moments,
+// the blue thread on desktop and the CV placeholder note. Elements a page lacks are skipped. Renders nothing.
+export default function PageInteractions({ lang }: { lang: Lang }) {
   useEffect(() => {
     const root = document.documentElement;
     root.classList.add("js");
@@ -36,8 +36,10 @@ export default function MethodInteractions({ lang }: { lang: Lang }) {
     once(stages, () => later(() => stages?.classList.add("lit"), reduce ? 0 : 500), "0px");
     const map = $("#map");
     once(map, () => map?.classList.add("drawn"));
-    const ba = $("#ba");
-    once(ba, () => ba?.classList.add("in"));
+    ["#ba", "#envs", "#funnel", "#build"].forEach((sel) => {
+      const el = $(sel);
+      once(el, () => el?.classList.add("in"));
+    });
 
     /* Table: bars fill and scores count up */
     const panel = $("#panel");
