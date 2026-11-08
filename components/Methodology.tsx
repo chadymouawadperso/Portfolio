@@ -87,7 +87,8 @@ export default async function Methodology({ lang }: { lang: Lang }) {
             <h2 className="display think-title" id="p-title" data-reveal>
               <span className="tl">{m.p_a}</span><em className="tl">{m.p_b}</em>
             </h2>
-            <p className="think-sub" data-reveal><b>{m.p_1a}</b> <span>{m.p_1b}</span></p>
+            <p className="subtitle" data-reveal>{m.p_1a}</p>
+            <p className="think-sub" data-reveal>{m.p_1b}</p>
             <figure className="ba" id="ba" data-reveal>
               <div className="ba-panel">
                 <svg viewBox="0 0 420 300" className="ba-svg" aria-hidden="true">
@@ -122,6 +123,7 @@ export default async function Methodology({ lang }: { lang: Lang }) {
               <div className="lead-l">
                 <p className="kicker" data-anchor>{m.st1}</p>
                 <h2 className="display" id="c1-title"><span className="tl">{m.c1_a}</span><span className="tl">{m.c1_b}</span></h2>
+                {m.c1_sub ? <p className="subtitle">{m.c1_sub}</p> : null}
               </div>
             </div>
             <div className="expo">
@@ -184,6 +186,7 @@ export default async function Methodology({ lang }: { lang: Lang }) {
               <div className="lead-l">
                 <p className="kicker" data-anchor>{m.st2}</p>
                 <h2 className="display" id="c2-title"><span className="tl">{m.c2_a}</span><span className="tl">{m.c2_b}</span></h2>
+                {m.c2_sub ? <p className="subtitle">{m.c2_sub}</p> : null}
               </div>
             </div>
             <div className="sig">

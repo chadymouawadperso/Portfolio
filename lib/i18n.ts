@@ -12,7 +12,7 @@ const dict = {
       view_framework:"View Framework",
       think_a:"Growth isn’t a channel problem.", think_b:"It’s a system problem.",
       think_p1:"Most marketing underperforms not because of its channels, but because of the structure behind them. Ads, campaigns, and ABM run in isolation create activity. They rarely create pipeline.",
-      think_p2:"So I start with the structure: who to target, how accounts are prioritised, how marketing and sales share signals, and how results are measured. Then the channels have something to scale.",
+      think_p2:"So I start with the structure: who to target, how accounts are prioritized, how marketing and sales share signals, and how results are measured. Then the channels have something to scale.",
       think_link:"The thinking behind this",
       exp_title:"Where I apply this thinking", exp_link:"See how it’s applied", pl_stat:"Pipeline influenced",
       an_t:"Building a brand and its growth engine from scratch",
@@ -22,7 +22,7 @@ const dict = {
       pl_t:"Designing multi-market GTM systems across Europe",
       pl_d:"Combined paid media, ABM, and outbound into one structured approach across Europe to improve sales alignment and pipeline.",
       pb_feat:"Featured GTM playbook",
-      pb_sum:"How to turn anonymous website visits into sales opportunities: spot high-intent behaviour, prioritise the right accounts, and alert sales while interest is still live.",
+      pb_sum:"How to turn anonymous website visits into sales opportunities: spot high-intent behavior, prioritize the right accounts, and alert sales while interest is still live.",
       pb_read:"Read the playbook", pb_more:"More GTM playbooks", pb_how:"How the engine works",
       c_title:"Some conversations are worth having.",
       c_body:"If you are building or scaling a go-to-market engine and want a sparring partner on its structure, I’m always open to a conversation.",
@@ -33,7 +33,7 @@ const dict = {
         ["Market|Segmentation","Defining the markets, accounts, and buyer profiles worth the budget, and saying no to the rest."],
         ["Demand|Generation","Building awareness with the right accounts before they are in market, so you are on the shortlist."],
         ["Channel|Orchestration","Running paid media, outreach, and ABM as one coordinated play instead of separate campaigns."],
-        ["Intent &|Buying Signals","Reading behavioural and account-level data to see which companies are actively evaluating."],
+        ["Intent &|Buying Signals","Reading behavioral and account-level data to see which companies are actively evaluating."],
         ["Sales|Activation","Turning buying signals into timely, relevant outreach and qualified sales conversations."]
       ],
       pb:["Intent taxonomy","Website signal analysis","Account matching","Buying committee mapping","Signal scoring","Automated activation","Sales routing"]
