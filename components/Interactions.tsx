@@ -5,7 +5,7 @@ import type { Lang } from "@/lib/i18n";
 
 // Page-wide behaviour: section reveal, the continuous blue thread, the pipeline counter,
 // the portrait parallax and the CV placeholder note. Renders nothing itself.
-export default function Interactions({ lang }: { lang: Lang }) {
+export default function Interactions({ lang, stat = 55 }: { lang: Lang; stat?: number }) {
   useEffect(() => {
     const root = document.documentElement;
     root.classList.add("js");
@@ -60,7 +60,7 @@ export default function Interactions({ lang }: { lang: Lang }) {
       const step = (t: number) => {
         if (!t0) t0 = t;
         const k = Math.min(1, (t - t0) / 1400), e = 1 - Math.pow(1 - k, 3);
-        statEl.textContent = fmt(Math.round(55 * e));
+        statEl.textContent = fmt(Math.round(stat * e));
         if (k < 1) requestAnimationFrame(step);
       };
       requestAnimationFrame(step);
@@ -155,7 +155,7 @@ export default function Interactions({ lang }: { lang: Lang }) {
     });
 
     return () => cleanups.forEach((c) => c());
-  }, [lang]);
+  }, [lang, stat]);
 
   return null;
 }

@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 import type { Dict, Lang } from "@/lib/i18n";
-import { LINKS } from "@/lib/i18n";
+import type { Links } from "@/lib/content";
 import { Monogram } from "./Icons";
 
-export default function Header({ t, lang }: { t: Dict; lang: Lang }) {
+export default function Header({ t, lang, links: LINKS }: { t: Dict; lang: Lang; links: Links }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 

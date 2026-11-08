@@ -77,9 +77,20 @@ const dict = {
   
 } as const;
 
-export type Dict = (typeof dict)["en"];
+type Widen<T> = {
+  -readonly [K in keyof T]: T[K] extends string
+    ? string
+    : T[K] extends readonly (readonly [string, string])[]
+      ? [string, string][]
+      : T[K] extends readonly string[]
+        ? string[]
+        : T[K];
+};
+export type Dict = Widen<(typeof dict)["en"]>;
+
+/** Built-in copy, used as a fallback when a field is empty in Sanity. */
 export function getDict(lang: Lang): Dict {
-  return dict[lang] as unknown as Dict;
+  return JSON.parse(JSON.stringify(dict[lang])) as Dict;
 }
 
 export const LINKS = {

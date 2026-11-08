@@ -1,13 +1,14 @@
-import { getDict, LINKS, type Lang } from "@/lib/i18n";
+import type { Lang } from "@/lib/i18n";
+import { getContent } from "@/lib/content";
 import Header from "./Header";
 import Monogram3D from "./Monogram3D";
 import Steps from "./Steps";
 import Interactions from "./Interactions";
 import { ArrowDown, ArrowRight, ArrowUpRight, Monogram } from "./Icons";
 
-export default function Home({ lang }: { lang: Lang }) {
-  const t = getDict(lang);
-  const stat = lang === "fr" ? "+55 M$" : "$55M+";
+export default async function Home({ lang }: { lang: Lang }) {
+  const { t, links: LINKS, portrait, stat: statN, experiences, featured, more } = await getContent(lang);
+  const stat = lang === "fr" ? `+${statN}\u202fM$` : `$${statN}M+`;
   const cvHref = LINKS.cv || "#cv";
 
   const CtaRow = ({ linkedinLabel }: { linkedinLabel: string }) => (
@@ -29,7 +30,7 @@ export default function Home({ lang }: { lang: Lang }) {
   return (
     <>
       <a className="skip" href="#main">{t.skip}</a>
-      <Header t={t} lang={lang} />
+      <Header t={t} lang={lang} links={LINKS} />
 
       <main id="main">
         <svg className="thread" id="thread" aria-hidden="true" />
@@ -92,7 +93,7 @@ export default function Home({ lang }: { lang: Lang }) {
                 </svg>
                 <div className="orb-disc">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/assets/portrait.webp" alt={t.a_portrait} width={900} height={900} loading="lazy" decoding="async" />
+                  <img src={portrait} alt={t.a_portrait} width={900} height={900} loading="lazy" decoding="async" />
                   <span className="orb-sheen" aria-hidden="true" />
                 </div>
                 <figcaption><strong>Chady Mouawad</strong><span>GTM Engineer</span></figcaption>
@@ -117,16 +118,12 @@ export default function Home({ lang }: { lang: Lang }) {
             <div className="track" data-track>
               <span className="track-base" aria-hidden="true" />
               <ol className="stops">
-                {([
-                  ["Atelier N", "ateliern", t.a_logo_an, t.an_t, t.an_d],
-                  ["Wminded", "wminded", t.a_logo_wm, t.wm_t, t.wm_d],
-                  ["Protolabs", "protolabs", t.a_logo_pl, t.pl_t, t.pl_d],
-                ] as const).map(([name, file, alt, title, desc]) => (
+                {experiences.map(({ company: name, logo, logoAlt: alt, title, description: desc }) => (
                   <li className="stop" key={name}>
                     <span className="dot" aria-hidden="true" />
                     <div className="co">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <span className="tile"><img src={`/assets/logo-${file}.webp`} alt={alt} width={100} height={100} /></span>
+                      <span className="tile"><img src={logo} alt={alt} width={100} height={100} /></span>
                       <span>{name}</span>
                     </div>
                     <h3>{title}</h3>
@@ -143,11 +140,11 @@ export default function Home({ lang }: { lang: Lang }) {
             <div className="feature" data-reveal>
               <div className="feature-copy">
                 <p className="label">{t.pb_feat}</p>
-                <h2 className="display" id="pb-title" style={{ fontSize: "var(--tf)", lineHeight: 0.98 }}>The High-Intent Website Visitor Engine</h2>
+                <h2 className="display" id="pb-title" style={{ fontSize: "var(--tf)", lineHeight: 0.98 }}>{featured.title}</h2>
                 <p>{t.pb_sum}</p>
               </div>
               <div className="feature-side">
-                <a className="btn" href={LINKS.featured}><span>{t.pb_read}</span><ArrowUpRight /></a>
+                <a className="btn" href={featured.url}><span>{t.pb_read}</span><ArrowUpRight /></a>
               </div>
             </div>
             <div className="pb-card" data-reveal>
@@ -159,7 +156,7 @@ export default function Home({ lang }: { lang: Lang }) {
             <div className="more" data-reveal>
               <p className="label">{t.pb_more}</p>
               <ul className="pb-list">
-                {LINKS.more.map(([title, href]) => (
+                {more.map(([title, href]) => (
                   <li key={href}><a href={href}><span>{title}</span><span className="ar" aria-hidden="true">→</span></a></li>
                 ))}
               </ul>
@@ -206,7 +203,7 @@ export default function Home({ lang }: { lang: Lang }) {
         </div>
       </footer>
 
-      <Interactions lang={lang} />
+      <Interactions lang={lang} stat={statN} />
     </>
   );
 }

@@ -12,3 +12,10 @@ Next.js 14 (App Router, TypeScript). English at `/`, French at `/fr`.
 - Search engines are blocked while in preview (`robots` in `lib/meta.ts`); switch to `index: true` at launch.
 
 Run locally: `npm install`, then `npm run dev`.
+
+## Editing content (Sanity)
+
+- Editor: `/studio` on the site (log in with your Sanity account).
+- Project ID `t88q36f5`, dataset `production`. Schema: `sanity/schemaTypes`.
+- Published changes appear on the site within about a minute (pages refresh every 60 seconds).
+- If Sanity is unreachable, the site falls back to the copy in `lib/i18n.ts`.

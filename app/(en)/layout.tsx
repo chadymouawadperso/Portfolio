@@ -2,7 +2,10 @@ import "../globals.css";
 import { pageMetadata } from "@/lib/meta";
 export { viewport } from "@/lib/meta";
 
-export const metadata = pageMetadata("en");
+export const revalidate = 60;
+export async function generateMetadata() {
+  return pageMetadata("en");
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
