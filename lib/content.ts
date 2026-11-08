@@ -2,6 +2,7 @@ import { createClient } from "@sanity/client";
 import { createImageUrlBuilder } from "@sanity/image-url";
 import { apiVersion, dataset, projectId } from "@/sanity/env";
 import { getDict, LINKS, type Dict, type Lang } from "./i18n";
+import { methodCopy, type MethodDict, type MethodKey } from "./methodology-copy";
 
 const client = createClient({ projectId, dataset, apiVersion, useCdn: true, perspective: "published" });
 const img = createImageUrlBuilder({ projectId, dataset });
@@ -85,7 +86,7 @@ export async function getContent(lang: Lang): Promise<Content> {
   const st = settings ?? {};
   const links: Links = {
     linkedin: str(st.linkedin) ?? LINKS.linkedin,
-    methodology: str(st.methodologyUrl) ?? LINKS.methodology,
+    methodology: lang === "fr" ? "/fr/methodology" : "/methodology",
     experience: str(st.experienceUrl) ?? LINKS.experience,
     playbooks: str(st.playbooksUrl) ?? LINKS.playbooks,
     about: str(st.aboutUrl) ?? LINKS.about,
@@ -128,5 +129,47 @@ export async function getContent(lang: Lang): Promise<Content> {
       url: str(hm.featuredUrl) ?? LINKS.featured,
     },
     more: more.length ? more : LINKS.more.map(([a, b]) => [a, b] as [string, string]),
+  };
+}
+
+export type MethodContent = {
+  base: Content;
+  m: MethodDict;
+  images: { meta: string; linkedin: string; google: string };
+};
+
+const CDN = "https://cdn.sanity.io/images/t88q36f5/production/";
+const DEFAULT_IMAGES = {
+  meta: CDN + "8034b9d689646d9a76c2089753e86fa0faaeda32-600x600.webp?w=300&fm=webp",
+  linkedin: CDN + "fb820b43c6f9812d4382b6cda151d7b58ce168d1-600x600.webp?w=300&fm=webp",
+  google: CDN + "b941e4371241ba64877c92779658fd95f04c865d-600x600.webp?w=300&fm=webp",
+};
+
+/** Methodology page content for one language: Sanity first, built-in copy as a fallback. */
+export async function getMethodology(lang: Lang): Promise<MethodContent> {
+  const base = await getContent(lang);
+  const m = { ...methodCopy[lang] } as MethodDict;
+  let doc: Record<string, unknown> | null = null;
+  try {
+    doc = await client.fetch<Record<string, unknown> | null>(`*[_id == "methodologyPage"][0]`, {});
+  } catch {
+    // Sanity unreachable: built-in copy.
+  }
+  if (doc) {
+    (Object.keys(m) as MethodKey[]).forEach((k) => {
+      const v = (doc![k] as L)?.[lang];
+      if (typeof v === "string" && v.trim()) m[k] = v;
+    });
+  }
+  const im = (v: unknown, fallback: string) =>
+    (v as Img)?.asset?._ref ? img.image(v as never).width(300).auto("format").quality(82).url() : fallback;
+  return {
+    base,
+    m,
+    images: {
+      meta: im(doc?.imgMeta, DEFAULT_IMAGES.meta),
+      linkedin: im(doc?.imgLinkedin, DEFAULT_IMAGES.linkedin),
+      google: im(doc?.imgGoogle, DEFAULT_IMAGES.google),
+    },
   };
 }

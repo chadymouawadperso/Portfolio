@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import type { Lang } from "./i18n";
-import { getContent } from "./content";
+import { getContent, getMethodology } from "./content";
 
 export const viewport: Viewport = { themeColor: "#0B0B0C", width: "device-width", initialScale: 1 };
 
@@ -22,5 +22,18 @@ export async function pageMetadata(lang: Lang): Promise<Metadata> {
     twitter: { card: "summary_large_image", title: t.m_title, description: t.m_desc, images: ["/og.png"] },
     icons: { icon: "/icon.svg" },
     robots: { index: false, follow: false }, // preview only: switch to true at launch
+  };
+}
+
+export async function methodMetadata(lang: Lang): Promise<Metadata> {
+  const { m } = await getMethodology(lang);
+  const base = await pageMetadata(lang);
+  return {
+    ...base,
+    title: m.m_title,
+    description: m.m_desc,
+    alternates: { canonical: lang === "fr" ? "/fr/methodology" : "/methodology", languages: { en: "/methodology", fr: "/fr/methodology" } },
+    openGraph: { ...base.openGraph, title: m.m_title, description: m.m_desc, url: lang === "fr" ? "/fr/methodology" : "/methodology" },
+    twitter: { card: "summary_large_image", title: m.m_title, description: m.m_desc, images: ["/og.png"] },
   };
 }

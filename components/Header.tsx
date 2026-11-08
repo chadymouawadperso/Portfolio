@@ -5,7 +5,9 @@ import type { Dict, Lang } from "@/lib/i18n";
 import type { Links } from "@/lib/content";
 import { Monogram } from "./Icons";
 
-export default function Header({ t, lang, links: LINKS }: { t: Dict; lang: Lang; links: Links }) {
+type Props = { t: Dict; lang: Lang; links: Links; current?: string; paths?: { en: string; fr: string } };
+
+export default function Header({ t, lang, links: LINKS, current, paths = { en: "/", fr: "/fr" } }: Props) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -40,19 +42,19 @@ export default function Header({ t, lang, links: LINKS }: { t: Dict; lang: Lang;
     <>
       <header className={"site-header" + (scrolled ? " scrolled" : "")}>
         <div className="wrap header-in">
-          <a className="brand" href="#top" aria-label={t.a_top}>
+          <a className="brand" href={current ? (lang === "fr" ? "/fr" : "/") : "#top"} aria-label={t.a_top}>
             <Monogram />
             <span>Chady Mouawad</span>
           </a>
           <nav className="nav" aria-label={t.a_main}>
             {nav.map(([label, href]) => (
-              <a key={href} href={href}>{label}</a>
+              <a key={href} href={href} aria-current={href === current ? "page" : undefined}>{label}</a>
             ))}
           </nav>
           <div className="header-tools">
             <div className="lang" role="group" aria-label={t.a_lang}>
-              <a href="/" hrefLang="en" lang="en" aria-current={lang === "en" ? "true" : undefined} className={lang === "en" ? "on" : ""}>EN</a>
-              <a href="/fr" hrefLang="fr" lang="fr" aria-current={lang === "fr" ? "true" : undefined} className={lang === "fr" ? "on" : ""}>FR</a>
+              <a href={paths.en} hrefLang="en" lang="en" aria-current={lang === "en" ? "true" : undefined} className={lang === "en" ? "on" : ""}>EN</a>
+              <a href={paths.fr} hrefLang="fr" lang="fr" aria-current={lang === "fr" ? "true" : undefined} className={lang === "fr" ? "on" : ""}>FR</a>
             </div>
             <button
               type="button"
@@ -71,7 +73,7 @@ export default function Header({ t, lang, links: LINKS }: { t: Dict; lang: Lang;
       </header>
       <nav className={"mobile-nav" + (open ? " open" : "")} id="mobile-nav" aria-label={t.a_mobile}>
         {nav.map(([label, href]) => (
-          <a key={href} href={href}>{label}</a>
+          <a key={href} href={href} aria-current={href === current ? "page" : undefined}>{label}</a>
         ))}
         <a className="btn" href={LINKS.linkedin}><span>{t.cta_connect}</span></a>
       </nav>

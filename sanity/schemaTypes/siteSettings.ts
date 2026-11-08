@@ -18,7 +18,7 @@ export const siteSettings = defineType({
     defineField({ name: "cvUrl", title: "CV link (PDF)", type: "url", group: "links", description: "Leave empty until the CV is hosted: the button then shows a short 'coming soon' note.", validation: (r) => r.uri({ allowRelative: true }) }),
     s("cvLabel", "CV button label", "links"),
     s("cvNote", "Note shown while the CV is not available", "links"),
-    defineField({ name: "methodologyUrl", title: "Methodology page link", type: "url", group: "links" }),
+    defineField({ name: "methodologyUrl", title: "Methodology page link", type: "url", group: "links", hidden: true }), // the page now lives on this site
     defineField({ name: "experienceUrl", title: "Experience page link", type: "url", group: "links" }),
     defineField({ name: "playbooksUrl", title: "GTM Playbooks page link", type: "url", group: "links" }),
     defineField({ name: "aboutUrl", title: "About page link", type: "url", group: "links" }),
