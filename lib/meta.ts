@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import type { Lang } from "./i18n";
-import { getAbout, getContent, getExperience, getMethodology, getPlaybooks } from "./content";
+import { getAbout, getContent, getExperience, getMethodology, getPbWv, getPlaybooks } from "./content";
 
 export const viewport: Viewport = { themeColor: "#0B0B0C", width: "device-width", initialScale: 1 };
 
@@ -75,5 +75,20 @@ export async function playbooksMetadata(lang: Lang): Promise<Metadata> {
     alternates: { canonical: path, languages: { en: "/gtm-playbooks", fr: "/fr/gtm-playbooks" } },
     openGraph: { ...base.openGraph, title: p.m_title, description: p.m_desc, url: path },
     twitter: { card: "summary_large_image", title: p.m_title, description: p.m_desc, images: ["/og.png"] },
+  };
+}
+
+export async function pbWvMetadata(lang: Lang): Promise<Metadata> {
+  const { w } = await getPbWv(lang);
+  const base = await pageMetadata(lang);
+  const en = "/gtm-playbooks/high-intent-website-visitor-engine";
+  const path = lang === "fr" ? `/fr${en}` : en;
+  return {
+    ...base,
+    title: w.m_title,
+    description: w.m_desc,
+    alternates: { canonical: path, languages: { en, fr: `/fr${en}` } },
+    openGraph: { ...base.openGraph, type: "article", title: w.m_title, description: w.m_desc, url: path },
+    twitter: { card: "summary_large_image", title: w.m_title, description: w.m_desc, images: ["/og.png"] },
   };
 }
