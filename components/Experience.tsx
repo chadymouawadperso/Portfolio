@@ -3,7 +3,7 @@ import { getExperience, type ExpImage } from "@/lib/content";
 import Header from "./Header";
 import Footer from "./Footer";
 import PageInteractions from "./PageInteractions";
-import { ArrowRight, ArrowUpRight } from "./Icons";
+import { ArrowDown, ArrowRight, ArrowUpRight } from "./Icons";
 
 const PATHS = { en: "/experience", fr: "/fr/experience" };
 const VISIT = {
@@ -75,10 +75,17 @@ export default async function Experience({ lang }: { lang: Lang }) {
                 <a className="link-arrow" href={links.methodology}><span>{x.cta_think}</span><ArrowRight /></a>
               </div>
             </div>
-            <nav className="stages" id="stages" aria-label="Protolabs, Wminded, Atelier N">
-              <a className="stage" href="#protolabs"><strong>Protolabs</strong><span className="sub"><b>{x.r1}</b> · {x.r1p}</span></a>
-              <a className="stage" href="#wminded"><strong>Wminded</strong><span className="sub"><b>{x.r2}</b> · {x.r2p}</span></a>
-              <a className="stage" href="#ateliern"><strong>Atelier N</strong><span className="sub"><b>{x.r3}</b> · {x.r3p}</span></a>
+            <figure className="mh-vis deck" id="deck" aria-hidden="true">
+              <div className="deck-in" id="deck-in">
+                <a className="card k1" href="#ateliern" tabIndex={-1}><img className="ph" src={images.an[0]?.src} width={520} height={520} alt="" decoding="async" /><span className="cbar"><span className="tile"><img className="an" src={logo("Atelier N", "/assets/logo-ateliern.webp")} width={38} height={38} alt="" /></span><span className="t"><b>Atelier N</b><i>{x.r3}</i></span></span></a>
+                <a className="card k2" href="#wminded" tabIndex={-1}><img className="ph" src={images.wm[1]?.src} width={520} height={520} alt="" decoding="async" /><span className="cbar"><span className="tile"><img src={logo("Wminded", "/assets/logo-wminded.webp")} width={38} height={38} alt="" /></span><span className="t"><b>Wminded</b><i>{x.r2}</i></span></span></a>
+                <a className="card k3" href="#protolabs" tabIndex={-1}><img className="ph" src={images.pl[1]?.src} width={520} height={520} alt="" decoding="async" /><span className="cbar"><span className="tile"><img src={logo("Protolabs", "/assets/logo-protolabs.webp")} width={38} height={38} alt="" /></span><span className="t"><b>Protolabs</b><i>{x.r1}</i></span></span></a>
+              </div>
+            </figure>
+            <nav className="mh-index" aria-label="Protolabs, Wminded, Atelier N">
+              <a href="#protolabs"><strong>Protolabs</strong><ArrowDown /><span className="sub"><b>{x.r1}</b> · {x.r1p}</span></a>
+              <a href="#wminded"><strong>Wminded</strong><ArrowDown /><span className="sub"><b>{x.r2}</b> · {x.r2p}</span></a>
+              <a href="#ateliern"><strong>Atelier N</strong><ArrowDown /><span className="sub"><b>{x.r3}</b> · {x.r3p}</span></a>
             </nav>
           </div>
         </section>

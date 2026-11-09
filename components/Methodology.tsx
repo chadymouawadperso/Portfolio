@@ -3,7 +3,7 @@ import { getMethodology } from "@/lib/content";
 import Header from "./Header";
 import Footer from "./Footer";
 import PageInteractions from "./PageInteractions";
-import { ArrowRight, ArrowUpRight } from "./Icons";
+import { ArrowRight, ArrowUpRight, ArrowDown } from "./Icons";
 
 const PATHS = { en: "/methodology", fr: "/fr/methodology" };
 
@@ -73,10 +73,21 @@ export default async function Methodology({ lang }: { lang: Lang }) {
                 <a className="link-arrow" href={links.experience}><span>{m.cta_exp}</span><ArrowRight /></a>
               </div>
             </div>
-            <nav className="stages" id="stages" aria-label={m.a_stages}>
-              <a className="stage" href="#exposure"><strong>{m.st1}</strong><span className="sub">{m.st1s}</span></a>
-              <a className="stage" href="#signals"><strong>{m.st2}</strong><span className="sub">{m.st2s}</span></a>
-              <a className="stage" href="#activation"><strong>{m.st3}</strong><span className="sub">{m.st3s}</span></a>
+            <figure className="mh-vis" aria-hidden="true">
+              <svg className="sig" id="sig" viewBox="0 0 520 520">
+                <g className="rings">
+                  <g data-k="1"><circle className="ring o" cx="260" cy="260" r="232" /><text className="lab m" x="260" y="33">{m.st1}</text></g>
+                  <g data-k=".65"><circle className="ring" cx="260" cy="260" r="150" /><text className="lab" x="260" y="115">{m.st2}</text></g>
+                  <g data-k=".25"><circle className="ring c" cx="260" cy="260" r="58" /><circle className="pulse" cx="260" cy="260" r="58" opacity="0" /><circle className="core" cx="260" cy="260" r="5" fill="#5A86A0" /><text className="lab" x="260" y="345">{m.st3}</text></g>
+                </g>
+                <g className="lines" />
+                <g className="dots" />
+              </svg>
+            </figure>
+            <nav className="mh-index" aria-label={m.a_stages}>
+              <a href="#exposure"><strong>{m.st1}</strong><ArrowDown /><span className="sub">{m.st1s}</span></a>
+              <a href="#signals"><strong>{m.st2}</strong><ArrowDown /><span className="sub">{m.st2s}</span></a>
+              <a href="#activation"><strong>{m.st3}</strong><ArrowDown /><span className="sub">{m.st3s}</span></a>
             </nav>
           </div>
         </section>

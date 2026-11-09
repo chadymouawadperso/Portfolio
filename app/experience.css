@@ -1,7 +1,6 @@
 /* =========================================================
    Experience page only. Shared inner-page styles: inner.css.
    ========================================================= */
-.stage .sub b{color:var(--soft);font-weight:500}
 
 /* Light section: three environments, one problem */
 .envs{position:relative;max-width:1040px;margin:clamp(44px,4.6vw,64px) auto 0}

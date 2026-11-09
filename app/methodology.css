@@ -167,4 +167,3 @@ html:not(.js) .tbl .meter b{width:var(--w)}
 html:not(.js) .wire::before{transform:scaleY(1)}
 html:not(.js) .split path.l,html:not(.js) .map .sp-l,html:not(.js) .ba .lnk{stroke-dashoffset:0}
 html:not(.js) .rsteps li .rdot{border-color:var(--blue-line);background:var(--blue-line)}
-html:not(.js) .stages::after{height:calc(100% - 40px)}
