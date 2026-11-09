@@ -250,7 +250,7 @@ export async function getAbout(lang: Lang): Promise<AboutContent> {
     });
   }
   const photo = (v: unknown, w: number, fallback: string) =>
-    (v as Img)?.asset?._ref ? img.image(v as never).width(w).auto("format").quality(84).url() : fallback;
+    (v as Img)?.asset?._ref ? img.image(v as never).width(w).fit("max").auto("format").quality(84).url() : fallback;
   const wm = EXP_IMAGES.wm.map(([id, en, fr], i) => {
     const field = doc?.[`img_wm${i + 1}`] as (Img & { alt?: L }) | undefined;
     const src = field?.asset?._ref
