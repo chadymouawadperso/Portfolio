@@ -21,7 +21,7 @@ export const siteSettings = defineType({
     defineField({ name: "methodologyUrl", title: "Methodology page link", type: "url", group: "links", hidden: true }), // the page now lives on this site
     defineField({ name: "experienceUrl", title: "Experience page link", type: "url", group: "links", hidden: true }), // the page now lives on this site
     defineField({ name: "playbooksUrl", title: "GTM Playbooks page link", type: "url", group: "links" }),
-    defineField({ name: "aboutUrl", title: "About page link", type: "url", group: "links" }),
+    defineField({ name: "aboutUrl", title: "About page link", type: "url", group: "links", hidden: true }), // the page now lives on this site
 
     s("navMethod", "Menu: Methodology", "menu"),
     s("navExp", "Menu: Experience", "menu"),

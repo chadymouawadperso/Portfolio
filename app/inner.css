@@ -121,3 +121,14 @@ html:not(.js) .card{opacity:1;transform:translate(-50%,-50%) var(--t)}
 @media (prefers-reduced-motion: reduce){
   .card,.deck-in{transition:none}
 }
+
+/* Two-column chapter: copy and visual (Experience, About) */
+.role{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:center}
+.role .copy{grid-column:1 / span 5}
+.role .vis{grid-column:7 / span 6}
+.role.flip .copy{grid-column:8 / span 5;order:2}
+.role.flip .vis{grid-column:1 / span 6;order:1}
+@media (max-width:1100px){
+  .role .copy,.role .vis,.role.flip .copy,.role.flip .vis{grid-column:1 / -1;order:0}
+  .role .vis{max-width:680px}
+}

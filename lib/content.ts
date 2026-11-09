@@ -3,6 +3,7 @@ import { createImageUrlBuilder } from "@sanity/image-url";
 import { apiVersion, dataset, projectId } from "@/sanity/env";
 import { getDict, LINKS, type Dict, type Lang } from "./i18n";
 import { methodCopy, type MethodDict, type MethodKey } from "./methodology-copy";
+import { aboutCopy, type AboutDict, type AboutKey } from "./about-copy";
 import { expCopy, type ExpDict, type ExpKey } from "./experience-copy";
 
 const client = createClient({ projectId, dataset, apiVersion, useCdn: true, perspective: "published" });
@@ -89,7 +90,7 @@ export async function getContent(lang: Lang): Promise<Content> {
     methodology: lang === "fr" ? "/fr/methodology" : "/methodology",
     experience: lang === "fr" ? "/fr/experience" : "/experience",
     playbooks: str(st.playbooksUrl) ?? LINKS.playbooks,
-    about: str(st.aboutUrl) ?? LINKS.about,
+    about: lang === "fr" ? "/fr/about" : "/about",
     cv: str(st.cvUrl) ?? LINKS.cv,
   };
 
@@ -222,4 +223,49 @@ export async function getExperience(lang: Lang): Promise<ExpContent> {
     });
   });
   return { base, x, images };
+}
+
+export type AboutImages = {
+  event: string;
+  atelier: string;
+  protolabs: string;
+  wm: ExpImage[];
+};
+export type AboutContent = { base: Content; a: AboutDict; images: AboutImages };
+
+/** About page content for one language: Sanity first, built-in copy as a fallback. */
+export async function getAbout(lang: Lang): Promise<AboutContent> {
+  const base = await getContent(lang);
+  const a = { ...aboutCopy[lang] } as AboutDict;
+  let doc: Record<string, unknown> | null = null;
+  try {
+    doc = await client.fetch<Record<string, unknown> | null>(`*[_id == "aboutPage"][0]`, {});
+  } catch {
+    // Sanity unreachable: built-in copy.
+  }
+  if (doc) {
+    (Object.keys(a) as AboutKey[]).forEach((k) => {
+      const v = (doc![k] as L)?.[lang];
+      if (typeof v === "string" && v.trim()) a[k] = v;
+    });
+  }
+  const photo = (v: unknown, w: number, fallback: string) =>
+    (v as Img)?.asset?._ref ? img.image(v as never).width(w).auto("format").quality(84).url() : fallback;
+  const wm = EXP_IMAGES.wm.map(([id, en, fr], i) => {
+    const field = doc?.[`img_wm${i + 1}`] as (Img & { alt?: L }) | undefined;
+    const src = field?.asset?._ref
+      ? img.image(field as never).width(420).height(420).fit("crop").auto("format").quality(82).url()
+      : `${CDN}${id}-500x500.webp?w=420&fm=webp`;
+    return { src, alt: (field?.alt as L)?.[lang] || (lang === "fr" ? fr : en) };
+  });
+  return {
+    base,
+    a,
+    images: {
+      event: photo(doc?.img_event, 1100, "/assets/about-event.webp"),
+      atelier: photo(doc?.img_atelier, 1200, `${CDN}291d59c8a8e4145217b3a85c562cea8dc62d33b8-600x400.webp?w=600&fm=webp`),
+      protolabs: photo(doc?.img_protolabs, 1200, `${CDN}0f6cb9eba6e4fc92a3a11083fa0342c4ab6e4c36-555x420.webp?w=555&fm=webp`),
+      wm,
+    },
+  };
 }

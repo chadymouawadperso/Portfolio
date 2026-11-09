@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import type { Lang } from "./i18n";
-import { getContent, getExperience, getMethodology } from "./content";
+import { getAbout, getContent, getExperience, getMethodology } from "./content";
 
 export const viewport: Viewport = { themeColor: "#0B0B0C", width: "device-width", initialScale: 1 };
 
@@ -48,5 +48,18 @@ export async function expMetadata(lang: Lang): Promise<Metadata> {
     alternates: { canonical: lang === "fr" ? "/fr/experience" : "/experience", languages: { en: "/experience", fr: "/fr/experience" } },
     openGraph: { ...base.openGraph, title: x.m_title, description: x.m_desc, url: lang === "fr" ? "/fr/experience" : "/experience" },
     twitter: { card: "summary_large_image", title: x.m_title, description: x.m_desc, images: ["/og.png"] },
+  };
+}
+
+export async function aboutMetadata(lang: Lang): Promise<Metadata> {
+  const { a } = await getAbout(lang);
+  const base = await pageMetadata(lang);
+  return {
+    ...base,
+    title: a.m_title,
+    description: a.m_desc,
+    alternates: { canonical: lang === "fr" ? "/fr/about" : "/about", languages: { en: "/about", fr: "/fr/about" } },
+    openGraph: { ...base.openGraph, title: a.m_title, description: a.m_desc, url: lang === "fr" ? "/fr/about" : "/about" },
+    twitter: { card: "summary_large_image", title: a.m_title, description: a.m_desc, images: ["/og.png"] },
   };
 }

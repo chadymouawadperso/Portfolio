@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import type { Lang } from "@/lib/i18n";
-import { initDeck, initSignals } from "@/lib/heroFx";
+import { initDeck, initExploded, initSignals } from "@/lib/heroFx";
 
 // Inner-page behaviour (Methodology, Experience): section reveal, one-time scroll moments,
 // the blue thread on desktop and the CV placeholder note. Elements a page lacks are skipped. Renders nothing.
@@ -35,6 +35,7 @@ export default function PageInteractions({ lang }: { lang: Lang }) {
 
     initSignals(reduce, once, cleanups);
     initDeck(reduce, once, later, cleanups);
+    initExploded(reduce, once, cleanups);
     const map = $("#map");
     once(map, () => map?.classList.add("drawn"));
     ["#ba", "#envs", "#funnel", "#build"].forEach((sel) => {

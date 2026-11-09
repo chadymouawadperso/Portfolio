@@ -95,3 +95,41 @@ export function initDeck(reduce: boolean, once: Once, later: Later, cleanups: ((
     hero.addEventListener('pointermove', onMove); hero.addEventListener('pointerleave', onLeave);
     cleanups.push(() => { hero.removeEventListener('pointermove', onMove); hero.removeEventListener('pointerleave', onLeave); });
   }
+
+export function initExploded(reduce: boolean, once: Once, cleanups: (() => void)[]) {
+  const sv = document.getElementById("xv");
+  if (!sv) return;
+  const pls = Array.prototype.slice.call(sv.querySelectorAll(".pl")) as SVGElement[];
+  const CY = 268, G0 = 50, G1 = 72, DUR = 700, STAG = 160;
+  let g = G0, gt = G0, start: number | null = null, raf = 0;
+  const ease = (t: number) => 1 - Math.pow(1 - t, 3);
+  function draw(now: number) {
+    const t = start === null ? 0 : now - start;
+    let busy = false;
+    pls.forEach((p, i) => {
+      const k = start === null ? 0 : Math.min(Math.max((t - i * STAG) / DUR, 0), 1);
+      if (k < 1) busy = true;
+      const y = CY + (1.5 - i) * g - (1 - ease(k)) * 60;
+      p.setAttribute("transform", "translate(0 " + y.toFixed(1) + ")");
+      p.style.opacity = ease(k).toFixed(3);
+    });
+    return busy;
+  }
+  function loop(now: number) {
+    g += (gt - g) * 0.12;
+    const busy = draw(now) || Math.abs(gt - g) > 0.1;
+    raf = busy ? requestAnimationFrame(loop) : 0;
+  }
+  const kick = () => { if (!raf) raf = requestAnimationFrame(loop); };
+  cleanups.push(() => { if (raf) cancelAnimationFrame(raf); });
+  if (reduce) { start = -1e6; draw(0); return; }
+  draw(0);
+  once(sv, () => { start = performance.now(); kick(); }, "0px");
+  if (window.matchMedia("(hover:hover)").matches) {
+    const onEnter = () => { gt = G1; kick(); };
+    const onLeave = () => { gt = G0; kick(); };
+    sv.addEventListener("pointerenter", onEnter);
+    sv.addEventListener("pointerleave", onLeave);
+    cleanups.push(() => { sv.removeEventListener("pointerenter", onEnter); sv.removeEventListener("pointerleave", onLeave); });
+  }
+}
