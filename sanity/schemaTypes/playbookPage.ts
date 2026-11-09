@@ -4,6 +4,8 @@ import { pbWvCopy } from "@/lib/pb-wv-copy";
 import { pbWvLabels } from "@/lib/pb-wv-labels";
 import { pbCtCopy } from "@/lib/pb-ct-copy";
 import { pbCtLabels } from "@/lib/pb-ct-labels";
+import { pbEvCopy } from "@/lib/pb-ev-copy";
+import { pbEvLabels } from "@/lib/pb-ev-labels";
 
 /** One text on a playbook page, with its English and French version. */
 export const pbText = defineType({
@@ -53,4 +55,5 @@ const prefill = (id: string, name: string, labels: [string, string][], copy: Cop
 export const playbookTemplates: Template[] = [
   prefill("pb-wv", "The High-Intent Website Visitor Engine", pbWvLabels, pbWvCopy),
   prefill("pb-ct", "The Competitor Takeout Engine", pbCtLabels, pbCtCopy),
+  prefill("pb-ev", "The Event & Webinar-to-Pipeline Engine", pbEvLabels, pbEvCopy),
 ];

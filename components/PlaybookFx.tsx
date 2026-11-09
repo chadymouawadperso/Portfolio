@@ -2,8 +2,8 @@
 
 import { useEffect } from "react";
 
-// Playbook page interactions: the simulator, the email flip, the 12-step stepper, the priority grid,
-// the animated takeout hero and the fit self-check. Elements a page lacks are skipped. Renders nothing.
+// Playbook page interactions: the simulator, the email and battle-card flips, the stepper, the priority grid,
+// the intent builder, the animated heroes and the fit self-check. Elements a page lacks are skipped. Renders nothing.
 export default function PlaybookFx() {
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -46,6 +46,28 @@ export default function PlaybookFx() {
     /* Email flip */
     const mail = document.getElementById("mail");
     if (mail) seg(mail, (v) => mail.classList.toggle("good", v === "good"));
+
+    /* Battle-card flip (Event engine) */
+    const hand = document.getElementById("hand");
+    if (hand) seg(hand, (v) => hand.classList.toggle("good", v === "good"));
+
+    /* Intent builder (Event engine): signals across stages x engaged contacts */
+    const ib = document.getElementById("ib");
+    if (ib) {
+      let many = false;
+      const chips = Array.from(ib.querySelectorAll<HTMLButtonElement>(".chip"));
+      const out = ib.querySelector<HTMLElement>(".ib-o")!;
+      const score = () => {
+        const on = chips.filter((c) => c.getAttribute("aria-pressed") === "true");
+        const depth = new Set(on.map((c) => c.dataset.g)).size;
+        const l = !on.length ? 0 : depth >= 2 && many ? 3 : depth >= 2 || many ? 2 : 1;
+        out.dataset.l = String(l);
+        ib.querySelectorAll<HTMLElement>("[data-o]").forEach((o) => (o.hidden = Number(o.dataset.o) !== l));
+      };
+      seg(ib.querySelector(".seg"), (v) => { many = v === "many"; score(); });
+      chips.forEach((c) => on(c, "click", () => { c.setAttribute("aria-pressed", String(c.getAttribute("aria-pressed") !== "true")); score(); }));
+      score();
+    }
 
     /* Stepper */
     const stp = document.getElementById("stp");
@@ -177,6 +199,106 @@ export default function PlaybookFx() {
         const stop = () => { running = false; cancelAnimationFrame(raf); };
         const vis = new IntersectionObserver((es) => (es[0].isIntersecting ? start() : stop()));
         vis.observe(tko);
+        const onVis = () => (document.hidden ? stop() : start());
+        document.addEventListener("visibilitychange", onVis);
+        cleanups.push(() => { stop(); vis.disconnect(); document.removeEventListener("visibilitychange", onVis); });
+      }
+    }
+
+    /* Hero (Event engine): attendees grouped by account; accounts with several engaged contacts move to pipeline */
+    const evt = document.getElementById("evt");
+    if (evt) {
+      const NS = "http://www.w3.org/2000/svg";
+      const arcs = evt.querySelector(".arcs")!, accs = evt.querySelector(".accs")!;
+      const slots = Array.from(evt.querySelectorAll<SVGRectElement>(".sl"));
+      type Cl = { g: SVGGElement; x: number; y: number; k: number; a: number; sp: number; dots: SVGCircleElement[]; busy: boolean; pull: number };
+      const cls: Cl[] = Array.from(evt.querySelectorAll<SVGGElement>(".cl")).map((g, i) => ({
+        g, x: Number(g.dataset.x), y: Number(g.dataset.y), k: Number(g.dataset.k), a: i * 0.7, sp: 0.00012 + (i % 4) * 0.00003,
+        dots: Array.from(g.querySelectorAll<SVGCircleElement>(".dt")), busy: false, pull: 0,
+      }));
+      const lay = (c: Cl) => c.dots.forEach((d, j) => {
+        const r = c.k === 1 ? 0 : 15 * (1 - c.pull), an = c.a + (j / c.k) * Math.PI * 2 - Math.PI / 2;
+        d.setAttribute("cx", (c.x + r * Math.cos(an)).toFixed(1)); d.setAttribute("cy", (c.y + r * Math.sin(an)).toFixed(1));
+      });
+      if (reduce) {
+        const c0 = cls[2];
+        c0?.g.classList.add("hot"); c0?.dots.forEach((d) => d.classList.add("sig"));
+        slots[0]?.classList.add("on"); slots[1]?.classList.add("on");
+      } else {
+        const timers: number[] = [];
+        const later = (fn: () => void, ms: number) => timers.push(window.setTimeout(fn, ms));
+        cleanups.push(() => timers.forEach(clearTimeout));
+        let n = 0, filled = 0, movers: ((now: number) => boolean)[] = [];
+        const reset = (c: Cl) => {
+          c.dots.forEach((d) => { d.classList.add("gone"); d.classList.remove("sig"); });
+          c.g.classList.remove("hot");
+          later(() => { c.pull = 0; lay(c); c.dots.forEach((d) => d.classList.remove("gone")); c.busy = false; }, 900);
+        };
+        const send = (c: Cl) => {
+          if (filled >= slots.length) { slots.forEach((s) => s.classList.remove("on")); filled = 0; }
+          const sl = slots[filled++], tx = Number(sl.getAttribute("x")) + 46, ty = Number(sl.getAttribute("y")) + 16;
+          const dot = document.createElementNS(NS, "circle");
+          dot.setAttribute("class", "acc"); dot.setAttribute("r", "8"); dot.setAttribute("cx", String(c.x)); dot.setAttribute("cy", String(c.y));
+          accs.appendChild(dot);
+          const qx = 300, qy = Math.min(c.y, ty) - 50;
+          const path = document.createElementNS(NS, "path");
+          path.setAttribute("d", `M${c.x} ${c.y} Q${qx} ${qy} ${tx} ${ty}`);
+          path.setAttribute("fill", "none"); path.setAttribute("stroke", "#8DB0C4"); path.setAttribute("stroke-width", "1.4"); path.setAttribute("stroke-dasharray", "3 4");
+          path.style.opacity = ".75"; path.style.transition = "opacity .8s ease";
+          arcs.appendChild(path);
+          const t0 = performance.now(), dur = 1400;
+          movers.push((now) => {
+            const k = Math.min(1, (now - t0) / dur), e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2, u = 1 - e;
+            dot.setAttribute("cx", (u * u * c.x + 2 * u * e * qx + e * e * tx).toFixed(1));
+            dot.setAttribute("cy", (u * u * c.y + 2 * u * e * qy + e * e * ty).toFixed(1));
+            if (k < 1) return true;
+            sl.classList.add("on"); dot.remove(); path.style.opacity = "0"; later(() => path.remove(), 900);
+            return false;
+          });
+          reset(c);
+        };
+        const converge = (c: Cl) => {
+          const t0 = performance.now(), dur = 600;
+          movers.push((now) => {
+            const k = Math.min(1, (now - t0) / dur);
+            c.pull = k; lay(c);
+            if (k < 1) return true;
+            send(c);
+            return false;
+          });
+        };
+        const tick = () => {
+          n++;
+          const win = n % 3 === 1;
+          const pool = cls.filter((c) => !c.busy && (win ? c.k >= 3 : true));
+          if (!pool.length) return;
+          const c = pool[Math.floor(Math.random() * pool.length)];
+          c.busy = true;
+          if (win) {
+            c.g.classList.add("hot");
+            c.dots.forEach((d, j) => later(() => d.classList.add("sig"), j * 260));
+            later(() => converge(c), c.k * 260 + 500);
+            return;
+          }
+          const d = c.dots[Math.floor(Math.random() * c.k)];
+          d.classList.add("sig");
+          later(() => { d.classList.remove("sig"); d.classList.add("dim"); }, 1000);
+          later(() => { d.classList.remove("dim"); c.busy = false; }, 2800);
+        };
+        let last = 0, acc = 0, raf = 0, running = false;
+        const frame = (now: number) => {
+          const dt = last ? Math.min(64, now - last) : 16;
+          last = now; acc += dt;
+          cls.forEach((c) => { if (c.k > 1 && c.pull === 0) { c.a += c.sp * dt; lay(c); } });
+          const cur = movers; movers = [];
+          cur.forEach((m) => { if (m(now)) movers.push(m); });
+          if (acc > 1300) { acc = 0; tick(); }
+          raf = requestAnimationFrame(frame);
+        };
+        const start = () => { if (!running && !document.hidden) { running = true; last = 0; raf = requestAnimationFrame(frame); } };
+        const stop = () => { running = false; cancelAnimationFrame(raf); };
+        const vis = new IntersectionObserver((es) => (es[0].isIntersecting ? start() : stop()));
+        vis.observe(evt);
         const onVis = () => (document.hidden ? stop() : start());
         document.addEventListener("visibilitychange", onVis);
         cleanups.push(() => { stop(); vis.disconnect(); document.removeEventListener("visibilitychange", onVis); });

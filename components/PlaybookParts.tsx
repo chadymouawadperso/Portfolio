@@ -54,7 +54,7 @@ export function PlaybookHero({ w, title, pdf, hub, visual, index }: { w: W; titl
       <div className="wrap mh-grid">
         <div className="mh-main">
           <p className="kicker" data-anchor>{w.kick}</p>
-          <h1 id="p-title">{title.map((l) => <span key={l} className="tl">{l}</span>)}</h1>
+          <h1 id="p-title">{title.map((l) => <span key={l} className={l.endsWith("-") ? "tl hy" : "tl"}>{l}</span>)}</h1>
           <p className="subtitle">{w.sub}</p>
           <p className="mh-lead">{w.lead}</p>
           <div className="cta-row">
