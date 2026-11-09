@@ -22,6 +22,7 @@ export default defineConfig({
             S.listItem().title("Methodology page").id("methodologyPage").child(S.document().schemaType("methodologyPage").documentId("methodologyPage")),
             S.listItem().title("Experience page").id("experiencePage").child(S.document().schemaType("experiencePage").documentId("experiencePage")),
             S.listItem().title("About page").id("aboutPage").child(S.document().schemaType("aboutPage").documentId("aboutPage")),
+            S.listItem().title("GTM Playbooks page").id("playbooksPage").child(S.document().schemaType("playbooksPage").documentId("playbooksPage")),
             S.listItem().title("Site settings").id("siteSettings").child(S.document().schemaType("siteSettings").documentId("siteSettings")),
           ]),
     }),

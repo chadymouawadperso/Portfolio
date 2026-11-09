@@ -4,6 +4,7 @@ import { apiVersion, dataset, projectId } from "@/sanity/env";
 import { getDict, LINKS, type Dict, type Lang } from "./i18n";
 import { methodCopy, type MethodDict, type MethodKey } from "./methodology-copy";
 import { aboutCopy, type AboutDict, type AboutKey } from "./about-copy";
+import { playbooksCopy, type PlaybooksDict, type PlaybooksKey } from "./playbooks-copy";
 import { expCopy, type ExpDict, type ExpKey } from "./experience-copy";
 
 const client = createClient({ projectId, dataset, apiVersion, useCdn: true, perspective: "published" });
@@ -89,7 +90,7 @@ export async function getContent(lang: Lang): Promise<Content> {
     linkedin: str(st.linkedin) ?? LINKS.linkedin,
     methodology: lang === "fr" ? "/fr/methodology" : "/methodology",
     experience: lang === "fr" ? "/fr/experience" : "/experience",
-    playbooks: str(st.playbooksUrl) ?? LINKS.playbooks,
+    playbooks: lang === "fr" ? "/fr/gtm-playbooks" : "/gtm-playbooks",
     about: lang === "fr" ? "/fr/about" : "/about",
     cv: str(st.cvUrl) ?? LINKS.cv,
   };
@@ -268,4 +269,74 @@ export async function getAbout(lang: Lang): Promise<AboutContent> {
       wm,
     },
   };
+}
+
+/* ---------- GTM Playbooks page ---------- */
+export type PlaybookKey = "w" | "c" | "e" | "a" | "d";
+export type PlaybookItem = {
+  key: PlaybookKey;
+  id: string;
+  title: string;
+  group: "zn" | "zg" | "zb";
+  steps: number;
+  url: string;
+  cover: string;
+  pdf: string;
+};
+export type PlaybooksContent = { base: Content; p: PlaybooksDict; items: PlaybookItem[] };
+
+const WP_PB = "https://chadymouawad.com/gtm-playbooks/";
+const FILES = "https://cdn.sanity.io/files/t88q36f5/production/";
+// Built-in defaults: key, anchor id, title, signal group, steps, page, cover id, PDF id, PDF download name.
+const PLAYBOOKS: [PlaybookKey, string, string, PlaybookItem["group"], number, string, string, string, string][] = [
+  ["w", "website", "The High-Intent Website Visitor Engine", "zn", 12, "high-intent-website-visitor-engine/", "1f81f652a6ae902652f5254c95c67b8387929a4d-600x600.webp", "befefa1ee50a19e20dd75f36df6c050d9963218c", "Chady-Mouawad-High-Intent-Website-Visitor-Engine.pdf"],
+  ["c", "competitor", "The Competitor Takeout Engine", "zn", 12, "competitor-takeout-engine/", "2ae3d03db002e457aa452ec3df69defb2d036a32-600x600.jpg", "2cc2d4085d2c9f8dfbb697a252db52ba2face6f5", "Chady-Mouawad-Competitor-Takeout-Engine.pdf"],
+  ["e", "events", "The Event & Webinar-to-Pipeline Engine", "zg", 13, "event-webinar-to-pipeline-engine/", "34bde108686fc48cd248771cfc62c59f2f613e59-600x600.webp", "86ced49235560ccd78a9225af3b864787b93ad6b", "Chady-Mouawad-Event-Webinar-to-Pipeline-Engine.pdf"],
+  ["a", "expansion", "The Account Manager Expansion Engine", "zb", 10, "account-manager-expansion-engine/", "26a0ee61065966b95e29acb709cb3d2f8f0557ec-600x600.webp", "7c55ac5d5ed7063b16b7e1b9c6f4fdce23bdeac5", "Chady-Mouawad-Account-Manager-Expansion-Engine.pdf"],
+  ["d", "reactivation", "The Dormant Customer Reactivation Engine", "zb", 13, "dormant-customer-reactivation-engine/", "3a10d9fc5d203bce0d49689253f76ecdb8309a9d-600x600.webp", "d26934b152d9f7eaa8c67d24cf0b23ad8996e64f", "Chady-Mouawad-Dormant-Customer-Reactivation-Engine.pdf"],
+];
+
+const sv = (v: unknown) => (typeof v === "string" && v.trim() ? v : undefined);
+
+/** A Sanity file reference ("file-<id>-pdf") as a public URL. */
+function fileUrl(v: unknown): string | undefined {
+  const ref = (v as { asset?: { _ref?: string } })?.asset?._ref;
+  const m = ref?.match(/^file-([a-f0-9]+)-(\w+)$/);
+  return m ? `${FILES}${m[1]}.${m[2]}` : undefined;
+}
+
+/** GTM Playbooks page content for one language: Sanity first, built-in copy as a fallback. */
+export async function getPlaybooks(lang: Lang): Promise<PlaybooksContent> {
+  const base = await getContent(lang);
+  const p = { ...playbooksCopy[lang] } as PlaybooksDict;
+  let doc: Record<string, unknown> | null = null;
+  try {
+    doc = await client.fetch<Record<string, unknown> | null>(`*[_id == "playbooksPage"][0]`, {});
+  } catch {
+    // Sanity unreachable: built-in copy.
+  }
+  if (doc) {
+    (Object.keys(p) as PlaybooksKey[]).forEach((k) => {
+      const v = (doc![k] as L)?.[lang];
+      if (typeof v === "string" && v.trim()) p[k] = v;
+    });
+  }
+  const items = PLAYBOOKS.map(([key, id, title, group, steps, page, cover, pdfId, pdfName]): PlaybookItem => {
+    const f = (n: string) => doc?.[`pb_${key}_${n}`];
+    const coverField = f("cover") as Img;
+    const pdf = fileUrl(f("pdf")) ?? `${FILES}${pdfId}.pdf`;
+    return {
+      key,
+      id,
+      title: sv(f("title")) ?? title,
+      group,
+      steps: typeof f("steps") === "number" ? (f("steps") as number) : steps,
+      url: sv(f("url")) ?? WP_PB + page,
+      cover: coverField?.asset?._ref
+        ? img.image(coverField as never).width(600).height(600).fit("crop").auto("format").quality(84).url()
+        : `${CDN}${cover}?w=600&fm=webp`,
+      pdf: `${pdf}?dl=${pdfName}`,
+    };
+  });
+  return { base, p, items };
 }

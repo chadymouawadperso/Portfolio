@@ -38,7 +38,7 @@ export default function PageInteractions({ lang }: { lang: Lang }) {
     initExploded(reduce, once, cleanups);
     const map = $("#map");
     once(map, () => map?.classList.add("drawn"));
-    ["#ba", "#envs", "#funnel", "#build"].forEach((sel) => {
+    ["#ba", "#envs", "#funnel", "#build", "#sys"].forEach((sel) => {
       const el = $(sel);
       once(el, () => el?.classList.add("in"));
     });
