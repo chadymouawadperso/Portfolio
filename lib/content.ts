@@ -128,7 +128,7 @@ export async function getContent(lang: Lang): Promise<Content> {
     experiences: exps.length ? exps : fallbackExp,
     featured: {
       title: str(hm.featuredTitle) ?? "The High-Intent Website Visitor Engine",
-      url: str(hm.featuredUrl) ?? LINKS.featured,
+      url: localPath(str(hm.featuredUrl) ?? LINKS.featured, lang),
     },
     more: more.length ? more : LINKS.more.map(([a, b]) => [a, b] as [string, string]),
   };

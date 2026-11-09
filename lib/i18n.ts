@@ -101,7 +101,7 @@ export const LINKS = {
   experience: "/experience",
   playbooks: "https://chadymouawad.com/gtm-playbooks/",
   about: "https://chadymouawad.com/about/",
-  featured: "https://chadymouawad.com/gtm-playbooks/high-intent-website-visitor-engine/",
+  featured: "/gtm-playbooks/high-intent-website-visitor-engine",
   more: [
     ["The Account Manager Expansion Engine", "https://chadymouawad.com/gtm-playbooks/account-manager-expansion-engine/"],
     ["The Dormant Customer Reactivation Engine", "https://chadymouawad.com/gtm-playbooks/dormant-customer-reactivation-engine/"],
