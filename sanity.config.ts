@@ -27,6 +27,7 @@ export default defineConfig({
             S.listItem().title("Playbook · Competitor Takeout Engine").id("pbCompetitorTakeout").child(S.document().schemaType("playbookPage").documentId("pbCompetitorTakeout").initialValueTemplate("pb-ct")),
             S.listItem().title("Playbook · Event & Webinar Engine").id("pbEventWebinar").child(S.document().schemaType("playbookPage").documentId("pbEventWebinar").initialValueTemplate("pb-ev")),
             S.listItem().title("Playbook · Account Manager Expansion Engine").id("pbAccountExpansion").child(S.document().schemaType("playbookPage").documentId("pbAccountExpansion").initialValueTemplate("pb-am")),
+            S.listItem().title("Playbook · Dormant Customer Reactivation Engine").id("pbDormantReactivation").child(S.document().schemaType("playbookPage").documentId("pbDormantReactivation").initialValueTemplate("pb-dr")),
             S.listItem().title("Site settings").id("siteSettings").child(S.document().schemaType("siteSettings").documentId("siteSettings")),
           ]),
     }),

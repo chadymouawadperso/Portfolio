@@ -8,6 +8,8 @@ import { pbEvCopy } from "@/lib/pb-ev-copy";
 import { pbEvLabels } from "@/lib/pb-ev-labels";
 import { pbAmCopy } from "@/lib/pb-am-copy";
 import { pbAmLabels } from "@/lib/pb-am-labels";
+import { pbDrCopy } from "@/lib/pb-dr-copy";
+import { pbDrLabels } from "@/lib/pb-dr-labels";
 
 /** One text on a playbook page, with its English and French version. */
 export const pbText = defineType({
@@ -59,4 +61,5 @@ export const playbookTemplates: Template[] = [
   prefill("pb-ct", "The Competitor Takeout Engine", pbCtLabels, pbCtCopy),
   prefill("pb-ev", "The Event & Webinar-to-Pipeline Engine", pbEvLabels, pbEvCopy),
   prefill("pb-am", "The Account Manager Expansion Engine", pbAmLabels, pbAmCopy),
+  prefill("pb-dr", "The Dormant Customer Reactivation Engine", pbDrLabels, pbDrCopy),
 ];

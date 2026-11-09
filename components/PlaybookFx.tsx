@@ -47,6 +47,20 @@ export default function PlaybookFx() {
     const mail = document.getElementById("mail");
     if (mail) seg(mail, (v) => mail.classList.toggle("good", v === "good"));
 
+    /* Reply router (Dormant engine): a reply lights up where it goes and what happens next */
+    const rp = document.getElementById("rp");
+    if (rp) {
+      const rys = Array.from(rp.querySelectorAll<HTMLButtonElement>(".ry"));
+      const pick = (b: HTMLButtonElement) => {
+        rys.forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+        const ds = (b.dataset.d || "").split(" ");
+        rp.querySelectorAll<HTMLElement>(".rd").forEach((r) => r.classList.toggle("on", ds.includes(r.dataset.d || "")));
+        rp.querySelectorAll<HTMLElement>(".rn").forEach((n) => (n.hidden = n.dataset.n !== b.dataset.y));
+      };
+      rys.forEach((b) => on(b, "click", () => pick(b)));
+      if (rys[0]) pick(rys[0]);
+    }
+
     /* Contact tiers (Account Manager engine) */
     const tr = document.getElementById("tr");
     if (tr) seg(tr.querySelector(".seg"), (v) => tr.querySelectorAll<HTMLElement>(".tr-p").forEach((p) => (p.hidden = p.dataset.t !== v)));
@@ -340,6 +354,59 @@ export default function PlaybookFx() {
         const onVis = () => (document.hidden ? stop() : start());
         document.addEventListener("visibilitychange", onVis);
         cleanups.push(() => { stop(); clearTimeout(resetT); vis.disconnect(); document.removeEventListener("visibilitychange", onVis); });
+      }
+    }
+
+    /* Hero (Dormant engine): dormant accounts; a warm-up passes, some react, a few reconnect with the AM */
+    const drx = document.getElementById("drx");
+    if (drx) {
+      const NS = "http://www.w3.org/2000/svg";
+      const dots = Array.from(drx.querySelectorAll<SVGCircleElement>(".dd"));
+      const lns = drx.querySelector(".lns")!;
+      const AMX = 432, AMY = 214;
+      const line = (d: SVGCircleElement) => {
+        const x = Number(d.getAttribute("cx")), y = Number(d.getAttribute("cy"));
+        const p = document.createElementNS(NS, "path");
+        p.setAttribute("class", "ln"); p.setAttribute("pathLength", "1");
+        p.setAttribute("d", `M${x} ${y} Q${(x + AMX) / 2} ${Math.min(y, AMY) - 40} ${AMX - 28} ${AMY}`);
+        lns.appendChild(p);
+        return p;
+      };
+      if (reduce) {
+        [5, 10].forEach((i) => { if (dots[i]) { dots[i].classList.add("back"); line(dots[i]).classList.add("on"); } });
+        dots[2]?.classList.add("eng");
+      } else {
+        const back: [SVGCircleElement, SVGPathElement][] = [];
+        const timers: number[] = [];
+        const later = (fn: () => void, ms: number) => timers.push(window.setTimeout(fn, ms));
+        let n = 0, timer = 0;
+        const tick = () => {
+          const free = dots.filter((d) => !d.classList.contains("eng") && !d.classList.contains("back"));
+          if (!free.length) return;
+          const d = free[Math.floor(Math.random() * free.length)];
+          n++;
+          d.classList.add("eng");
+          later(() => {
+            d.classList.remove("eng");
+            if (n % 3 !== 1) return;
+            d.classList.add("back");
+            const p = line(d);
+            requestAnimationFrame(() => requestAnimationFrame(() => p.classList.add("on")));
+            back.push([d, p]);
+            if (back.length > 3) {
+              const [od, op] = back.shift()!;
+              op.classList.add("off"); od.classList.remove("back");
+              later(() => op.remove(), 800);
+            }
+          }, 1300);
+        };
+        const start = () => { if (!timer && !document.hidden) timer = window.setInterval(tick, 1100); };
+        const stop = () => { clearInterval(timer); timer = 0; };
+        const vis = new IntersectionObserver((es) => (es[0].isIntersecting ? start() : stop()));
+        vis.observe(drx);
+        const onVis = () => (document.hidden ? stop() : start());
+        document.addEventListener("visibilitychange", onVis);
+        cleanups.push(() => { stop(); timers.forEach(clearTimeout); vis.disconnect(); document.removeEventListener("visibilitychange", onVis); });
       }
     }
 
