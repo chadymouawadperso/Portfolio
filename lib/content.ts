@@ -7,6 +7,7 @@ import { aboutCopy, type AboutDict, type AboutKey } from "./about-copy";
 import { pbWvCopy, type PbWvDict } from "./pb-wv-copy";
 import { pbCtCopy, type PbCtDict } from "./pb-ct-copy";
 import { pbEvCopy, type PbEvDict } from "./pb-ev-copy";
+import { pbAmCopy, type PbAmDict } from "./pb-am-copy";
 import { playbooksCopy, type PlaybooksDict, type PlaybooksKey } from "./playbooks-copy";
 import { expCopy, type ExpDict, type ExpKey } from "./experience-copy";
 
@@ -375,3 +376,4 @@ async function getPlaybookPage<D extends Record<string, string>>(
 export const getPbWv = (lang: Lang) => getPlaybookPage<PbWvDict>(lang, "pbWebsiteVisitor", pbWvCopy, "w", "c");
 export const getPbCt = (lang: Lang) => getPlaybookPage<PbCtDict>(lang, "pbCompetitorTakeout", pbCtCopy, "c", "e");
 export const getPbEv = (lang: Lang) => getPlaybookPage<PbEvDict>(lang, "pbEventWebinar", pbEvCopy, "e", "a");
+export const getPbAm = (lang: Lang) => getPlaybookPage<PbAmDict>(lang, "pbAccountExpansion", pbAmCopy, "a", "d");

@@ -47,6 +47,10 @@ export default function PlaybookFx() {
     const mail = document.getElementById("mail");
     if (mail) seg(mail, (v) => mail.classList.toggle("good", v === "good"));
 
+    /* Contact tiers (Account Manager engine) */
+    const tr = document.getElementById("tr");
+    if (tr) seg(tr.querySelector(".seg"), (v) => tr.querySelectorAll<HTMLElement>(".tr-p").forEach((p) => (p.hidden = p.dataset.t !== v)));
+
     /* Battle-card flip (Event engine) */
     const hand = document.getElementById("hand");
     if (hand) seg(hand, (v) => hand.classList.toggle("good", v === "good"));
@@ -302,6 +306,40 @@ export default function PlaybookFx() {
         const onVis = () => (document.hidden ? stop() : start());
         document.addEventListener("visibilitychange", onVis);
         cleanups.push(() => { stop(); vis.disconnect(); document.removeEventListener("visibilitychange", onVis); });
+      }
+    }
+
+    /* Hero (Account Manager engine): one known contact becomes a mapped committee that knows the AM */
+    const amx = document.getElementById("amx");
+    if (amx) {
+      const cs = Array.from(amx.querySelectorAll<SVGGElement>(".cs"));
+      if (reduce) {
+        cs.forEach((c, i) => { if (i < 4) c.classList.add("k"); else if (i < 6) c.classList.add("m"); });
+      } else {
+        const order = [4, 2, 6, 1, 7, 3, 5];
+        let step = 0, pause = 0, timer = 0, resetT = 0;
+        const tick = () => {
+          if (pause > 0) {
+            pause--;
+            if (pause === 0) {
+              cs.forEach((c, i) => { if (i) c.classList.add("out"); });
+              resetT = window.setTimeout(() => { cs.forEach((c, i) => { if (i) c.classList.remove("m", "k", "out"); }); step = 0; }, 700);
+            }
+            return;
+          }
+          if (step < order.length * 2) {
+            cs[order[Math.floor(step / 2)]].classList.add(step % 2 ? "k" : "m");
+            step++;
+            if (step === order.length * 2) pause = 3;
+          }
+        };
+        const start = () => { if (!timer && !document.hidden) timer = window.setInterval(tick, 900); };
+        const stop = () => { clearInterval(timer); timer = 0; };
+        const vis = new IntersectionObserver((es) => (es[0].isIntersecting ? start() : stop()));
+        vis.observe(amx);
+        const onVis = () => (document.hidden ? stop() : start());
+        document.addEventListener("visibilitychange", onVis);
+        cleanups.push(() => { stop(); clearTimeout(resetT); vis.disconnect(); document.removeEventListener("visibilitychange", onVis); });
       }
     }
 

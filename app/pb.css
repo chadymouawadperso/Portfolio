@@ -167,3 +167,35 @@
 }
 html:not(.js) .pn[hidden]{display:grid;margin-top:40px}
 html:not(.js) .stp-c,html:not(.js) .trk-w,html:not(.js) .hint{display:none}
+
+/* Problem: "today" flow vs "the engine" flow (Event, Account Manager pages) */
+.flw{display:flex;flex-direction:column;gap:18px;margin-top:clamp(36px,4vw,52px)}
+.fl{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:24px;align-items:center;padding:clamp(18px,2vw,24px);border-radius:20px;background:#111416;border:1px solid #1E2226}
+.fl.b{border-color:rgba(90,134,160,.5);background:radial-gradient(120% 100% at 100% 0%,rgba(73,114,135,.2),rgba(73,114,135,0) 60%),#111416}
+.fl-h{margin:0;display:flex;flex-direction:column;gap:6px}
+.fl-h b{font-size:clamp(19px,1.6vw,22px);font-weight:700;font-stretch:108%;letter-spacing:-.02em;color:var(--soft)}
+.fl.b .fl-h b{color:var(--blue-light)}
+.fl-h span{font-size:14.5px;line-height:1.5;color:var(--muted)}
+.fl-r{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;align-items:center;gap:10px 0}
+.fl-r li{display:inline-flex;align-items:center;font-size:15px;font-weight:600;color:var(--soft);opacity:0;transform:translateX(-6px);transition:opacity .4s ease,transform .5s ease;transition-delay:calc(var(--i) * 110ms + .1s)}
+.fl.b .fl-r li{transition-delay:calc(var(--i) * 110ms + .7s)}
+.fl-r li span{padding:9px 13px;border-radius:999px;border:1px solid #2C3640;background:#0F1214;white-space:nowrap}
+.fl.b .fl-r li span{border-color:rgba(90,134,160,.55);color:var(--paper)}
+.fl-r li + li::before{content:"";width:16px;height:2px;margin:0 4px;background:#2C3640}
+.fl.b .fl-r li + li::before{background:var(--blue-line)}
+.fl-r li.x span{border-style:dashed;color:var(--muted);background:transparent}
+.fl-r li.x::before{background:repeating-linear-gradient(90deg,#2C3640 0 4px,transparent 4px 8px)}
+.fl-r li.pp span{background:var(--blue);border-color:var(--blue);color:var(--paper)}
+.flw.in .fl-r li{opacity:1;transform:none}
+
+@media (max-width:1100px){
+  .fl{grid-template-columns:1fr;gap:14px}
+}
+@media (max-width:760px){
+  .fl-r{flex-direction:column;align-items:flex-start;gap:0}
+  .fl-r li{flex-direction:column;align-items:flex-start}
+  .fl-r li + li::before{width:2px;height:14px;margin:2px 0 2px 20px}
+  .fl-r li.x::before{background:repeating-linear-gradient(180deg,#2C3640 0 4px,transparent 4px 8px)}
+}
+@media (prefers-reduced-motion: reduce){.fl-r li{transition:none}}
+html:not(.js) .fl-r li{opacity:1;transform:none}

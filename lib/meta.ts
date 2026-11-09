@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import type { Lang } from "./i18n";
-import { getAbout, getContent, getExperience, getMethodology, getPbCt, getPbEv, getPbWv, getPlaybooks } from "./content";
+import { getAbout, getContent, getExperience, getMethodology, getPbAm, getPbCt, getPbEv, getPbWv, getPlaybooks } from "./content";
 
 export const viewport: Viewport = { themeColor: "#0B0B0C", width: "device-width", initialScale: 1 };
 
@@ -94,4 +94,5 @@ async function playbookMetadata(lang: Lang, slug: string, w: { m_title: string; 
 
 export const pbWvMetadata = async (lang: Lang) => playbookMetadata(lang, "high-intent-website-visitor-engine", (await getPbWv(lang)).w);
 export const pbCtMetadata = async (lang: Lang) => playbookMetadata(lang, "competitor-takeout-engine", (await getPbCt(lang)).w);
+export const pbAmMetadata = async (lang: Lang) => playbookMetadata(lang, "account-manager-expansion-engine", (await getPbAm(lang)).w);
 export const pbEvMetadata = async (lang: Lang) => playbookMetadata(lang, "event-webinar-to-pipeline-engine", (await getPbEv(lang)).w);
