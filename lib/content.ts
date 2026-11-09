@@ -4,7 +4,8 @@ import { apiVersion, dataset, projectId } from "@/sanity/env";
 import { getDict, LINKS, type Dict, type Lang } from "./i18n";
 import { methodCopy, type MethodDict, type MethodKey } from "./methodology-copy";
 import { aboutCopy, type AboutDict, type AboutKey } from "./about-copy";
-import { pbWvCopy, type PbWvDict, type PbWvKey } from "./pb-wv-copy";
+import { pbWvCopy, type PbWvDict } from "./pb-wv-copy";
+import { pbCtCopy, type PbCtDict } from "./pb-ct-copy";
 import { playbooksCopy, type PlaybooksDict, type PlaybooksKey } from "./playbooks-copy";
 import { expCopy, type ExpDict, type ExpKey } from "./experience-copy";
 
@@ -119,7 +120,7 @@ export async function getContent(lang: Lang): Promise<Content> {
 
   const more = ((hm.morePlaybooks as { title?: string; url?: string }[] | undefined) ?? [])
     .filter((m) => str(m.title) && str(m.url))
-    .map((m) => [m.title as string, m.url as string] as [string, string]);
+    .map((m) => [m.title as string, localPath(m.url as string, lang)] as [string, string]);
 
   return {
     t,
@@ -345,26 +346,30 @@ export async function getPlaybooks(lang: Lang): Promise<PlaybooksContent> {
   return { base, p, items };
 }
 
-/* ---------- Playbook page: The High-Intent Website Visitor Engine ---------- */
-export type PbWvContent = { base: Content; w: PbWvDict; pdf: string; hub: string; next: { title: string; url: string } };
+/* ---------- Playbook pages (one per playbook) ---------- */
+export type PlaybookPageContent<D> = { base: Content; w: D; pdf: string; hub: string; next: { title: string; url: string } };
 
-/** Website Visitor Engine page content for one language. The PDF and the next playbook come from the GTM Playbooks page. */
-export async function getPbWv(lang: Lang): Promise<PbWvContent> {
+/** Content of one playbook page: built-in copy, overridden by the texts list of its Sanity "Playbook page" document.
+    The PDF and the next playbook come from the GTM Playbooks page. */
+async function getPlaybookPage<D extends Record<string, string>>(
+  lang: Lang, docId: string, copy: Record<Lang, Readonly<D>>, me: PlaybookKey, nextKey: PlaybookKey
+): Promise<PlaybookPageContent<D>> {
   const { base, items } = await getPlaybooks(lang);
-  const w = { ...pbWvCopy[lang] } as PbWvDict;
-  let doc: Record<string, unknown> | null = null;
+  const w = { ...copy[lang] } as D;
+  let doc: { texts?: { key?: string; en?: string; fr?: string }[] } | null = null;
   try {
-    doc = await client.fetch<Record<string, unknown> | null>(`*[_id == "pbWebsiteVisitor"][0]{texts}`, {});
+    doc = await client.fetch(`*[_id == $id][0]{texts}`, { id: docId });
   } catch {
     // Sanity unreachable: built-in copy.
   }
-  // Texts are one list of { key, en, fr } entries (see sanity/schemaTypes/playbookPage.ts).
-  const texts = (doc?.texts as { key?: string; en?: string; fr?: string }[] | undefined) ?? [];
-  texts.forEach((t) => {
+  (doc?.texts ?? []).forEach((t) => {
     const v = t?.[lang];
-    if (t?.key && t.key in w && typeof v === "string" && v.trim()) w[t.key as PbWvKey] = v;
+    if (t?.key && t.key in w && typeof v === "string" && v.trim()) (w as Record<string, string>)[t.key] = v;
   });
-  const me = items.find((i) => i.key === "w")!;
-  const next = items.find((i) => i.key === "c")!;
-  return { base, w, pdf: me.pdf, hub: base.links.playbooks, next: { title: next.title, url: next.url } };
+  const self = items.find((i) => i.key === me)!;
+  const next = items.find((i) => i.key === nextKey)!;
+  return { base, w, pdf: self.pdf, hub: base.links.playbooks, next: { title: next.title, url: next.url } };
 }
+
+export const getPbWv = (lang: Lang) => getPlaybookPage<PbWvDict>(lang, "pbWebsiteVisitor", pbWvCopy, "w", "c");
+export const getPbCt = (lang: Lang) => getPlaybookPage<PbCtDict>(lang, "pbCompetitorTakeout", pbCtCopy, "c", "e");

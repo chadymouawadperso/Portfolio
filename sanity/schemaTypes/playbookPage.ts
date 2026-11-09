@@ -1,6 +1,9 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
+import type { Template } from "sanity";
 import { pbWvCopy } from "@/lib/pb-wv-copy";
 import { pbWvLabels } from "@/lib/pb-wv-labels";
+import { pbCtCopy } from "@/lib/pb-ct-copy";
+import { pbCtLabels } from "@/lib/pb-ct-labels";
 
 /** One text on a playbook page, with its English and French version. */
 export const pbText = defineType({
@@ -16,8 +19,8 @@ export const pbText = defineType({
   preview: { select: { title: "label", subtitle: "en" } },
 });
 
-/** A playbook page. Its texts are one list (label + English + French), so every playbook shares the same structure.
-    When the page is first opened in the Studio, the list is pre-filled with the built-in copy. Empty texts fall back to it. */
+/** A playbook page. Its texts are one list (label + English + French), so every playbook shares the same structure
+    and the dataset's field-name count stays flat. Empty texts fall back to the built-in copy. */
 export const playbookPage = defineType({
   name: "playbookPage",
   title: "Playbook page",
@@ -32,17 +35,22 @@ export const playbookPage = defineType({
       of: [defineArrayMember({ type: "pbText" })],
     }),
   ],
-  // Pre-fills the Website Visitor Engine page. Other playbooks will get their own template when they are built.
-  initialValue: () => ({
-    name: "The High-Intent Website Visitor Engine",
-    texts: pbWvLabels.map(([key, label]) => ({
-      _type: "pbText",
-      _key: key,
-      key,
-      label,
-      en: pbWvCopy.en[key as keyof typeof pbWvCopy.en],
-      fr: pbWvCopy.fr[key as keyof typeof pbWvCopy.fr],
-    })),
-  }),
   preview: { select: { title: "name" } },
 });
+
+type Copy = { en: Readonly<Record<string, string>>; fr: Readonly<Record<string, string>> };
+const prefill = (id: string, name: string, labels: [string, string][], copy: Copy): Template => ({
+  id,
+  title: name,
+  schemaType: "playbookPage",
+  value: {
+    name,
+    texts: labels.map(([key, label]) => ({ _type: "pbText", _key: key, key, label, en: copy.en[key], fr: copy.fr[key] })),
+  },
+});
+
+/** One pre-filled template per playbook: opening a playbook for the first time shows its current texts. */
+export const playbookTemplates: Template[] = [
+  prefill("pb-wv", "The High-Intent Website Visitor Engine", pbWvLabels, pbWvCopy),
+  prefill("pb-ct", "The Competitor Takeout Engine", pbCtLabels, pbCtCopy),
+];

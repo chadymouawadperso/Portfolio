@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import type { Lang } from "./i18n";
-import { getAbout, getContent, getExperience, getMethodology, getPbWv, getPlaybooks } from "./content";
+import { getAbout, getContent, getExperience, getMethodology, getPbCt, getPbWv, getPlaybooks } from "./content";
 
 export const viewport: Viewport = { themeColor: "#0B0B0C", width: "device-width", initialScale: 1 };
 
@@ -78,10 +78,9 @@ export async function playbooksMetadata(lang: Lang): Promise<Metadata> {
   };
 }
 
-export async function pbWvMetadata(lang: Lang): Promise<Metadata> {
-  const { w } = await getPbWv(lang);
+async function playbookMetadata(lang: Lang, slug: string, w: { m_title: string; m_desc: string }): Promise<Metadata> {
   const base = await pageMetadata(lang);
-  const en = "/gtm-playbooks/high-intent-website-visitor-engine";
+  const en = `/gtm-playbooks/${slug}`;
   const path = lang === "fr" ? `/fr${en}` : en;
   return {
     ...base,
@@ -92,3 +91,6 @@ export async function pbWvMetadata(lang: Lang): Promise<Metadata> {
     twitter: { card: "summary_large_image", title: w.m_title, description: w.m_desc, images: ["/og.png"] },
   };
 }
+
+export const pbWvMetadata = async (lang: Lang) => playbookMetadata(lang, "high-intent-website-visitor-engine", (await getPbWv(lang)).w);
+export const pbCtMetadata = async (lang: Lang) => playbookMetadata(lang, "competitor-takeout-engine", (await getPbCt(lang)).w);

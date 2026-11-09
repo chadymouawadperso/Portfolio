@@ -3,7 +3,7 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { projectId, dataset } from "./sanity/env";
-import { schemaTypes, SINGLETONS } from "./sanity/schemaTypes";
+import { playbookTemplates, schemaTypes, SINGLETONS } from "./sanity/schemaTypes";
 
 // The editing Studio, available at /studio on the website.
 export default defineConfig({
@@ -23,16 +23,22 @@ export default defineConfig({
             S.listItem().title("Experience page").id("experiencePage").child(S.document().schemaType("experiencePage").documentId("experiencePage")),
             S.listItem().title("About page").id("aboutPage").child(S.document().schemaType("aboutPage").documentId("aboutPage")),
             S.listItem().title("GTM Playbooks page").id("playbooksPage").child(S.document().schemaType("playbooksPage").documentId("playbooksPage")),
-            S.listItem().title("Playbook · Website Visitor Engine").id("pbWebsiteVisitor").child(S.document().schemaType("playbookPage").documentId("pbWebsiteVisitor").initialValueTemplate("playbookPage")),
+            S.listItem().title("Playbook · Website Visitor Engine").id("pbWebsiteVisitor").child(S.document().schemaType("playbookPage").documentId("pbWebsiteVisitor").initialValueTemplate("pb-wv")),
+            S.listItem().title("Playbook · Competitor Takeout Engine").id("pbCompetitorTakeout").child(S.document().schemaType("playbookPage").documentId("pbCompetitorTakeout").initialValueTemplate("pb-ct")),
             S.listItem().title("Site settings").id("siteSettings").child(S.document().schemaType("siteSettings").documentId("siteSettings")),
           ]),
     }),
   ],
   schema: {
     types: schemaTypes,
-    templates: (templates) => templates.filter(({ schemaType }) => !SINGLETONS.includes(schemaType)),
+    templates: (templates) => [
+      ...templates.filter(({ schemaType }) => !SINGLETONS.includes(schemaType) && schemaType !== "playbookPage"),
+      ...playbookTemplates,
+    ],
   },
   document: {
+    // Playbook pages are opened from the list, never created from the "+" menu.
+    newDocumentOptions: (prev) => prev.filter(({ templateId }) => !templateId.startsWith("pb-")),
     actions: (input, context) =>
       SINGLETONS.includes(context.schemaType) || context.schemaType === "playbookPage"
         ? input.filter(({ action }) => action && ["publish", "discardChanges", "restore"].includes(action))

@@ -146,6 +146,13 @@ export default function PageInteractions({ lang }: { lang: Lang }) {
     window.addEventListener("scroll", onScrollRaf, { passive: true });
     window.addEventListener("resize", onResize);
     window.addEventListener("load", refresh);
+    // Redraw the thread whenever the page height changes (a step opens, a section grows).
+    let lastH = mainEl?.offsetHeight ?? 0;
+    const ro = typeof ResizeObserver !== "undefined" && mainEl
+      ? new ResizeObserver(() => { if (mainEl.offsetHeight !== lastH) { lastH = mainEl.offsetHeight; onResize(); } })
+      : null;
+    if (ro && mainEl) ro.observe(mainEl);
+    cleanups.push(() => ro?.disconnect());
     refresh();
     document.fonts?.ready.then(refresh);
     cleanups.push(() => {

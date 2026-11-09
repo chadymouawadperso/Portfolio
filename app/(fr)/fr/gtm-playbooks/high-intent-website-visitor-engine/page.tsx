@@ -1,4 +1,5 @@
 import "../../../../inner.css";
+import "../../../../pb.css";
 import "../../../../pb-wv.css";
 import PlaybookWebsiteVisitor from "@/components/PlaybookWebsiteVisitor";
 import { pbWvMetadata } from "@/lib/meta";
