@@ -91,3 +91,22 @@
 html:not(.js) .tb,html:not(.js) .td,html:not(.js) .tr-f{transform:none;opacity:1}
 html:not(.js) .tr-thr{opacity:1}
 html:not(.js) .tr-line{clip-path:none}
+
+/* Color layer (hero): each page type its own color, the intent line warms from sky to coral */
+.trail{background:radial-gradient(80% 70% at 85% 10%,rgba(255,122,89,.12),transparent 60%),radial-gradient(70% 60% at 10% 100%,rgba(90,184,255,.10),transparent 60%),#0F1214}
+.tr-acc i{background:linear-gradient(135deg,var(--sky),var(--violet));border:0}
+.tr-tags em:nth-child(1){color:var(--mint);border-color:rgba(79,209,165,.45);background:rgba(79,209,165,.08)}
+.tr-tags em:nth-child(2){color:var(--amber);border-color:rgba(255,194,75,.45);background:rgba(255,194,75,.08)}
+.tc:nth-child(3) .tb{background:linear-gradient(180deg,var(--sky),rgba(90,184,255,.25))}
+.tc:nth-child(4) .tb{background:linear-gradient(180deg,var(--coral),rgba(255,122,89,.25))}
+.tc:nth-child(5) .tb{background:linear-gradient(180deg,var(--amber),rgba(255,194,75,.25))}
+.tc:nth-child(6) .tb{background:linear-gradient(180deg,var(--violet),rgba(167,139,250,.25))}
+.lg-b::before{background:linear-gradient(135deg,var(--sky),var(--coral))}
+.lg-l::before{background:var(--paper)}
+.lg-t::before{border-top-color:var(--coral)}
+.tr-thr{border-top-color:rgba(255,122,89,.7)}
+.tr-line path{stroke:var(--paper)}
+.td{border-color:var(--paper)}
+.td.hot{background:var(--coral);border-color:var(--coral);box-shadow:0 0 0 0 rgba(255,122,89,.6)}
+@keyframes hot{0%{box-shadow:0 0 0 0 rgba(255,122,89,.6)}70%,100%{box-shadow:0 0 0 14px rgba(255,122,89,0)}}
+.tr-f b{color:var(--mint)}

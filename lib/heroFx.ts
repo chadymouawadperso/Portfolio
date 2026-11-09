@@ -133,3 +133,21 @@ export function initExploded(reduce: boolean, once: Once, cleanups: (() => void)
     cleanups.push(() => { sv.removeEventListener("pointerenter", onEnter); sv.removeEventListener("pointerleave", onLeave); });
   }
 }
+
+/** GTM Playbooks hero: the five cards take turns lifting until the visitor hovers the hand. */
+export function initHand(reduce: boolean, cleanups: (() => void)[]) {
+  const box = document.getElementById("h5");
+  if (!box || reduce) return;
+  const cards = Array.from(box.querySelectorAll<HTMLElement>(".pc"));
+  let i = 0, hover = false;
+  const clear = () => cards.forEach((c) => c.classList.remove("up"));
+  const enter = () => { hover = true; clear(); };
+  const leave = () => { hover = false; };
+  box.addEventListener("mouseenter", enter);
+  box.addEventListener("mouseleave", leave);
+  const t = window.setInterval(() => {
+    if (hover || !cards.length) return;
+    clear(); cards[i % cards.length].classList.add("up"); i++;
+  }, 1400);
+  cleanups.push(() => { clearInterval(t); box.removeEventListener("mouseenter", enter); box.removeEventListener("mouseleave", leave); });
+}

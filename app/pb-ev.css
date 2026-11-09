@@ -86,3 +86,24 @@
 }
 html:not(.js) .hand .seg{display:none}
 html:not(.js) .hand .good{display:block}
+
+/* Color layer (hero): every contact has its own color, pipeline fills in amber */
+.evt{background:radial-gradient(70% 70% at 85% 50%,rgba(255,194,75,.12),transparent 60%),radial-gradient(70% 70% at 15% 30%,rgba(167,139,250,.10),transparent 60%),#0F1214}
+.evt .cl .dt:nth-child(5n+2){fill:rgba(90,184,255,.55)}
+.evt .cl .dt:nth-child(5n+3){fill:rgba(244,114,182,.5)}
+.evt .cl .dt:nth-child(5n+4){fill:rgba(79,209,165,.5)}
+.evt .cl .dt:nth-child(5n){fill:rgba(167,139,250,.55)}
+.evt .cl .dt:nth-child(5n+1){fill:rgba(255,122,89,.5)}
+.evt .dt.sig{fill:var(--amber) !important;filter:drop-shadow(0 0 7px rgba(255,194,75,.9))}
+.evt .dt.dim{fill:#262D32 !important}
+.evt .cl.hot .ring{stroke:var(--amber)}
+.evt .acc{fill:var(--amber);filter:drop-shadow(0 0 9px rgba(255,194,75,.9))}
+.evt .sl.on{fill:rgba(255,194,75,.28);stroke:var(--amber)}
+.evt .sls .sl:nth-child(2).on{fill:rgba(255,122,89,.28);stroke:var(--coral)}
+.evt .sls .sl:nth-child(3).on{fill:rgba(79,209,165,.28);stroke:var(--mint)}
+.evt .sls .sl:nth-child(4).on{fill:rgba(90,184,255,.28);stroke:var(--sky)}
+.evt .sls .sl:nth-child(5).on{fill:rgba(167,139,250,.28);stroke:var(--violet)}
+.evt .arcs path{stroke:var(--amber) !important}
+.evt .lb.y{fill:var(--amber)}
+.evt-k .k-s::before{background:var(--amber);box-shadow:0 0 8px rgba(255,194,75,.9)}
+.evt-k .k-w::before{background:rgba(255,194,75,.28);border-color:var(--amber)}

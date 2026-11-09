@@ -88,3 +88,23 @@
 html:not(.js) .g-ctl{display:none}
 html:not(.js) .evc,html:not(.js) .ev-o{opacity:1;transform:none}
 html:not(.js) .ev-j i,html:not(.js) .ev-j span{transform:none}
+
+/* Color layer (hero): accounts in mixed colors, competitor in coral, your side in mint */
+.tko{background:radial-gradient(70% 70% at 25% 50%,rgba(255,122,89,.12),transparent 60%),radial-gradient(70% 70% at 75% 50%,rgba(79,209,165,.12),transparent 60%),#0F1214}
+.tko .dts .dt:nth-child(5n+1){fill:rgba(90,184,255,.55)}
+.tko .dts .dt:nth-child(5n+2){fill:rgba(167,139,250,.55)}
+.tko .dts .dt:nth-child(5n+3){fill:rgba(244,114,182,.5)}
+.tko .dts .dt:nth-child(5n+4){fill:rgba(255,194,75,.5)}
+.tko .dts .dt:nth-child(5n){fill:rgba(90,184,255,.4)}
+.tko .dts .dt.sig{fill:var(--amber);filter:drop-shadow(0 0 7px rgba(255,194,75,.9))}
+.tko .dts .dt.won{fill:var(--mint)}
+.tko .dts .dt.dim{fill:#262D32}
+.tko .orb ellipse{stroke:rgba(255,122,89,.28)}
+.tko .orb ellipse.mine{stroke:rgba(79,209,165,.45)}
+.tko .nd-c{fill:#1A1311;stroke:var(--coral)}
+.tko .nd-y{fill:rgba(79,209,165,.25);stroke:var(--mint)}
+.tko .lb{fill:var(--coral)}
+.tko .lb.y{fill:var(--mint)}
+.tko .arcs path{stroke:var(--amber) !important}
+.tko-k .k-s::before{background:var(--amber);box-shadow:0 0 8px rgba(255,194,75,.9)}
+.tko-k .k-w::before{background:var(--mint);opacity:1}

@@ -1,3 +1,4 @@
+import type React from "react";
 import type { Lang } from "@/lib/i18n";
 import { getPlaybooks, type PlaybookItem } from "@/lib/content";
 import type { PlaybooksDict } from "@/lib/playbooks-copy";
@@ -7,6 +8,9 @@ import PageInteractions from "./PageInteractions";
 import { ArrowDown, ArrowRight, ArrowUpRight } from "./Icons";
 
 const PATHS = { en: "/gtm-playbooks", fr: "/fr/gtm-playbooks" };
+
+// Number of dots in each card's mini motif (Website, Competitor, Events, Account expansion, Dormant).
+const MOTIF: Record<string, number> = { w: 4, c: 2, e: 3, a: 5, d: 6 };
 
 function Download() {
   return (
@@ -61,14 +65,14 @@ export default async function Playbooks({ lang }: { lang: Lang }) {
                 <a className="link-arrow" href={links.methodology}><span>{p.cta_think}</span><ArrowRight /></a>
               </div>
             </div>
-            <figure className="mh-vis sys" id="sys" aria-hidden="true">
-              <div className="sys-h"><span>{p.h_sig}</span><span>{p.h_eng}</span><span>{p.h_act}</span></div>
-              <div className="sys-rows">
+            {/* Hero: the five playbooks as a fanned hand of colored cards; they take turns lifting, hover pulls one up */}
+            <figure className="mh-vis h5" id="h5" aria-hidden="true">
+              <div className="h5-in">
                 {items.map((it, i) => (
-                  <a key={it.key} className="sys-r" href={`#${it.id}`} tabIndex={-1} style={{ "--d": `${i * 120}ms` } as React.CSSProperties}>
-                    <span className="sg">{p[`sg_${it.key}`]}</span>
-                    <span className="en">{p[`nl_${it.key}`]}</span>
-                    <span className="ac">{p[`ac_${it.key}`]}</span>
+                  <a key={it.key} className={`pc pc-${it.key}`} href={it.url} tabIndex={-1} style={{ "--i": i - 2 } as React.CSSProperties}>
+                    <i className={`mo mo-${it.key}`}>{Array.from({ length: MOTIF[it.key] ?? 0 }, (_, j) => <b key={j} />)}</i>
+                    <p>{p[`nl_${it.key}`]}</p>
+                    <span>{p[it.group]}</span>
                   </a>
                 ))}
               </div>

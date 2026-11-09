@@ -1,3 +1,4 @@
+import type React from "react";
 import type { Lang } from "@/lib/i18n";
 import { getMethodology } from "@/lib/content";
 import Header from "./Header";
@@ -73,16 +74,28 @@ export default async function Methodology({ lang }: { lang: Lang }) {
                 <a className="link-arrow" href={links.experience}><span>{m.cta_exp}</span><ArrowRight /></a>
               </div>
             </div>
-            <figure className="mh-vis" aria-hidden="true">
-              <svg className="sig" id="sig" viewBox="0 0 520 520">
-                <g className="rings">
-                  <g data-k="1"><circle className="ring o" cx="260" cy="260" r="232" /><text className="lab m" x="260" y="33">{m.st1}</text></g>
-                  <g data-k=".65"><circle className="ring" cx="260" cy="260" r="150" /><text className="lab" x="260" y="115">{m.st2}</text></g>
-                  <g data-k=".25"><circle className="ring c" cx="260" cy="260" r="58" /><circle className="pulse" cx="260" cy="260" r="58" opacity="0" /><circle className="core" cx="260" cy="260" r="5" fill="#5A86A0" /><text className="lab" x="260" y="345">{m.st3}</text></g>
-                </g>
-                <g className="lines" />
-                <g className="dots" />
-              </svg>
+            {/* Hero: Exposure, Signals and Activation as a three-card deck; hover fans it out */}
+            <figure className="mh-vis d3" aria-hidden="true">
+              <div className="d3-in">
+                <div className="c3 c-ex">
+                  <p className="ch"><b>{m.st1}</b><span>{m.st1s}</span></p>
+                  <div className="ads">{[1, 2, 3, 4].map((i) => <i key={i} className={`ad a${i}`}><em /><s /><s /></i>)}</div>
+                  <p className="cf"><span style={{ "--c": "var(--sky)" } as React.CSSProperties}>LinkedIn</span><span style={{ "--c": "var(--amber)" } as React.CSSProperties}>Google</span><span style={{ "--c": "var(--pink)" } as React.CSSProperties}>Meta</span></p>
+                </div>
+                <div className="c3 c-sg">
+                  <p className="ch"><b>{m.st2}</b><span>{m.st2s}</span></p>
+                  <ul className="sc">
+                    {([["A", "92%", "hot", m.tb_hot], ["B", "74%", "hot", m.tb_hot], ["C", "38%", "cold", m.tb_cold], ["D", "14%", "ice", m.tb_ice]] as const).map(([x, w, k, lab]) => (
+                      <li key={x} className={k}><span>{m.hv_acc.replace("{x}", x)}</span><em>{lab}</em><i><u style={{ "--w": w } as React.CSSProperties} /></i></li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="c3 c-ac">
+                  <p className="ch"><b>{m.st3}</b><span>{m.st3s}</span></p>
+                  <ol className="seq">{[m.hv_q1, m.hv_q2, m.hv_q3, m.hv_q4].map((q, i) => <li key={i} style={{ "--d": i } as React.CSSProperties}><i>✓</i>{q}</li>)}</ol>
+                  <p className="won">{m.hv_won}</p>
+                </div>
+              </div>
             </figure>
             <nav className="mh-index" aria-label={m.a_stages}>
               <a href="#exposure"><strong>{m.st1}</strong><ArrowDown /><span className="sub">{m.st1s}</span></a>

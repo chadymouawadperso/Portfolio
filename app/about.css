@@ -56,3 +56,14 @@
   .xv .ls{display:none}
 }
 html:not(.js) .xv .pl{opacity:1}
+
+/* Color layer (hero): each layer of the exploded view in its own color */
+.xv .pl:nth-of-type(1){--c:var(--sky)}.xv .pl:nth-of-type(2){--c:var(--amber)}.xv .pl:nth-of-type(3){--c:var(--pink)}.xv .pl:nth-of-type(4){--c:var(--mint)}
+.xv .top{fill:color-mix(in srgb,var(--c) 22%,#0F1316);stroke:var(--c)}
+.xv .pl:hover .top{fill:color-mix(in srgb,var(--c) 38%,#0F1316)}
+.xv .sl{fill:color-mix(in srgb,var(--c) 8%,#0F1316);stroke:color-mix(in srgb,var(--c) 35%,#2C3A43)}
+.xv .sr{fill:color-mix(in srgb,var(--c) 12%,#13191D);stroke:color-mix(in srgb,var(--c) 35%,#2C3A43)}
+.xv .ins{stroke:color-mix(in srgb,var(--c) 45%,transparent)}
+.xv .cd{fill:var(--c)}
+.xv .ld{stroke:color-mix(in srgb,var(--c) 50%,#3A4A54)}
+.xv .pl:hover .ln,.xv .pl:focus-visible .ln{fill:var(--c)}

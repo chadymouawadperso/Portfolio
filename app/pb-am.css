@@ -74,3 +74,18 @@
 html:not(.js) .own-c li{opacity:1;transform:none}
 html:not(.js) .tr .seg{display:none}
 html:not(.js) .tr-p[hidden]{display:grid}
+
+/* Color layer (hero): each committee member gets a color once they know the AM */
+.amx{background:radial-gradient(70% 70% at 70% 50%,rgba(79,209,165,.12),transparent 60%),radial-gradient(60% 60% at 15% 50%,rgba(90,184,255,.10),transparent 60%),#0F1214}
+.amx .am{fill:rgba(79,209,165,.28);stroke:var(--mint)}
+.amx .core{stroke:rgba(167,139,250,.6)}
+.amx .orb{stroke:rgba(167,139,250,.35)}
+.amx .cs{--c:var(--mint)}
+.amx .cs:nth-child(2){--c:var(--sky)}.amx .cs:nth-child(3){--c:var(--amber)}.amx .cs:nth-child(4){--c:var(--pink)}
+.amx .cs:nth-child(5){--c:var(--violet)}.amx .cs:nth-child(6){--c:var(--coral)}.amx .cs:nth-child(7){--c:var(--sky)}.amx .cs:nth-child(8){--c:var(--amber)}
+.amx .ct{stroke:var(--c)}
+.amx .cs.k .ct{fill:var(--c);stroke:var(--c);filter:drop-shadow(0 0 6px var(--c))}
+.amx .ln{stroke:var(--c)}
+.amx .lb.y{fill:var(--mint)}
+.amx-k .k-m::before{border-color:var(--violet)}
+.amx-k .k-k::before{background:linear-gradient(135deg,var(--mint),var(--amber));box-shadow:0 0 8px rgba(79,209,165,.7)}

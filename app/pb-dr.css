@@ -56,3 +56,16 @@
 }
 html:not(.js) .rp-a,html:not(.js) .rp-dl{display:none}
 html:not(.js) .rn[hidden]{display:block}
+
+/* Color layer (hero): a violet-pink warm-up sweep; customers that come back take on color */
+.drx{background:radial-gradient(70% 70% at 85% 50%,rgba(167,139,250,.14),transparent 60%),radial-gradient(60% 60% at 20% 30%,rgba(244,114,182,.08),transparent 60%),#0F1214}
+#drxScan stop{stop-color:var(--pink)}
+.drx .dd{--c:var(--violet)}
+.drx .dds .dd:nth-child(4n+1){--c:var(--pink)}.drx .dds .dd:nth-child(4n+2){--c:var(--mint)}.drx .dds .dd:nth-child(4n+3){--c:var(--amber)}
+.drx .dd.eng{fill:var(--c);stroke:var(--c);filter:drop-shadow(0 0 8px var(--c))}
+.drx .dd.back{fill:var(--c);stroke:#F2F0EB;stroke-width:2}
+.drx .ln{stroke:var(--violet)}
+.drx .am{fill:rgba(167,139,250,.28);stroke:var(--violet)}
+.drx .lb.y{fill:var(--violet)}
+.drx-k .k-e::before{background:var(--pink);box-shadow:0 0 8px rgba(244,114,182,.85)}
+.drx-k .k-b::before{background:var(--mint);border-color:#F2F0EB}
