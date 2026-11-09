@@ -4,7 +4,7 @@ export type Lang = "en" | "fr";
 const dict = {
     en:{
       a_top:"Chady Mouawad, back to top", a_main:"Main", a_lang:"Language", a_mobile:"Mobile menu", a_footer:"Footer", a_logo_an:"Atelier N logo", a_logo_wm:"Wminded logo", a_logo_pl:"Protolabs logo", a_portrait:"Chady Mouawad, GTM Engineer", m_title:"Chady Mouawad · GTM Engineer", m_desc:"Chady Mouawad, GTM Engineer. I build go-to-market systems that connect marketing and sales around the accounts most likely to buy.",
-      skip:"Skip to content", nav_method:"Methodology", nav_exp:"Experience", nav_pb:"GTM Playbooks", nav_about:"About",
+      skip:"Skip to content", nav_method:"Methodology", nav_exp:"Experience", nav_pb:"GTM Playbooks", nav_pb_menu:"Show the five GTM playbooks", nav_about:"About",
       cta_connect:"Connect on LinkedIn",
       hero_lead:"I build go-to-market systems that connect marketing and sales around the accounts most likely to buy.",
       sys_title:"How I build go‑to‑market systems",
@@ -41,7 +41,7 @@ const dict = {
     },
     fr:{
       a_top:"Chady Mouawad, retour en haut", a_main:"Navigation principale", a_lang:"Langue", a_mobile:"Menu mobile", a_footer:"Pied de page", a_logo_an:"Logo Atelier N", a_logo_wm:"Logo Wminded", a_logo_pl:"Logo Protolabs", a_portrait:"Chady Mouawad, GTM Engineer", m_title:"Chady Mouawad · GTM Engineer", m_desc:"Chady Mouawad, GTM Engineer. Je conçois des systèmes go-to-market qui alignent marketing et sales sur les comptes les plus susceptibles d’acheter.",
-      skip:"Aller au contenu", nav_method:"Méthodologie", nav_exp:"Parcours", nav_pb:"Playbooks GTM", nav_about:"À propos",
+      skip:"Aller au contenu", nav_method:"Méthodologie", nav_exp:"Parcours", nav_pb:"Playbooks GTM", nav_pb_menu:"Afficher les cinq playbooks GTM", nav_about:"À propos",
       cta_connect:"Échangeons sur LinkedIn",
       hero_lead:"Je conçois des systèmes go-to-market qui alignent marketing et sales sur les comptes les plus susceptibles d’acheter.",
       sys_title:"Comment je construis un système go‑to‑market",
