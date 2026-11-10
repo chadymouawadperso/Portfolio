@@ -97,7 +97,7 @@ export async function getContent(lang: Lang): Promise<Content> {
     experience: lang === "fr" ? "/fr/experience" : "/experience",
     playbooks: lang === "fr" ? "/fr/gtm-playbooks" : "/gtm-playbooks",
     about: lang === "fr" ? "/fr/about" : "/about",
-    cv: str(st.cvUrl) ?? LINKS.cv,
+    cv: str(st.cvUrl) ?? (lang === "fr" ? LINKS.cvFr : LINKS.cv),
   };
 
   const hm = home ?? {};

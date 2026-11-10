@@ -108,6 +108,7 @@ export const LINKS = {
     ["The Competitor Takeout Engine", "https://chadymouawad.com/gtm-playbooks/competitor-takeout-engine/"],
     ["The Event & Webinar-to-Pipeline Engine", "https://chadymouawad.com/gtm-playbooks/event-webinar-to-pipeline-engine/"],
   ] as const,
-  // Set to the hosted PDF address (e.g. "/cv/chady-mouawad-cv.pdf") when the CV is ready.
-  cv: "",
+  // Hosted CV per language (files in /public/cv). A cvUrl set in Sanity overrides both.
+  cv: "/cv/Chady-Mouawad-CV-EN.pdf",
+  cvFr: "/cv/Chady-Mouawad-CV-FR.pdf",
 };
