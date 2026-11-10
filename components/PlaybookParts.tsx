@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import type { Lang } from "@/lib/i18n";
 import type { Content } from "@/lib/content";
 import Header from "./Header";
+import StructuredData from "./StructuredData";
 import Footer from "./Footer";
 import PageInteractions from "./PageInteractions";
 import PlaybookFx from "./PlaybookFx";
@@ -36,6 +37,7 @@ export function PlaybookShell({ base, lang, paths, children }: { base: Content; 
       <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       <a className="skip" href="#main">{t.skip}</a>
       <Header t={t} lang={lang} links={links} current={links.playbooks} paths={paths} />
+      <StructuredData t={t} lang={lang} en={paths.en} />
       <main id="main">
         <svg className="thread" id="thread" aria-hidden="true" />
         {children}

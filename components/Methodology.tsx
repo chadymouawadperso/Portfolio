@@ -2,6 +2,7 @@ import type React from "react";
 import type { Lang } from "@/lib/i18n";
 import { getMethodology } from "@/lib/content";
 import Header from "./Header";
+import StructuredData from "./StructuredData";
 import Footer from "./Footer";
 import PageInteractions from "./PageInteractions";
 import { ArrowRight, ArrowUpRight, ArrowDown } from "./Icons";
@@ -54,6 +55,7 @@ export default async function Methodology({ lang }: { lang: Lang }) {
     <>
       <a className="skip" href="#main">{t.skip}</a>
       <Header t={t} lang={lang} links={links} current={links.methodology} paths={PATHS} />
+      <StructuredData t={t} lang={lang} en={PATHS.en} />
 
       <main id="main">
         <svg className="thread" id="thread" aria-hidden="true" />

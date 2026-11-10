@@ -1,6 +1,7 @@
 import type { Lang } from "@/lib/i18n";
 import { getContent } from "@/lib/content";
 import Header from "./Header";
+import StructuredData from "./StructuredData";
 import Monogram3D from "./Monogram3D";
 import Steps from "./Steps";
 import Interactions from "./Interactions";
@@ -31,6 +32,7 @@ export default async function Home({ lang }: { lang: Lang }) {
     <>
       <a className="skip" href="#main">{t.skip}</a>
       <Header t={t} lang={lang} links={LINKS} />
+      <StructuredData t={t} lang={lang} en={"/"} />
 
       <main id="main">
         <svg className="thread" id="thread" aria-hidden="true" />

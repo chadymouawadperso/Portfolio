@@ -1,6 +1,7 @@
 import type { Lang } from "@/lib/i18n";
 import { getExperience, type ExpImage } from "@/lib/content";
 import Header from "./Header";
+import StructuredData from "./StructuredData";
 import Footer from "./Footer";
 import PageInteractions from "./PageInteractions";
 import { ArrowDown, ArrowRight, ArrowUpRight } from "./Icons";
@@ -54,6 +55,7 @@ export default async function Experience({ lang }: { lang: Lang }) {
     <>
       <a className="skip" href="#main">{t.skip}</a>
       <Header t={t} lang={lang} links={links} current={links.experience} paths={PATHS} />
+      <StructuredData t={t} lang={lang} en={PATHS.en} />
 
       <main id="main">
         <svg className="thread" id="thread" aria-hidden="true" />

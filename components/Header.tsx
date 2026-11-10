@@ -4,15 +4,9 @@ import { useEffect, useState } from "react";
 import type { Dict, Lang } from "@/lib/i18n";
 import type { Links } from "@/lib/content";
 import { Monogram } from "./Icons";
+import { PLAYBOOKS } from "@/lib/site";
 
-// The five playbook pages, in the order of the GTM Playbooks page. Titles stay in English in both languages.
-const PLAYBOOKS: [string, string][] = [
-  ["The High-Intent Website Visitor Engine", "high-intent-website-visitor-engine"],
-  ["The Competitor Takeout Engine", "competitor-takeout-engine"],
-  ["The Event & Webinar-to-Pipeline Engine", "event-webinar-to-pipeline-engine"],
-  ["The Account Manager Expansion Engine", "account-manager-expansion-engine"],
-  ["The Dormant Customer Reactivation Engine", "dormant-customer-reactivation-engine"],
-];
+
 
 function Chevron() {
   return (

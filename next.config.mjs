@@ -54,6 +54,8 @@ const nextConfig = {
       { source: "/((?!studio).*)", headers: securityHeaders },
       { source: "/studio", headers: studioHeaders },
       { source: "/studio/:path*", headers: studioHeaders },
+      // Temporary Vercel addresses must never be indexed, even after launch.
+      { source: "/:path*", has: [{ type: "host", value: "(?<host>.*\\.vercel\\.app)" }], headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] },
       { source: "/assets/:path*", headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] },
     ];
   },

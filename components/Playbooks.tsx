@@ -3,6 +3,7 @@ import type { Lang } from "@/lib/i18n";
 import { getPlaybooks, type PlaybookItem } from "@/lib/content";
 import type { PlaybooksDict } from "@/lib/playbooks-copy";
 import Header from "./Header";
+import StructuredData from "./StructuredData";
 import Footer from "./Footer";
 import PageInteractions from "./PageInteractions";
 import { ArrowDown, ArrowRight, ArrowUpRight } from "./Icons";
@@ -48,6 +49,7 @@ export default async function Playbooks({ lang }: { lang: Lang }) {
     <>
       <a className="skip" href="#main">{t.skip}</a>
       <Header t={t} lang={lang} links={links} current={links.playbooks} paths={PATHS} />
+      <StructuredData t={t} lang={lang} en={PATHS.en} />
 
       <main id="main">
         <svg className="thread" id="thread" aria-hidden="true" />
