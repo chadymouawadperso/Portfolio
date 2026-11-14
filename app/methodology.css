@@ -62,7 +62,7 @@
 .tbl tbody tr{opacity:0;transform:translateY(8px);transition:opacity .5s ease,transform .5s ease}
 .panel.in .tbl tbody tr{opacity:1;transform:none}
 .tbl tr.cut td{border-top:1px solid #2A2E32}
-.panel-foot{display:flex;justify-content:space-between;gap:12px;padding:11px 22px;font-size:12px;color:#6C7075;border-top:1px solid #1C1F23}
+.panel-foot{display:flex;justify-content:space-between;gap:12px;padding:11px 22px;font-size:12px;color:#7A7F84;border-top:1px solid #1C1F23}
 .act{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:center}
 .seq-wrap{grid-column:1 / span 7;border-radius:20px;padding:clamp(28px,3.5vw,44px);background:radial-gradient(120% 80% at 50% 0%,rgba(73,114,135,.14),rgba(73,114,135,0) 60%),#0F1113;border:1px solid #202327;position:relative;overflow:hidden}
 .seq-wrap::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.06) 1px,transparent 1px);background-size:22px 22px;mask-image:linear-gradient(180deg,#000,transparent 90%);-webkit-mask-image:linear-gradient(180deg,#000,transparent 90%);pointer-events:none}
