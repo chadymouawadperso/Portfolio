@@ -1,22 +1,40 @@
-# chadymouawad.com — new site (homepage)
+# chadymouawad.com
 
-Next.js 14 (App Router, TypeScript). English at `/`, French at `/fr`.
+Personal portfolio of Chady Mouawad. Next.js 15 (App Router, TypeScript, React 19), content in Sanity, hosted on Vercel.
+English at `/`, French at `/fr`.
 
-- Copy (EN + FR): `lib/i18n.ts`
-- Page structure: `components/Home.tsx`
-- 3D monogram: `components/Monogram3D.tsx`
-- Blue thread, reveal, counter: `components/Interactions.tsx`
-- Styles: `app/globals.css`
-- Security headers: `next.config.mjs`
-- CV link: set `LINKS.cv` in `lib/i18n.ts` once the PDF is hosted.
-- Search engines are blocked while in preview (`robots` in `lib/meta.ts`); switch to `index: true` at launch.
+## Run it
 
-Run locally: `npm install`, then `npm run dev`.
+- `npm install`, then `npm run dev` (local) or `npm run build && npm start`.
+- `npm run test:smoke` checks every page, the SEO files, the 404 page and the old WordPress redirects.
+  Point it at another server with `BASE=https://… npm run test:smoke`.
 
-## Editing content (Sanity)
+## Where things live
 
-- Editor: `/studio` on the site (log in with your Sanity account).
-- Project ID `t88q36f5`, dataset `production`. Schema: `sanity/schemaTypes`.
-- Published changes appear on the site within about a minute (pages refresh every 60 seconds).
-- Documents: Homepage, Methodology page (`/methodology`, `/fr/methodology`), Experience page (`/experience`, `/fr/experience`) and Site settings.
-- If Sanity is unreachable, the site falls back to the built-in copy in `lib/i18n.ts` (homepage, header, footer) , `lib/methodology-copy.ts` (Methodology) and `lib/experience-copy.ts` (Experience).
+- Pages: `app/(en)` and `app/(fr)/fr` (one folder per page). Studio: `app/(studio)/studio`.
+- Page components: `components/` (`Home.tsx`, `About.tsx`, `Experience.tsx`, `Methodology.tsx`, `Playbooks.tsx`, `Playbook*.tsx`).
+- Shared playbook parts and animations: `components/PlaybookParts.tsx`, `components/PlaybookFx.tsx`.
+- Inner-page animations: `components/PageInteractions.tsx`, `lib/heroFx.ts`. Homepage: `components/Interactions.tsx`, `components/Monogram3D.tsx`.
+- Styles: `app/globals.css` (all pages), `app/inner.css` (inner pages) and one CSS file per page.
+- Site URL, routes, canonical and language links: `lib/site.ts`. Page titles and descriptions: `lib/meta.ts`.
+- `robots.txt` and `sitemap.xml`: `app/robots.ts`, `app/sitemap.ts`. Structured data: `components/StructuredData.tsx`.
+- Security headers, redirects from the old WordPress site, and `/playbooks/<slug>.pdf`: `next.config.mjs`.
+- CV files: `public/cv/`.
+
+## Content (Sanity)
+
+- Editor: `/studio` on the site (log in with your Sanity account). Project `t88q36f5`, dataset `production`. Schema: `sanity/schemaTypes`.
+- Published text changes appear within about a minute (pages refresh every 60 seconds).
+- A new playbook PDF uploaded in the Studio goes live at the next deploy (the `/playbooks/<slug>.pdf` links are built then).
+- If Sanity is unreachable, pages fall back to the built-in copy in `lib/*-copy.ts` and `lib/i18n.ts`.
+
+## Analytics
+
+Vercel Web Analytics (`@vercel/analytics`), cookie-free, so no consent banner. Not loaded on `/studio`.
+It must be switched on once in the Vercel project (Analytics tab).
+
+## Launch switch
+
+Search engines are blocked until launch: `noindex` on every page and `Disallow: /` in `robots.txt`.
+At launch, set the Vercel environment variable `SITE_INDEXABLE=true` and redeploy.
+`*.vercel.app` addresses always send `noindex`.

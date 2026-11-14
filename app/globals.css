@@ -78,6 +78,7 @@ h1,h2,h3{text-wrap:balance}
 .nav-dd:hover .nav-dd-m,.nav-dd:focus-within .nav-dd-m,.nav-dd.open .nav-dd-m{opacity:1;visibility:visible;transform:none;transition:opacity .2s ease,transform .2s ease,visibility 0s}
 .nav .nav-dd-m a{display:block;padding:11px 14px;border-radius:10px;font-size:14.5px;line-height:1.3;color:var(--soft);box-shadow:none}
 .nav .nav-dd-m a:hover,.nav .nav-dd-m a:focus-visible{background:rgba(73,114,135,.18);color:var(--paper);outline:none}
+.nav .nav-dd-m a:focus-visible{outline:2px solid var(--blue-light);outline-offset:-2px}
 .header-tools{display:flex;align-items:center;gap:10px}
 .lang{display:flex;font-size:13px;font-weight:600;border:1px solid #3A3D40;border-radius:999px;padding:3px;background:rgba(11,11,12,.6)}
 .lang a{display:inline-flex;align-items:center;justify-content:center;min-height:36px;min-width:44px;color:var(--muted);border-radius:999px;padding:0 10px;text-decoration:none}

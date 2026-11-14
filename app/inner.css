@@ -58,16 +58,6 @@ html:lang(fr) .think-title .tl{white-space:normal}
 /* Hero visual (one per page) */
 .mh-vis{grid-column:8 / span 5;position:relative;margin:0}
 
-/* Methodology: signals converging */
-.sig{width:100%;height:auto;display:block;overflow:visible}
-.sig .ring{fill:none;stroke:#2A2E32;stroke-width:1}
-.sig .ring.o{stroke:#24272A;stroke-dasharray:2 7}
-.sig .ring.c{fill:rgba(73,114,135,.10);stroke:var(--blue);stroke-width:1.2}
-.sig .lab{font-size:14px;font-weight:600;letter-spacing:.02em;fill:var(--blue-light);text-anchor:middle;paint-order:stroke;stroke:var(--ground);stroke-width:10px;stroke-linejoin:round}
-.sig .lab.m{fill:var(--muted)}
-.sig .ln{stroke:var(--blue-line);stroke-width:1;stroke-opacity:.4}
-.sig .pulse{fill:none;stroke:var(--blue-line);stroke-width:1.5}
-
 /* Experience: three environments */
 .deck{aspect-ratio:1 / .78;perspective:1400px}
 .deck-in{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
