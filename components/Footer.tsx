@@ -1,6 +1,7 @@
 import type { Dict } from "@/lib/i18n";
 import type { Links } from "@/lib/content";
 import { Monogram } from "./Icons";
+import { INDEXABLE } from "@/lib/site";
 
 export default function Footer({ t, links: LINKS }: { t: Dict; links: Links }) {
   const cvHref = LINKS.cv || "#cv";
@@ -30,7 +31,7 @@ export default function Footer({ t, links: LINKS }: { t: Dict; links: Links }) {
       </div>
       <div className="wrap foot-bottom">
         <span>© 2026 Chady Mouawad. {t.rights}</span>
-        <span className="draft-tag">{t.draft}</span>
+        {!INDEXABLE && <span className="draft-tag">{t.draft}</span>}
       </div>
     </footer>
   );
