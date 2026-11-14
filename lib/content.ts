@@ -134,7 +134,7 @@ export async function getContent(lang: Lang): Promise<Content> {
       title: str(hm.featuredTitle) ?? "The High-Intent Website Visitor Engine",
       url: localPath(str(hm.featuredUrl) ?? LINKS.featured, lang),
     },
-    more: more.length ? more : LINKS.more.map(([a, b]) => [a, b] as [string, string]),
+    more: more.length ? more : LINKS.more.map(([a, b]) => [a, localPath(b, lang)] as [string, string]),
   };
 }
 
@@ -290,28 +290,19 @@ export type PlaybookItem = {
 };
 export type PlaybooksContent = { base: Content; p: PlaybooksDict; items: PlaybookItem[] };
 
-const WP_PB = "https://chadymouawad.com/gtm-playbooks/";
-const FILES = "https://cdn.sanity.io/files/t88q36f5/production/";
-// Built-in defaults: key, anchor id, title, signal group, steps, page, cover id, PDF id, PDF download name.
-const PLAYBOOKS: [PlaybookKey, string, string, PlaybookItem["group"], number, string, string, string, string][] = [
-  ["w", "website", "The High-Intent Website Visitor Engine", "zn", 12, "high-intent-website-visitor-engine/", "1f81f652a6ae902652f5254c95c67b8387929a4d-600x600.webp", "befefa1ee50a19e20dd75f36df6c050d9963218c", "Chady-Mouawad-High-Intent-Website-Visitor-Engine.pdf"],
-  ["c", "competitor", "The Competitor Takeout Engine", "zn", 12, "competitor-takeout-engine/", "2ae3d03db002e457aa452ec3df69defb2d036a32-600x600.jpg", "2cc2d4085d2c9f8dfbb697a252db52ba2face6f5", "Chady-Mouawad-Competitor-Takeout-Engine.pdf"],
-  ["e", "events", "The Event & Webinar-to-Pipeline Engine", "zg", 13, "event-webinar-to-pipeline-engine/", "34bde108686fc48cd248771cfc62c59f2f613e59-600x600.webp", "86ced49235560ccd78a9225af3b864787b93ad6b", "Chady-Mouawad-Event-Webinar-to-Pipeline-Engine.pdf"],
-  ["a", "expansion", "The Account Manager Expansion Engine", "zb", 10, "account-manager-expansion-engine/", "26a0ee61065966b95e29acb709cb3d2f8f0557ec-600x600.webp", "7c55ac5d5ed7063b16b7e1b9c6f4fdce23bdeac5", "Chady-Mouawad-Account-Manager-Expansion-Engine.pdf"],
-  ["d", "reactivation", "The Dormant Customer Reactivation Engine", "zb", 13, "dormant-customer-reactivation-engine/", "3a10d9fc5d203bce0d49689253f76ecdb8309a9d-600x600.webp", "d26934b152d9f7eaa8c67d24cf0b23ad8996e64f", "Chady-Mouawad-Dormant-Customer-Reactivation-Engine.pdf"],
+// Built-in defaults: key, anchor id, title, signal group, steps, page slug, cover id. PDFs: see lib/playbook-pdfs.json.
+const PLAYBOOKS: [PlaybookKey, string, string, PlaybookItem["group"], number, string, string][] = [
+  ["w", "website", "The High-Intent Website Visitor Engine", "zn", 12, "high-intent-website-visitor-engine", "1f81f652a6ae902652f5254c95c67b8387929a4d-600x600.webp"],
+  ["c", "competitor", "The Competitor Takeout Engine", "zn", 12, "competitor-takeout-engine", "2ae3d03db002e457aa452ec3df69defb2d036a32-600x600.jpg"],
+  ["e", "events", "The Event & Webinar-to-Pipeline Engine", "zg", 13, "event-webinar-to-pipeline-engine", "34bde108686fc48cd248771cfc62c59f2f613e59-600x600.webp"],
+  ["a", "expansion", "The Account Manager Expansion Engine", "zb", 10, "account-manager-expansion-engine", "26a0ee61065966b95e29acb709cb3d2f8f0557ec-600x600.webp"],
+  ["d", "reactivation", "The Dormant Customer Reactivation Engine", "zb", 13, "dormant-customer-reactivation-engine", "3a10d9fc5d203bce0d49689253f76ecdb8309a9d-600x600.webp"],
 ];
 
 const sv = (v: unknown) => (typeof v === "string" && v.trim() ? v : undefined);
 
 /** A page link from Sanity: site-relative paths ("/gtm-playbooks/...") get the /fr prefix in French. */
 const localPath = (url: string, lang: Lang) => (url.startsWith("/") && lang === "fr" ? `/fr${url}` : url);
-
-/** A Sanity file reference ("file-<id>-pdf") as a public URL. */
-function fileUrl(v: unknown): string | undefined {
-  const ref = (v as { asset?: { _ref?: string } })?.asset?._ref;
-  const m = ref?.match(/^file-([a-f0-9]+)-(\w+)$/);
-  return m ? `${FILES}${m[1]}.${m[2]}` : undefined;
-}
 
 /** GTM Playbooks page content for one language: Sanity first, built-in copy as a fallback. */
 export async function getPlaybooks(lang: Lang): Promise<PlaybooksContent> {
@@ -329,21 +320,21 @@ export async function getPlaybooks(lang: Lang): Promise<PlaybooksContent> {
       if (typeof v === "string" && v.trim()) p[k] = v;
     });
   }
-  const items = PLAYBOOKS.map(([key, id, title, group, steps, page, cover, pdfId, pdfName]): PlaybookItem => {
+  const items = PLAYBOOKS.map(([key, id, title, group, steps, page, cover]): PlaybookItem => {
     const f = (n: string) => doc?.[`pb_${key}_${n}`];
     const coverField = f("cover") as Img;
-    const pdf = fileUrl(f("pdf")) ?? `${FILES}${pdfId}.pdf`;
     return {
       key,
       id,
       title: sv(f("title")) ?? title,
       group,
       steps: typeof f("steps") === "number" ? (f("steps") as number) : steps,
-      url: localPath(sv(f("url")) ?? WP_PB + page, lang),
+      url: localPath(sv(f("url")) ?? `/gtm-playbooks/${page}`, lang),
       cover: coverField?.asset?._ref
         ? img.image(coverField as never).width(600).height(600).fit("crop").auto("format").quality(84).url()
         : `${CDN}${cover}?w=600&fm=webp`,
-      pdf: `${pdf}?dl=${pdfName}`,
+      // Served from our own domain; next.config.mjs maps it to the PDF file in Sanity.
+      pdf: `/playbooks/${page}.pdf`,
     };
   });
   return { base, p, items };

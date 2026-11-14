@@ -132,3 +132,4 @@ html:not(.js) .card{opacity:1;transform:translate(-50%,-50%) var(--t)}
   .role .copy,.role .vis,.role.flip .copy,.role.flip .vis{grid-column:1 / -1;order:0}
   .role .vis{max-width:680px}
 }
+.nf{min-height:72vh;display:flex;align-items:center}
