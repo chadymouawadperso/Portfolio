@@ -94,7 +94,7 @@ export const expCopy = {
     cta_think: "La vision derrière ce parcours",
     r1: "GTM Engineer",
     r1p: "Europe",
-    r2: "Spécialiste digital",
+    r2: "Spécialiste marketing digital",
     r2p: "France",
     r3: "Fondateur",
     r3p: "Liban",
