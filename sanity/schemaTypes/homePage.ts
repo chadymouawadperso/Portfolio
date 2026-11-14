@@ -85,7 +85,7 @@ export const homePage = defineType({
     s("pbFeatLabel", "Small label above the featured playbook", "playbooks"),
     defineField({ name: "featuredTitle", title: "Featured playbook title", type: "string", group: "playbooks" }),
     p("featuredSummary", "Featured playbook summary", "playbooks"),
-    defineField({ name: "featuredUrl", title: "Featured playbook link", type: "url", group: "playbooks" }),
+    defineField({ name: "featuredUrl", title: "Featured playbook link", type: "url", group: "playbooks", validation: (r) => r.uri({ allowRelative: true }) }),
     s("pbRead", "Button label", "playbooks"),
     s("pbHow", "Label above the steps", "playbooks"),
     defineField({ name: "featuredSteps", title: "Steps of the engine", type: "array", group: "playbooks", of: [defineArrayMember({ type: "localeString" })] }),
@@ -101,7 +101,7 @@ export const homePage = defineType({
           name: "playbookLink",
           fields: [
             defineField({ name: "title", title: "Title", type: "string" }),
-            defineField({ name: "url", title: "Link", type: "url" }),
+            defineField({ name: "url", title: "Link", type: "url", validation: (r) => r.uri({ allowRelative: true }) }),
           ],
         }),
       ],
