@@ -3,7 +3,7 @@
 export const pbEvCopy = {
   en: {
     m_title: "The Event & Webinar-to-Pipeline Engine · Chady Mouawad",
-    m_desc: "A 13-step GTM playbook by Chady Mouawad for turning events and webinars into qualified pipeline: the right accounts, account-level intent, AI battle cards, and timely sales activation.",
+    m_desc: "A 13-step GTM playbook by Chady Mouawad for turning events and webinars into qualified pipeline, from account intent to timely sales activation.",
     kick: "GTM Playbook · Events & webinars",
     sub: "Great events do not automatically create pipeline.",
     lead: "Without one operating model, event engagement rarely turns into coordinated revenue action. This playbook connects the full event lifecycle, from account selection to post-event sales activation.",
@@ -241,7 +241,7 @@ export const pbEvCopy = {
   },
   fr: {
     m_title: "The Event & Webinar-to-Pipeline Engine · Chady Mouawad",
-    m_desc: "Un playbook GTM en 13 étapes, par Chady Mouawad, pour transformer événements et webinars en pipeline qualifié : les bons comptes, l’intention au niveau du compte, des battle cards IA et une activation commerciale au bon moment.",
+    m_desc: "Un playbook GTM en 13 étapes, par Chady Mouawad, pour transformer événements et webinars en pipeline qualifié, de l’intention à l’activation commerciale.",
     kick: "Playbook GTM · Événements et webinars",
     sub: "Un bon événement ne crée pas automatiquement du pipeline.",
     lead: "Sans modèle opérationnel commun, l’engagement suscité par un événement se traduit rarement en action commerciale coordonnée. Ce playbook relie tout le cycle de l’événement, de la sélection des comptes à l’activation commerciale après l’événement.",

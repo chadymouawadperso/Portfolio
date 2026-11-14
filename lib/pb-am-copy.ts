@@ -3,7 +3,7 @@
 export const pbAmCopy = {
   en: {
     m_title: "The Account Manager Expansion Engine · Chady Mouawad",
-    m_desc: "A 10-step GTM playbook by Chady Mouawad for helping Account Managers reach more of the right people inside the accounts they already own, without automating the relationship.",
+    m_desc: "A 10-step GTM playbook by Chady Mouawad for helping Account Managers reach more of the right people in their accounts, without automating the relationship.",
     kick: "GTM Playbook · Customer data",
     sub: "Account expansion rarely fails for lack of effort.",
     lead: "It fails because the motion depends on memory, manual work, and disconnected tools. This playbook turns the pieces that already exist, AM knowledge, marketing, sales tools, and reporting, into one repeatable expansion system.",
@@ -209,7 +209,7 @@ export const pbAmCopy = {
   },
   fr: {
     m_title: "The Account Manager Expansion Engine · Chady Mouawad",
-    m_desc: "Un playbook GTM en 10 étapes, par Chady Mouawad, pour aider les Account Managers à toucher davantage de bonnes personnes dans les comptes qu’ils gèrent déjà, sans automatiser la relation.",
+    m_desc: "Un playbook GTM en 10 étapes, par Chady Mouawad, pour aider les Account Managers à toucher plus de bons interlocuteurs, sans automatiser la relation.",
     kick: "Playbook GTM · Données clients",
     sub: "Le développement des comptes échoue rarement par manque d’effort.",
     lead: "Il échoue parce que la démarche repose sur la mémoire, le travail manuel et des outils déconnectés. Ce playbook transforme les briques qui existent déjà, la connaissance de l’AM, le marketing, les outils commerciaux et le reporting, en un système de développement reproductible.",

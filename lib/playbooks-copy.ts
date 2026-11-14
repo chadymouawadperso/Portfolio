@@ -65,7 +65,7 @@ export const playbooksCopy = {
     c_q2: "Each one documents how I diagnose it, structure the response, and measure what moves.",
     c_btn: "Let’s connect on LinkedIn",
     c_why: "More about me",
-    m_desc: "Practical GTM playbooks by Chady Mouawad: repeatable operating models that turn website intent, competitor research, event engagement, and customer data into the right commercial action.",
+    m_desc: "Practical GTM playbooks by Chady Mouawad: repeatable operating models that turn intent, competitor, event and customer data into the right sales action.",
   },
   fr: {
     h_sig: "Signal",
@@ -132,7 +132,7 @@ export const playbooksCopy = {
     c_q2: "Chacun documente comment je le diagnostique, structure la réponse et mesure ce qui progresse.",
     c_btn: "Échangeons sur LinkedIn",
     c_why: "En savoir plus sur moi",
-    m_desc: "Des playbooks GTM concrets par Chady Mouawad : des modèles opérationnels reproductibles qui transforment intention web, recherche concurrentielle, engagement événementiel et données clients en la bonne action commerciale.",
+    m_desc: "Des playbooks GTM concrets par Chady Mouawad, des modèles reproductibles qui transforment intention, veille, événements et données clients en actions.",
   },
 };
 

@@ -3,7 +3,7 @@
 export const pbDrCopy = {
   en: {
     m_title: "The Dormant Customer Reactivation Engine · Chady Mouawad",
-    m_desc: "A 13-step GTM playbook by Chady Mouawad for re-engaging customers who stopped ordering: account history, contact mapping, warm-up, contextual outreach, and replies routed back to the Account Manager.",
+    m_desc: "A 13-step GTM playbook by Chady Mouawad for re-engaging customers who stopped ordering, with replies routed back to the Account Manager.",
     kick: "GTM Playbook · Customer data",
     sub: "Dormant customers don’t go quiet for one reason.",
     lead: "Projects pause, contacts change, budgets move, or another supplier becomes easier to use. This playbook turns that uncertainty into a repeatable reactivation motion, without dropping the customer into an automated “please buy again” sequence.",
@@ -221,7 +221,7 @@ export const pbDrCopy = {
   },
   fr: {
     m_title: "The Dormant Customer Reactivation Engine · Chady Mouawad",
-    m_desc: "Un playbook GTM en 13 étapes, par Chady Mouawad, pour réengager les clients qui ont cessé de commander : historique du compte, cartographie des contacts, réchauffage, prise de contact contextuelle et réponses renvoyées à l’Account Manager.",
+    m_desc: "Un playbook GTM en 13 étapes, par Chady Mouawad, pour réengager les clients qui ont cessé de commander, avec des réponses renvoyées à l’Account Manager.",
     kick: "Playbook GTM · Données clients",
     sub: "Un client ne devient pas inactif pour une seule raison.",
     lead: "Les projets s’arrêtent, les contacts changent, les budgets bougent, ou un autre fournisseur devient plus simple. Ce playbook transforme cette incertitude en démarche de réactivation reproductible, sans faire entrer le client dans une séquence automatisée « recommandez chez nous ».",

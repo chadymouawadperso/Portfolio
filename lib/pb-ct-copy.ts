@@ -3,7 +3,7 @@
 export const pbCtCopy = {
   en: {
     m_title: "The Competitor Takeout Engine · Chady Mouawad",
-    m_desc: "A 12-step GTM playbook by Chady Mouawad for turning competitive research into a structured displacement motion: the right accounts, a pain-led angle, and the right owner.",
+    m_desc: "A 12-step GTM playbook by Chady Mouawad for turning competitive research into a structured displacement motion with the right accounts and owner.",
     kick: "GTM Playbook · Intent signals",
     sub: "Competitor takeout usually fails before outreach starts.",
     lead: "This playbook turns competitive research into a structured displacement motion. It finds the accounts actually comparing alternatives, checks them against CRM and fit, and opens a conversation about the buyer’s pain, never an attack on the competitor.",
@@ -218,7 +218,7 @@ export const pbCtCopy = {
   },
   fr: {
     m_title: "The Competitor Takeout Engine · Chady Mouawad",
-    m_desc: "Un playbook GTM en 12 étapes, par Chady Mouawad, pour transformer la veille concurrentielle en démarche de remplacement structurée : les bons comptes, un angle centré sur la douleur de l’acheteur et le bon propriétaire.",
+    m_desc: "Un playbook GTM en 12 étapes, par Chady Mouawad, pour transformer la veille concurrentielle en démarche de remplacement structurée, avec les bons comptes.",
     kick: "Playbook GTM · Signaux d’intention",
     sub: "Le remplacement d’un concurrent échoue généralement avant même le premier contact.",
     lead: "Ce playbook transforme la veille concurrentielle en démarche de remplacement structurée. Il repère les comptes qui comparent réellement les alternatives, les confronte au CRM et à l’ICP, puis ouvre une conversation sur la douleur de l’acheteur, jamais une attaque contre le concurrent.",

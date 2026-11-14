@@ -3,7 +3,7 @@
 export const pbWvCopy = {
   en: {
     m_title: "The High-Intent Website Visitor Engine · Chady Mouawad",
-    m_desc: "A 12-step GTM playbook by Chady Mouawad for turning high-intent website visits into prioritized accounts, routed actions, and pipeline, without exposing the tracking behind it.",
+    m_desc: "A 12-step GTM playbook by Chady Mouawad for turning high-intent website visits into prioritized accounts, routed actions and pipeline.",
     np_next: "Next playbook",
     np_all: "All GTM playbooks",
     c_pdf: "Download the PDF",
@@ -212,7 +212,7 @@ export const pbWvCopy = {
   },
   fr: {
     m_title: "The High-Intent Website Visitor Engine · Chady Mouawad",
-    m_desc: "Un playbook GTM en 12 étapes, par Chady Mouawad, pour transformer les visites à forte intention en comptes priorisés, en actions routées et en pipeline, sans jamais révéler le tracking.",
+    m_desc: "Un playbook GTM en 12 étapes, par Chady Mouawad, pour transformer les visites à forte intention en comptes priorisés, en actions routées et en pipeline.",
     np_next: "Playbook suivant",
     np_all: "Tous les playbooks GTM",
     c_pdf: "Télécharger le PDF (en anglais)",

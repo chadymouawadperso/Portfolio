@@ -138,7 +138,7 @@ export const aboutCopy = {
     c_q2: "Ce qui produit des résultats, c’est la façon dont tout est relié.",
     c_btn: "Échangeons sur LinkedIn",
     c_why: "Comment je structure la croissance",
-    m_desc: "Des études de génie mécanique au business et aux systèmes go-to-market : comment Chady Mouawad en est venu à voir la croissance comme un système, pas une addition de tactiques.",
+    m_desc: "Du génie mécanique aux systèmes go-to-market : comment Chady Mouawad en est venu à voir la croissance comme un système, pas une addition de tactiques.",
   },
 };
 
