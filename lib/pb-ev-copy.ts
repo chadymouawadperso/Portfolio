@@ -2,11 +2,11 @@
 // Sanity overrides any text filled in the Studio (document "Playbook · Event & Webinar Engine").
 export const pbEvCopy = {
   en: {
-    m_title: "The Event & Webinar-to-Pipeline Engine · Chady Mouawad",
-    m_desc: "A 13-step GTM playbook by Chady Mouawad for turning events and webinars into qualified pipeline, from account intent to timely sales activation.",
-    kick: "GTM Playbook · Events & webinars",
+    m_title: "Trade Show and Event Lead Follow-Up · Chady Mouawad",
+    m_desc: "A 13-step B2B playbook to turn trade shows, events and webinars into qualified pipeline: score accounts, not attendees, and activate sales fast.",
+    kick: "GTM Playbook · Trade show and event lead follow-up",
     sub: "Great events do not automatically create pipeline.",
-    lead: "Without one operating model, event engagement rarely turns into coordinated revenue action. This playbook connects the full event lifecycle, from account selection to post-event sales activation.",
+    lead: "Without one operating model, the engagement from a trade show, event or webinar rarely turns into coordinated revenue action. This playbook structures lead follow-up across the full event lifecycle, from account selection to post-event sales activation.",
     pdf: "Download the PDF",
     all: "All GTM playbooks",
     v_att: "Attendees",
@@ -240,11 +240,11 @@ export const pbEvCopy = {
     np_all: "All GTM playbooks",
   },
   fr: {
-    m_title: "The Event & Webinar-to-Pipeline Engine · Chady Mouawad",
-    m_desc: "Un playbook GTM en 13 étapes, par Chady Mouawad, pour transformer événements et webinars en pipeline qualifié, de l’intention à l’activation commerciale.",
-    kick: "Playbook GTM · Événements et webinars",
+    m_title: "Suivi des leads après un salon ou un événement · Chady Mouawad",
+    m_desc: "Un playbook B2B en 13 étapes pour transformer salons, événements et webinars en pipeline qualifié : scorer les comptes, pas les participants.",
+    kick: "Playbook GTM · Suivi des leads après un salon",
     sub: "Un bon événement ne crée pas automatiquement du pipeline.",
-    lead: "Sans modèle opérationnel commun, l’engagement suscité par un événement se traduit rarement en action commerciale coordonnée. Ce playbook relie tout le cycle de l’événement, de la sélection des comptes à l’activation commerciale après l’événement.",
+    lead: "Sans modèle opérationnel commun, l’engagement suscité par un salon, un événement ou un webinar se traduit rarement en action commerciale coordonnée. Ce playbook structure le suivi des leads sur tout le cycle de l’événement, de la sélection des comptes à l’activation commerciale après l’événement.",
     pdf: "Télécharger le PDF (en anglais)",
     all: "Tous les playbooks GTM",
     v_att: "Participants",

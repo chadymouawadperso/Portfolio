@@ -2,7 +2,7 @@
 export const aboutCopy = {
   en: {
     c1p3: "That’s where my focus took shape: how operations and demand connect.",
-    m_title: "About · Chady Mouawad",
+    m_title: "About Chady Mouawad · From Engineering to Go-to-Market",
     eyebrow: "About",
     h1a: "I didn’t start",
     h1b: "in marketing.",
@@ -72,7 +72,7 @@ export const aboutCopy = {
   },
   fr: {
     c1p3: "C’est là que mon intérêt s’est précisé : le lien entre les opérations et la demande.",
-    m_title: "À propos · Chady Mouawad",
+    m_title: "À propos de Chady Mouawad · De l’ingénierie au go-to-market",
     eyebrow: "À propos",
     h1a: "Je n’ai pas",
     h1b: "commencé par",

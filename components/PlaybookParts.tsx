@@ -246,6 +246,7 @@ export function Closing({ w, base, pdf, hub, next }: { w: W; base: Content; pdf:
           <a href={hub}><span className="np-k">{w.np_all}</span><b>GTM Playbooks</b></a>
           <a href={next.url} className="nx"><span className="np-k">{w.np_next}</span><b>{next.title}</b></a>
         </nav>
+        <p className="kw-links kw-part">{t.kw_part_a} <a href={links.methodology}>{t.kw_part_b}</a>.</p>
       </div>
     </section>
   );

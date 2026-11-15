@@ -2,11 +2,11 @@
 // Sanity overrides any text filled in the Studio (document "Playbook · Account Manager Expansion Engine").
 export const pbAmCopy = {
   en: {
-    m_title: "The Account Manager Expansion Engine · Chady Mouawad",
-    m_desc: "A 10-step GTM playbook by Chady Mouawad for helping Account Managers reach more of the right people in their accounts, without automating the relationship.",
-    kick: "GTM Playbook · Customer data",
+    m_title: "Grow Existing Customer Accounts · Chady Mouawad",
+    m_desc: "A 10-step B2B playbook that helps Account Managers reach more of the right people in their accounts and expand them, without automating the relationship.",
+    kick: "GTM Playbook · Grow existing customer accounts",
     sub: "Account expansion rarely fails for lack of effort.",
-    lead: "It fails because the motion depends on memory, manual work, and disconnected tools. This playbook turns the pieces that already exist, AM knowledge, marketing, sales tools, and reporting, into one repeatable expansion system.",
+    lead: "It fails because the motion depends on memory, manual work, and disconnected tools. To grow existing customer accounts, this playbook turns the pieces that already exist, AM knowledge, marketing, sales tools, and reporting, into one repeatable expansion system.",
     pdf: "Download the PDF",
     all: "All GTM playbooks",
     v_am: "Account Manager",
@@ -208,11 +208,11 @@ export const pbAmCopy = {
     np_all: "All GTM playbooks",
   },
   fr: {
-    m_title: "The Account Manager Expansion Engine · Chady Mouawad",
-    m_desc: "Un playbook GTM en 10 étapes, par Chady Mouawad, pour aider les Account Managers à toucher plus de bons interlocuteurs, sans automatiser la relation.",
-    kick: "Playbook GTM · Données clients",
+    m_title: "Développer les comptes clients existants · Chady Mouawad",
+    m_desc: "Un playbook B2B en 10 étapes pour aider les Account Managers à toucher plus de bons interlocuteurs dans leurs comptes, sans automatiser la relation.",
+    kick: "Playbook GTM · Développer les comptes clients existants",
     sub: "Le développement des comptes échoue rarement par manque d’effort.",
-    lead: "Il échoue parce que la démarche repose sur la mémoire, le travail manuel et des outils déconnectés. Ce playbook transforme les briques qui existent déjà, la connaissance de l’AM, le marketing, les outils commerciaux et le reporting, en un système de développement reproductible.",
+    lead: "Il échoue parce que la démarche repose sur la mémoire, le travail manuel et des outils déconnectés. Pour développer les comptes clients existants, ce playbook transforme les briques qui existent déjà, la connaissance de l’AM, le marketing, les outils commerciaux et le reporting, en un système reproductible.",
     pdf: "Télécharger le PDF (en anglais)",
     all: "Tous les playbooks GTM",
     v_am: "Account Manager",

@@ -1,6 +1,7 @@
 import type React from "react";
 import type { Lang } from "@/lib/i18n";
 import { getMethodology } from "@/lib/content";
+import { PLAYBOOKS } from "@/lib/site";
 import Header from "./Header";
 import StructuredData from "./StructuredData";
 import Footer from "./Footer";
@@ -331,6 +332,12 @@ export default async function Methodology({ lang }: { lang: Lang }) {
               <a className="btn" href={links.linkedin}><span>{m.r_btn}</span><ArrowUpRight /></a>
               <a className="link-arrow" href={links.playbooks}><span>{m.r_pb}</span><ArrowRight /></a>
             </div>
+            <p className="kw-links">
+              <span>{t.kw_practice}</span>
+              {PLAYBOOKS.map(([, slug], i) => (
+                <a key={slug} href={`${lang === "fr" ? "/fr" : ""}/gtm-playbooks/${slug}`}>{t.kw_pb[i]}</a>
+              ))}
+            </p>
           </div>
         </section>
       </main>

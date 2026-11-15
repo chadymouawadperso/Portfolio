@@ -2,11 +2,11 @@
 // Sanity overrides any text filled in the Studio (document "Playbook · Dormant Customer Reactivation Engine").
 export const pbDrCopy = {
   en: {
-    m_title: "The Dormant Customer Reactivation Engine · Chady Mouawad",
-    m_desc: "A 13-step GTM playbook by Chady Mouawad for re-engaging customers who stopped ordering, with replies routed back to the Account Manager.",
-    kick: "GTM Playbook · Customer data",
+    m_title: "Reactivate Inactive B2B Customers · Chady Mouawad",
+    m_desc: "A 13-step playbook to win back B2B customers who stopped ordering: understand why they went quiet, re-engage them, and route replies to the Account Manager.",
+    kick: "GTM Playbook · Reactivate inactive B2B customers",
     sub: "Dormant customers don’t go quiet for one reason.",
-    lead: "Projects pause, contacts change, budgets move, or another supplier becomes easier to use. This playbook turns that uncertainty into a repeatable reactivation motion, without dropping the customer into an automated “please buy again” sequence.",
+    lead: "Projects pause, contacts change, budgets move, or another supplier becomes easier to use. To reactivate inactive B2B customers, this playbook turns that uncertainty into a repeatable motion, without dropping the customer into an automated “please buy again” sequence.",
     pdf: "Download the PDF",
     all: "All GTM playbooks",
     v_dor: "Dormant customers",
@@ -220,11 +220,11 @@ export const pbDrCopy = {
     np_all: "All GTM playbooks",
   },
   fr: {
-    m_title: "The Dormant Customer Reactivation Engine · Chady Mouawad",
-    m_desc: "Un playbook GTM en 13 étapes, par Chady Mouawad, pour réengager les clients qui ont cessé de commander, avec des réponses renvoyées à l’Account Manager.",
-    kick: "Playbook GTM · Données clients",
+    m_title: "Relancer les clients inactifs · Chady Mouawad",
+    m_desc: "Un playbook en 13 étapes pour reconquérir les clients B2B qui ne commandent plus : comprendre pourquoi, reprendre contact, alerter l’Account Manager.",
+    kick: "Playbook GTM · Relancer les clients inactifs",
     sub: "Un client ne devient pas inactif pour une seule raison.",
-    lead: "Les projets s’arrêtent, les contacts changent, les budgets bougent, ou un autre fournisseur devient plus simple. Ce playbook transforme cette incertitude en démarche de réactivation reproductible, sans faire entrer le client dans une séquence automatisée « recommandez chez nous ».",
+    lead: "Les projets s’arrêtent, les contacts changent, les budgets bougent, ou un autre fournisseur devient plus simple. Pour relancer les clients inactifs, ce playbook transforme cette incertitude en démarche reproductible, sans faire entrer le client dans une séquence automatisée « recommandez chez nous ».",
     pdf: "Télécharger le PDF (en anglais)",
     all: "Tous les playbooks GTM",
     v_dor: "Clients inactifs",
