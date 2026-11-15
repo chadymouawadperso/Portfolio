@@ -46,7 +46,7 @@ export default async function Home({ lang }: { lang: Lang }) {
                 <span className="ln"><span>Chady</span></span>
                 <span className="ln"><span>Mouawad</span></span>
               </h1>
-              <p className="hero-role"><i aria-hidden="true" /><span>GTM Engineer</span></p>
+              <p className="hero-role"><i aria-hidden="true" /><span>{t.hero_role}</span></p>
               <p className="hero-lead">{t.hero_lead}</p>
               <CtaRow linkedinLabel={t.cta_connect} />
             </div>

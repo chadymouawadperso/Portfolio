@@ -24,6 +24,7 @@ export const playbooksPage = defineType({
     defineField({ name: "eyebrow", title: "Small label above the title", type: "localeString", group: "top" }),
     defineField({ name: "h1a", title: "Title, line 1", type: "localeString", group: "top" }),
     defineField({ name: "h1b", title: "Title, line 2", type: "localeString", group: "top" }),
+    defineField({ name: "h1c", title: "Title, line 3 (optional)", type: "localeString", group: "top" }),
     defineField({ name: "sub", title: "Subtitle (under the title)", type: "localeString", group: "top" }),
     defineField({ name: "lead", title: "Intro paragraph", type: "localeText", group: "top" }),
     defineField({ name: "cta_feat", title: "Main button", type: "localeString", group: "top" }),

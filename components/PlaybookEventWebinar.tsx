@@ -73,7 +73,7 @@ export default async function PlaybookEventWebinar({ lang }: { lang: Lang }) {
 
   return (
     <PlaybookShell base={base} lang={lang} paths={PATHS}>
-      <PlaybookHero w={w} title={["The Event &", "Webinar-to-", "Pipeline Engine"]} pdf={pdf} hub={hub} visual={visual}
+      <PlaybookHero w={w} title={w.h1l.split("|")} pdf={pdf} hub={hub} visual={visual}
         index={[["why", "i1", "i1s"], ["model", "i2", "i2s"], ["intent", "i3", "i3s"], ["fit", "i4", "i4s"]]} />
 
       {/* The problem: today's flow vs the engine, and what sales receives */}

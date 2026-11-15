@@ -76,7 +76,7 @@ export default async function PlaybookAccountExpansion({ lang }: { lang: Lang })
 
   return (
     <PlaybookShell base={base} lang={lang} paths={PATHS}>
-      <PlaybookHero w={w} title={["The Account", "Manager", "Expansion Engine"]} pdf={pdf} hub={hub} visual={visual}
+      <PlaybookHero w={w} title={w.h1l.split("|")} pdf={pdf} hub={hub} visual={visual}
         index={[["why", "i1", "i1s"], ["model", "i2", "i2s"], ["tiers", "i3", "i3s"], ["fit", "i4", "i4s"]]} />
 
       {/* The problem: today's flow vs the engine, and who owns what */}

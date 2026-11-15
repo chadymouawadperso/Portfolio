@@ -49,7 +49,7 @@ export default async function PlaybookWebsiteVisitor({ lang }: { lang: Lang }) {
 
   return (
     <PlaybookShell base={base} lang={lang} paths={PATHS}>
-      <PlaybookHero w={w} title={["The High-Intent", "Website Visitor", "Engine"]} pdf={pdf} hub={hub} visual={visual}
+      <PlaybookHero w={w} title={w.h1l.split("|")} pdf={pdf} hub={hub} visual={visual}
         index={[["why", "i1", "i1s"], ["model", "i2", "i2s"], ["fit", "i4", "i4s"], ["measure", "i3", "i3s"]]} />
 
       {/* The problem: simulator and the non-negotiable */}

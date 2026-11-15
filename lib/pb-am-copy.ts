@@ -2,9 +2,10 @@
 // Sanity overrides any text filled in the Studio (document "Playbook · Account Manager Expansion Engine").
 export const pbAmCopy = {
   en: {
+    h1l: "Grow your|existing customer|accounts.",
     m_title: "Grow Existing Customer Accounts · Chady Mouawad",
     m_desc: "A 10-step B2B playbook that helps Account Managers reach more of the right people in their accounts and expand them, without automating the relationship.",
-    kick: "GTM Playbook · Grow existing customer accounts",
+    kick: "GTM Playbook · The Account Manager Expansion Engine",
     sub: "Account expansion rarely fails for lack of effort.",
     lead: "It fails because the motion depends on memory, manual work, and disconnected tools. To grow existing customer accounts, this playbook turns the pieces that already exist, AM knowledge, marketing, sales tools, and reporting, into one repeatable expansion system.",
     pdf: "Download the PDF",
@@ -208,9 +209,10 @@ export const pbAmCopy = {
     np_all: "All GTM playbooks",
   },
   fr: {
+    h1l: "Développer|vos comptes|clients existants.",
     m_title: "Développer les comptes clients existants · Chady Mouawad",
     m_desc: "Un playbook B2B en 10 étapes pour aider les Account Managers à toucher plus de bons interlocuteurs dans leurs comptes, sans automatiser la relation.",
-    kick: "Playbook GTM · Développer les comptes clients existants",
+    kick: "Playbook GTM · The Account Manager Expansion Engine",
     sub: "Le développement des comptes échoue rarement par manque d’effort.",
     lead: "Il échoue parce que la démarche repose sur la mémoire, le travail manuel et des outils déconnectés. Pour développer les comptes clients existants, ce playbook transforme les briques qui existent déjà, la connaissance de l’AM, le marketing, les outils commerciaux et le reporting, en un système reproductible.",
     pdf: "Télécharger le PDF (en anglais)",

@@ -21,6 +21,7 @@ export default function StructuredData({ t, lang, en }: { t: Dict; lang: Lang; e
         name: "Chady Mouawad",
         url: SITE_URL,
         jobTitle: "GTM Engineer",
+        knowsAbout: ["B2B marketing strategy", "Digital advertising", "Account-based marketing", "Sales activation", "Demand generation", "Go-to-market strategy"],
         worksFor: { "@type": "Organization", name: "Protolabs" },
         sameAs: [LINKS.linkedin],
       },

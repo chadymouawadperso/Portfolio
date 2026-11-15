@@ -66,7 +66,7 @@ export default async function PlaybookCompetitorTakeout({ lang }: { lang: Lang }
 
   return (
     <PlaybookShell base={base} lang={lang} paths={PATHS}>
-      <PlaybookHero w={w} title={["The Competitor", "Takeout Engine"]} pdf={pdf} hub={hub} visual={visual}
+      <PlaybookHero w={w} title={w.h1l.split("|")} pdf={pdf} hub={hub} visual={visual}
         index={[["why", "i1", "i1s"], ["model", "i2", "i2s"], ["grid", "i3", "i3s"], ["fit", "i4", "i4s"]]} />
 
       {/* The problem: three sources of evidence, and the non-negotiable */}
