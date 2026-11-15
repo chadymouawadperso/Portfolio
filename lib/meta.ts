@@ -3,6 +3,8 @@ import type { Lang } from "./i18n";
 import { SITE_URL, INDEXABLE, alternates } from "./site";
 import { getAbout, getContent, getExperience, getMethodology, getPbAm, getPbCt, getPbDr, getPbEv, getPbWv, getPlaybooks } from "./content";
 
+const ogImage = (key: string, alt: string) => [{ url: `/og/${key}.jpg`, width: 1200, height: 630, alt }];
+
 export const viewport: Viewport = { themeColor: "#0B0B0C", width: "device-width", initialScale: 1 };
 
 export async function pageMetadata(lang: Lang): Promise<Metadata> {
@@ -20,9 +22,9 @@ export async function pageMetadata(lang: Lang): Promise<Metadata> {
       siteName: "Chady Mouawad",
       locale: lang === "fr" ? "fr_FR" : "en_US",
       alternateLocale: lang === "fr" ? "en_US" : "fr_FR",
-      images: [{ url: "/og.png", width: 1200, height: 630, alt: t.m_title }],
+      images: ogImage("home", t.m_title),
     },
-    twitter: { card: "summary_large_image", title: t.m_title, description: t.m_desc, images: ["/og.png"] },
+    twitter: { card: "summary_large_image", title: t.m_title, description: t.m_desc, images: ["/og/home.jpg"] },
     icons: { icon: "/icon.svg" },
     robots: INDEXABLE ? { index: true, follow: true } : { index: false, follow: false }, // see lib/site.ts
   };
@@ -36,8 +38,8 @@ export async function methodMetadata(lang: Lang): Promise<Metadata> {
     title: m.m_title,
     description: m.m_desc,
     alternates: alternates("/methodology", lang),
-    openGraph: { ...base.openGraph, title: m.m_title, description: m.m_desc, url: lang === "fr" ? "/fr/methodology" : "/methodology" },
-    twitter: { card: "summary_large_image", title: m.m_title, description: m.m_desc, images: ["/og.png"] },
+    openGraph: { ...base.openGraph, title: m.m_title, description: m.m_desc, images: ogImage("methodology", m.m_title), url: lang === "fr" ? "/fr/methodology" : "/methodology" },
+    twitter: { card: "summary_large_image", title: m.m_title, description: m.m_desc, images: ["/og/methodology.jpg"] },
   };
 }
 
@@ -49,8 +51,8 @@ export async function expMetadata(lang: Lang): Promise<Metadata> {
     title: x.m_title,
     description: x.m_desc,
     alternates: alternates("/experience", lang),
-    openGraph: { ...base.openGraph, title: x.m_title, description: x.m_desc, url: lang === "fr" ? "/fr/experience" : "/experience" },
-    twitter: { card: "summary_large_image", title: x.m_title, description: x.m_desc, images: ["/og.png"] },
+    openGraph: { ...base.openGraph, title: x.m_title, description: x.m_desc, images: ogImage("experience", x.m_title), url: lang === "fr" ? "/fr/experience" : "/experience" },
+    twitter: { card: "summary_large_image", title: x.m_title, description: x.m_desc, images: ["/og/experience.jpg"] },
   };
 }
 
@@ -62,8 +64,8 @@ export async function aboutMetadata(lang: Lang): Promise<Metadata> {
     title: a.m_title,
     description: a.m_desc,
     alternates: alternates("/about", lang),
-    openGraph: { ...base.openGraph, title: a.m_title, description: a.m_desc, url: lang === "fr" ? "/fr/about" : "/about" },
-    twitter: { card: "summary_large_image", title: a.m_title, description: a.m_desc, images: ["/og.png"] },
+    openGraph: { ...base.openGraph, title: a.m_title, description: a.m_desc, images: ogImage("about", a.m_title), url: lang === "fr" ? "/fr/about" : "/about" },
+    twitter: { card: "summary_large_image", title: a.m_title, description: a.m_desc, images: ["/og/about.jpg"] },
   };
 }
 
@@ -76,8 +78,8 @@ export async function playbooksMetadata(lang: Lang): Promise<Metadata> {
     title: p.m_title,
     description: p.m_desc,
     alternates: alternates("/gtm-playbooks", lang),
-    openGraph: { ...base.openGraph, title: p.m_title, description: p.m_desc, url: path },
-    twitter: { card: "summary_large_image", title: p.m_title, description: p.m_desc, images: ["/og.png"] },
+    openGraph: { ...base.openGraph, title: p.m_title, description: p.m_desc, images: ogImage("playbooks", p.m_title), url: path },
+    twitter: { card: "summary_large_image", title: p.m_title, description: p.m_desc, images: ["/og/playbooks.jpg"] },
   };
 }
 
@@ -90,8 +92,8 @@ async function playbookMetadata(lang: Lang, slug: string, w: { m_title: string; 
     title: w.m_title,
     description: w.m_desc,
     alternates: alternates(en, lang),
-    openGraph: { ...base.openGraph, type: "article", title: w.m_title, description: w.m_desc, url: path },
-    twitter: { card: "summary_large_image", title: w.m_title, description: w.m_desc, images: ["/og.png"] },
+    openGraph: { ...base.openGraph, type: "article", title: w.m_title, description: w.m_desc, images: ogImage("playbooks", w.m_title), url: path },
+    twitter: { card: "summary_large_image", title: w.m_title, description: w.m_desc, images: ["/og/playbooks.jpg"] },
   };
 }
 
