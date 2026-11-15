@@ -4,7 +4,10 @@ import type { Lang } from "./i18n";
 import { SITE_URL, INDEXABLE, alternates } from "./site";
 import { getAbout, getContent, getExperience, getMethodology, getPbAm, getPbCt, getPbDr, getPbEv, getPbWv, getPlaybooks } from "./content";
 
-const ogImage = (key: string, alt: string) => [{ url: `/og/${key}.jpg`, width: 1200, height: 630, alt }];
+// Bump a version when an image changes, so LinkedIn and others re-fetch it instead of using their cached copy.
+const OG_VERSION: Record<string, string> = { experience: "2" };
+const ogUrl = (key: string) => `/og/${key}.jpg${OG_VERSION[key] ? `?v=${OG_VERSION[key]}` : ""}`;
+const ogImage = (key: string, alt: string) => [{ url: ogUrl(key), width: 1200, height: 630, alt }];
 
 export const viewport: Viewport = { themeColor: "#0B0B0C", width: "device-width", initialScale: 1 };
 
@@ -57,7 +60,7 @@ export async function expMetadata(lang: Lang): Promise<Metadata> {
     description: x.m_desc,
     alternates: alternates("/experience", lang),
     openGraph: { ...base.openGraph, title: x.m_title, description: x.m_desc, images: ogImage("experience", x.m_title), url: lang === "fr" ? "/fr/experience" : "/experience" },
-    twitter: { card: "summary_large_image", title: x.m_title, description: x.m_desc, images: ["/og/experience.jpg"] },
+    twitter: { card: "summary_large_image", title: x.m_title, description: x.m_desc, images: [ogUrl("experience")] },
   };
 }
 
