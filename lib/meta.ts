@@ -1,3 +1,4 @@
+import { legalCopy } from "./legal-copy";
 import type { Metadata, Viewport } from "next";
 import type { Lang } from "./i18n";
 import { SITE_URL, INDEXABLE, alternates } from "./site";
@@ -106,3 +107,17 @@ export const pbCtMetadata = async (lang: Lang) => playbookMetadata(lang, "compet
 export const pbAmMetadata = async (lang: Lang) => playbookMetadata(lang, "account-manager-expansion-engine", (await getPbAm(lang)).w);
 export const pbDrMetadata = async (lang: Lang) => playbookMetadata(lang, "dormant-customer-reactivation-engine", (await getPbDr(lang)).w);
 export const pbEvMetadata = async (lang: Lang) => playbookMetadata(lang, "event-webinar-to-pipeline-engine", (await getPbEv(lang)).w);
+
+export async function legalMetadata(lang: Lang): Promise<Metadata> {
+  const c = legalCopy[lang];
+  const base = await pageMetadata(lang);
+  return {
+    ...base,
+    title: c.m_title,
+    description: c.m_desc,
+    alternates: alternates("/legal", lang),
+    openGraph: { ...base.openGraph, title: c.m_title, description: c.m_desc, url: lang === "fr" ? "/fr/legal" : "/legal" },
+    twitter: { ...base.twitter, title: c.m_title, description: c.m_desc },
+    robots: { index: false, follow: true },
+  };
+}

@@ -3,7 +3,10 @@ import type { Links } from "@/lib/content";
 import { Monogram } from "./Icons";
 import { INDEXABLE } from "@/lib/site";
 
+const LEGAL = { en: "/legal", fr: "/fr/legal" };
+
 export default function Footer({ t, links: LINKS }: { t: Dict; links: Links }) {
+  const legal = LINKS.about.startsWith("/fr") ? LEGAL.fr : LEGAL.en;
   const cvHref = LINKS.cv || "#cv";
   return (
     <footer>
@@ -30,7 +33,7 @@ export default function Footer({ t, links: LINKS }: { t: Dict; links: Links }) {
         </div>
       </div>
       <div className="wrap foot-bottom">
-        <span>© 2026 Chady Mouawad. {t.rights}</span>
+        <span>© 2026 Chady Mouawad. {t.rights} <a className="foot-legal" href={legal}>{t.f_legal}</a></span>
         {!INDEXABLE && <span className="draft-tag">{t.draft}</span>}
       </div>
     </footer>
