@@ -13,6 +13,7 @@
     "@sanity/image-url": "^2.1.1",
     "@sanity/ui": "^2.16.29",
     "@vercel/analytics": "^1.6.1",
+    "@vercel/speed-insights": "^2.1.0",
     "next": "15.5.29",
     "next-sanity": "^9.12.3",
     "react": "19.2.0",

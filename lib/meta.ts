@@ -25,7 +25,11 @@ export async function pageMetadata(lang: Lang): Promise<Metadata> {
       images: ogImage("home", t.m_title),
     },
     twitter: { card: "summary_large_image", title: t.m_title, description: t.m_desc, images: ["/og/home.jpg"] },
-    icons: { icon: "/icon.svg" },
+    icons: {
+      icon: [{ url: "/icon.svg", type: "image/svg+xml" }, { url: "/icon-192.png", sizes: "192x192", type: "image/png" }],
+      apple: "/apple-touch-icon.png",
+    },
+    manifest: "/site.webmanifest",
     robots: INDEXABLE ? { index: true, follow: true } : { index: false, follow: false }, // see lib/site.ts
   };
 }

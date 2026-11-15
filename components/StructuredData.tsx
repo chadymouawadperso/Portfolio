@@ -45,6 +45,20 @@ export default function StructuredData({ t, lang, en }: { t: Dict; lang: Lang; e
     const items = [{ name: lang === "fr" ? "Accueil" : "Home", path: "/" }].concat(
       segs.map((s, i) => ({ name: names[s] ?? s, path: "/" + segs.slice(0, i + 1).join("/") })),
     );
+    // Playbook pages are articles written by Chady. No dates: none is published on the page.
+    const pb = PLAYBOOKS.find(([, slug]) => en === `/gtm-playbooks/${slug}`);
+    if (pb) {
+      graph.push({
+        "@type": "Article",
+        headline: pb[0],
+        url: loc(en),
+        mainEntityOfPage: loc(en),
+        inLanguage: lang,
+        image: `${SITE_URL}/og/playbooks.jpg`,
+        author: { "@type": "Person", "@id": person, name: "Chady Mouawad", url: SITE_URL },
+        publisher: { "@type": "Person", "@id": person, name: "Chady Mouawad" },
+      });
+    }
     graph.push({
       "@type": "BreadcrumbList",
       itemListElement: items.map((it, i) => ({ "@type": "ListItem", position: i + 1, name: it.name, item: loc(it.path) })),

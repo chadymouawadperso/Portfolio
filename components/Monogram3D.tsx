@@ -15,6 +15,9 @@ export default function Monogram3D() {
     let disposed = false;
     let cleanup = () => {};
 
+    // Hands the main thread back between heavy steps, so taps and scrolling stay responsive while the 3D loads.
+    const breathe = () => new Promise<void>((r) => setTimeout(r, 0));
+
     const start = async () => {
       const [THREE, { mergeGeometries }] = await Promise.all([
         import("three"),
@@ -39,8 +42,8 @@ export default function Monogram3D() {
       if (/swiftshader|llvmpipe|softpipe|software|basic render/i.test(gpu)) reduce = true;
       renderer.setPixelRatio(Math.min(dpr, window.innerWidth < 700 ? 1.5 : 2));
       renderer.outputColorSpace = THREE.SRGBColorSpace;
-      stage.appendChild(renderer.domElement);
-      setReady(true);
+      await breathe();
+      if (disposed) return renderer.dispose();
 
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
@@ -102,6 +105,14 @@ export default function Monogram3D() {
       }
       cyl.dispose();
       sph.dispose();
+
+      // Shaders compile in the background where the browser supports it; the canvas appears only once
+      // they are ready, so the flat logo is never replaced by an empty frame.
+      await breathe();
+      try { await renderer.compileAsync(scene, camera); } catch { /* compiles on first frame instead */ }
+      if (disposed) { geos.forEach((g) => g.dispose()); paper.dispose(); blue.dispose(); return renderer.dispose(); }
+      stage.appendChild(renderer.domElement);
+      setReady(true);
 
       const resize = () => {
         const w = stage.clientWidth, h = stage.clientHeight;
@@ -171,12 +182,15 @@ export default function Monogram3D() {
       };
     };
 
-    const idle = (window as Window & { requestIdleCallback?: (cb: () => void) => number }).requestIdleCallback;
-    if (idle) idle(() => void start());
-    else setTimeout(() => void start(), 200);
+    // Starts once the page has fully loaded and the browser is idle, never during the first paint.
+    const idle = (window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number }).requestIdleCallback;
+    const kick = () => (idle ? idle(() => void start(), { timeout: 3000 }) : setTimeout(() => void start(), 600));
+    if (document.readyState === "complete") kick();
+    else window.addEventListener("load", kick, { once: true });
 
     return () => {
       disposed = true;
+      window.removeEventListener("load", kick);
       cleanup();
     };
   }, []);

@@ -26,6 +26,8 @@ export type Content = {
   t: Dict;
   links: Links;
   portrait: string;
+  /** A 600 px copy for phones and small screens. */
+  portraitSm: string;
   experiences: Experience[];
   featured: { title: string; url: string };
   more: [string, string][];
@@ -129,6 +131,7 @@ export async function getContent(lang: Lang): Promise<Content> {
     t,
     links,
     portrait: imgUrl(hm.portrait, 900) ?? "/assets/portrait.webp",
+    portraitSm: imgUrl(hm.portrait, 600) ?? "/assets/portrait-600.webp",
     experiences: exps.length ? exps : fallbackExp,
     featured: {
       title: str(hm.featuredTitle) ?? "The High-Intent Website Visitor Engine",
@@ -371,3 +374,31 @@ export const getPbEv = (lang: Lang) => getPlaybookPage<PbEvDict>(lang, "pbEventW
 export const getPbAm = (lang: Lang) => getPlaybookPage<PbAmDict>(lang, "pbAccountExpansion", pbAmCopy, "a", "d");
 // Last playbook: its "next" loops back to the first one (Website Visitor Engine).
 export const getPbDr = (lang: Lang) => getPlaybookPage<PbDrDict>(lang, "pbDormantReactivation", pbDrCopy, "d", "w");
+
+/** Last edit date of each page's Sanity document, keyed by English path. Used for the sitemap's dates.
+    A page counts as changed when its own document or the shared site settings changed. */
+export async function getUpdatedAt(): Promise<Record<string, string>> {
+  const ids: Record<string, string> = {
+    "/": "homePage", "/methodology": "methodologyPage", "/experience": "experiencePage",
+    "/gtm-playbooks": "playbooksPage", "/about": "aboutPage",
+    "/gtm-playbooks/high-intent-website-visitor-engine": "pbWebsiteVisitor",
+    "/gtm-playbooks/competitor-takeout-engine": "pbCompetitorTakeout",
+    "/gtm-playbooks/event-webinar-to-pipeline-engine": "pbEventWebinar",
+    "/gtm-playbooks/account-manager-expansion-engine": "pbAccountExpansion",
+    "/gtm-playbooks/dormant-customer-reactivation-engine": "pbDormantReactivation",
+  };
+  try {
+    const docs = await client.fetch<{ _id: string; _updatedAt: string }[]>(
+      `*[_id in $ids]{_id, _updatedAt}`, { ids: [...Object.values(ids), "siteSettings"] }
+    );
+    const at = Object.fromEntries(docs.map((d) => [d._id, d._updatedAt]));
+    const out: Record<string, string> = {};
+    for (const [path, id] of Object.entries(ids)) {
+      const dates = [at[id], at.siteSettings].filter(Boolean).sort();
+      if (dates.length) out[path] = dates[dates.length - 1];
+    }
+    return out;
+  } catch {
+    return {};
+  }
+}

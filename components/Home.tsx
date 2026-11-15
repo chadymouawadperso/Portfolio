@@ -9,7 +9,7 @@ import Footer from "./Footer";
 import { ArrowDown, ArrowRight, ArrowUpRight } from "./Icons";
 
 export default async function Home({ lang }: { lang: Lang }) {
-  const { t, links: LINKS, portrait, experiences, featured, more } = await getContent(lang);
+  const { t, links: LINKS, portrait, portraitSm, experiences, featured, more } = await getContent(lang);
   const cvHref = LINKS.cv || "#cv";
 
   const CtaRow = ({ linkedinLabel }: { linkedinLabel: string }) => (
@@ -95,7 +95,7 @@ export default async function Home({ lang }: { lang: Lang }) {
                 </svg>
                 <div className="orb-disc">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={portrait} alt={t.a_portrait} width={900} height={900} loading="lazy" decoding="async" />
+                  <img src={portrait} srcSet={`${portraitSm} 600w, ${portrait} 900w`} sizes="(max-width: 875px) 280px, (min-width: 1375px) 440px, 32vw" alt={t.a_portrait} width={900} height={900} loading="lazy" decoding="async" />
                   <span className="orb-sheen" aria-hidden="true" />
                 </div>
                 <figcaption><strong>Chady Mouawad</strong><span>GTM Engineer</span></figcaption>
@@ -125,7 +125,7 @@ export default async function Home({ lang }: { lang: Lang }) {
                     <span className="dot" aria-hidden="true" />
                     <div className="co">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <span className="tile"><img src={logo} alt={alt} width={100} height={100} /></span>
+                      <span className="tile"><img src={logo} alt={alt} width={100} height={100} loading="lazy" decoding="async" /></span>
                       <span>{name}</span>
                     </div>
                     <h3>{title}</h3>
