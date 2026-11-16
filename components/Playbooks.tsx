@@ -59,7 +59,7 @@ export default async function Playbooks({ lang }: { lang: Lang }) {
           <div className="wrap mh-grid">
             <div className="mh-main">
               <p className="kicker" data-anchor>{p.eyebrow}</p>
-              <h1 id="p-title"><span className="tl">{p.h1a}</span><span className="tl">{p.h1b}</span>{p.h1c ? <span className="tl">{p.h1c}</span> : null}</h1>
+              <h1 id="p-title"><span className="tl">{p.h1a}</span>{" "}<span className="tl">{p.h1b}</span>{p.h1c ? " " : null}{p.h1c ? <span className="tl">{p.h1c}</span> : null}</h1>
               {p.sub ? <p className="subtitle">{p.sub}</p> : null}
               <p className="mh-lead">{p.lead}</p>
               <div className="cta-row">

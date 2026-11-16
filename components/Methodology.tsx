@@ -67,8 +67,8 @@ export default async function Methodology({ lang }: { lang: Lang }) {
             <div className="mh-main">
               <p className="kicker" data-anchor>{m.eyebrow}</p>
               <h1 id="m-title">
-                <span className="tl">{m.h1a}</span>
-                <span className="tl">{m.h1b}</span>
+                <span className="tl">{m.h1a}</span>{" "}
+                <span className="tl">{m.h1b}</span>{m.h1c ? " " : null}
                 {m.h1c ? <span className="tl">{m.h1c}</span> : null}
               </h1>
               <p className="mh-lead">{m.lead}</p>

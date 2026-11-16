@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import type { ReactNode } from "react";
 import type { Lang } from "@/lib/i18n";
 import type { Content } from "@/lib/content";
@@ -56,7 +57,7 @@ export function PlaybookHero({ w, title, pdf, hub, visual, index }: { w: W; titl
       <div className="wrap mh-grid">
         <div className="mh-main">
           <p className="kicker" data-anchor>{w.kick}</p>
-          <h1 id="p-title">{title.map((l) => <span key={l} className={l.endsWith("-") ? "tl hy" : "tl"}>{l}</span>)}</h1>
+          <h1 id="p-title">{title.map((l, i) => <Fragment key={l}><span className={l.endsWith("-") ? "tl hy" : "tl"}>{l}</span>{i < title.length - 1 && !l.endsWith("-") ? " " : null}</Fragment>)}</h1>
           <p className="subtitle">{w.sub}</p>
           <p className="mh-lead">{w.lead}</p>
           <div className="cta-row">

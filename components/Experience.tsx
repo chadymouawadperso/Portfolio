@@ -66,8 +66,8 @@ export default async function Experience({ lang }: { lang: Lang }) {
             <div className="mh-main">
               <p className="kicker" data-anchor>{x.eyebrow}</p>
               <h1 id="x-title">
-                <span className="tl">{x.h1a}</span>
-                <span className="tl">{x.h1b}</span>
+                <span className="tl">{x.h1a}</span>{" "}
+                <span className="tl">{x.h1b}</span>{x.h1c ? " " : null}
                 {x.h1c ? <span className="tl">{x.h1c}</span> : null}
               </h1>
               {x.sub ? <p className="subtitle">{x.sub}</p> : null}

@@ -77,8 +77,8 @@ export default async function About({ lang }: { lang: Lang }) {
             <div className="mh-main">
               <p className="kicker" data-anchor>{a.eyebrow}</p>
               <h1 id="a-title">
-                <span className="tl">{a.h1a}</span>
-                <span className="tl">{a.h1b}</span>
+                <span className="tl">{a.h1a}</span>{" "}
+                <span className="tl">{a.h1b}</span>{a.h1c ? " " : null}
                 {a.h1c ? <span className="tl">{a.h1c}</span> : null}
               </h1>
               {a.sub ? <p className="subtitle">{a.sub}</p> : null}
