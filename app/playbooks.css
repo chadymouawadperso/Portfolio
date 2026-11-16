@@ -67,5 +67,12 @@
 .h5 .mo-d b{position:static;width:10px;height:10px;background:#3A4250;animation:h5dr 4.2s infinite}
 .h5 .mo-d b:nth-child(2){animation-delay:1.4s}.h5 .mo-d b:nth-child(6){animation-delay:2.8s}
 @keyframes h5dr{0%,60%,100%{background:#3A4250}70%,90%{background:var(--c);box-shadow:0 0 10px var(--c)}}
+/* Advertising engine: three funnel bands, wide to narrow, lighting in turn */
+.h5 .pc-f{--c:var(--pink)}
+.h5 .mo-f b{left:50%;height:13%;border-radius:5px;background:transparent;border:1.5px solid var(--c);transform:translateX(-50%);animation:h5fn 3s infinite}
+.h5 .mo-f b:nth-child(1){top:16%;width:76%}.h5 .mo-f b:nth-child(2){top:43%;width:50%;animation-delay:.5s}.h5 .mo-f b:nth-child(3){top:70%;width:24%;animation-delay:1s}
+@keyframes h5fn{0%,30%{background:transparent}45%,85%{background:var(--c)}100%{background:transparent}}
+/* Six cards: a tighter fan */
+.h5.n6 .pc{--x:calc(var(--i) * 15.5%);width:24%;height:54%}
 @media (max-width:760px){.h5 .pc{padding:10px;border-radius:14px}.h5 .pc span{display:none}.h5 .pc p{font-size:12px}}
 @media (prefers-reduced-motion:reduce){.h5 .mo b{animation:none}.h5 .pc{transition:none}}

@@ -9,7 +9,9 @@ import { pbCtCopy, type PbCtDict } from "./pb-ct-copy";
 import { pbEvCopy, type PbEvDict } from "./pb-ev-copy";
 import { pbAmCopy, type PbAmDict } from "./pb-am-copy";
 import { pbDrCopy, type PbDrDict } from "./pb-dr-copy";
+import { pbFaCopy, type PbFaDict } from "./pb-fa-copy";
 import { playbooksCopy, type PlaybooksDict, type PlaybooksKey } from "./playbooks-copy";
+import PDFS from "./playbook-pdfs.json";
 import { expCopy, type ExpDict, type ExpKey } from "./experience-copy";
 
 const client = createClient({ projectId, dataset, apiVersion, useCdn: true, perspective: "published" });
@@ -280,7 +282,7 @@ export async function getAbout(lang: Lang): Promise<AboutContent> {
 }
 
 /* ---------- GTM Playbooks page ---------- */
-export type PlaybookKey = "w" | "c" | "e" | "a" | "d";
+export type PlaybookKey = "f" | "w" | "c" | "e" | "a" | "d";
 export type PlaybookItem = {
   key: PlaybookKey;
   id: string;
@@ -293,14 +295,18 @@ export type PlaybookItem = {
 };
 export type PlaybooksContent = { base: Content; p: PlaybooksDict; items: PlaybookItem[] };
 
-// Built-in defaults: key, anchor id, title, signal group, steps, page slug, cover id. PDFs: see lib/playbook-pdfs.json.
+// Built-in defaults: key, anchor id, title, signal group, steps, page slug, cover (Sanity image id, or a path in /public).
+// PDFs: see lib/playbook-pdfs.json; a playbook without one gets no download link.
 const PLAYBOOKS: [PlaybookKey, string, string, PlaybookItem["group"], number, string, string][] = [
+  ["f", "advertising", "The Full-Funnel B2B Advertising Engine", "zg", 12, "full-funnel-b2b-advertising-engine", "/assets/pb-advertising-cover.webp"],
   ["w", "website", "The High-Intent Website Visitor Engine", "zn", 12, "high-intent-website-visitor-engine", "1f81f652a6ae902652f5254c95c67b8387929a4d-600x600.webp"],
   ["c", "competitor", "The Competitor Takeout Engine", "zn", 12, "competitor-takeout-engine", "2ae3d03db002e457aa452ec3df69defb2d036a32-600x600.jpg"],
   ["e", "events", "The Event & Webinar-to-Pipeline Engine", "zg", 13, "event-webinar-to-pipeline-engine", "34bde108686fc48cd248771cfc62c59f2f613e59-600x600.webp"],
   ["a", "expansion", "The Account Manager Expansion Engine", "zb", 10, "account-manager-expansion-engine", "26a0ee61065966b95e29acb709cb3d2f8f0557ec-600x600.webp"],
   ["d", "reactivation", "The Dormant Customer Reactivation Engine", "zb", 13, "dormant-customer-reactivation-engine", "3a10d9fc5d203bce0d49689253f76ecdb8309a9d-600x600.webp"],
 ];
+
+const PDF_SLUGS = new Set(PDFS.map((p) => p.slug));
 
 const sv = (v: unknown) => (typeof v === "string" && v.trim() ? v : undefined);
 
@@ -335,9 +341,9 @@ export async function getPlaybooks(lang: Lang): Promise<PlaybooksContent> {
       url: localPath(sv(f("url")) ?? `/gtm-playbooks/${page}`, lang),
       cover: coverField?.asset?._ref
         ? img.image(coverField as never).width(600).height(600).fit("crop").auto("format").quality(84).url()
-        : `${CDN}${cover}?w=600&fm=webp`,
+        : cover.startsWith("/") ? cover : `${CDN}${cover}?w=600&fm=webp`,
       // Served from our own domain; next.config.mjs maps it to the PDF file in Sanity.
-      pdf: `/playbooks/${page}.pdf`,
+      pdf: PDF_SLUGS.has(page) ? `/playbooks/${page}.pdf` : "",
     };
   });
   return { base, p, items };
@@ -365,15 +371,16 @@ async function getPlaybookPage<D extends Record<string, string>>(
   });
   const self = items.find((i) => i.key === me)!;
   const next = items.find((i) => i.key === nextKey)!;
-  return { base, w, pdf: self.pdf, hub: base.links.playbooks, next: { title: next.title, url: next.url } };
+  return { base, w, pdf: self.pdf || "#model", hub: base.links.playbooks, next: { title: next.title, url: next.url } };
 }
 
+export const getPbFa = (lang: Lang) => getPlaybookPage<PbFaDict>(lang, "pbFullFunnelAds", pbFaCopy, "f", "w");
 export const getPbWv = (lang: Lang) => getPlaybookPage<PbWvDict>(lang, "pbWebsiteVisitor", pbWvCopy, "w", "c");
 export const getPbCt = (lang: Lang) => getPlaybookPage<PbCtDict>(lang, "pbCompetitorTakeout", pbCtCopy, "c", "e");
 export const getPbEv = (lang: Lang) => getPlaybookPage<PbEvDict>(lang, "pbEventWebinar", pbEvCopy, "e", "a");
 export const getPbAm = (lang: Lang) => getPlaybookPage<PbAmDict>(lang, "pbAccountExpansion", pbAmCopy, "a", "d");
-// Last playbook: its "next" loops back to the first one (Website Visitor Engine).
-export const getPbDr = (lang: Lang) => getPlaybookPage<PbDrDict>(lang, "pbDormantReactivation", pbDrCopy, "d", "w");
+// Last playbook: its "next" loops back to the first one (Full-Funnel Advertising Engine).
+export const getPbDr = (lang: Lang) => getPlaybookPage<PbDrDict>(lang, "pbDormantReactivation", pbDrCopy, "d", "f");
 
 /** Last edit date of each page's Sanity document, keyed by English path. Used for the sitemap's dates.
     A page counts as changed when its own document or the shared site settings changed. */
@@ -381,6 +388,7 @@ export async function getUpdatedAt(): Promise<Record<string, string>> {
   const ids: Record<string, string> = {
     "/": "homePage", "/methodology": "methodologyPage", "/experience": "experiencePage",
     "/gtm-playbooks": "playbooksPage", "/about": "aboutPage",
+    "/gtm-playbooks/full-funnel-b2b-advertising-engine": "pbFullFunnelAds",
     "/gtm-playbooks/high-intent-website-visitor-engine": "pbWebsiteVisitor",
     "/gtm-playbooks/competitor-takeout-engine": "pbCompetitorTakeout",
     "/gtm-playbooks/event-webinar-to-pipeline-engine": "pbEventWebinar",

@@ -10,6 +10,8 @@ import { pbAmCopy } from "@/lib/pb-am-copy";
 import { pbAmLabels } from "@/lib/pb-am-labels";
 import { pbDrCopy } from "@/lib/pb-dr-copy";
 import { pbDrLabels } from "@/lib/pb-dr-labels";
+import { pbFaCopy } from "@/lib/pb-fa-copy";
+import { pbFaLabels } from "@/lib/pb-fa-labels";
 
 /** One text on a playbook page, with its English and French version. */
 export const pbText = defineType({
@@ -57,6 +59,7 @@ const prefill = (id: string, name: string, labels: [string, string][], copy: Cop
 
 /** One pre-filled template per playbook: opening a playbook for the first time shows its current texts. */
 export const playbookTemplates: Template[] = [
+  prefill("pb-fa", "The Full-Funnel B2B Advertising Engine", pbFaLabels, pbFaCopy),
   prefill("pb-wv", "The High-Intent Website Visitor Engine", pbWvLabels, pbWvCopy),
   prefill("pb-ct", "The Competitor Takeout Engine", pbCtLabels, pbCtCopy),
   prefill("pb-ev", "The Event & Webinar-to-Pipeline Engine", pbEvLabels, pbEvCopy),

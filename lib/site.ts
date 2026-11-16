@@ -12,8 +12,9 @@
 export const SITE_URL = "https://chadymouawad.com";
 export const INDEXABLE = process.env.SITE_INDEXABLE === "true";
 
-/** The five playbook pages, in the order of the GTM Playbooks page. Titles stay in English in both languages. */
+/** The six playbook pages, in the order of the GTM Playbooks page. Titles stay in English in both languages. */
 export const PLAYBOOKS: [string, string][] = [
+  ["The Full-Funnel B2B Advertising Engine", "full-funnel-b2b-advertising-engine"],
   ["The High-Intent Website Visitor Engine", "high-intent-website-visitor-engine"],
   ["The Competitor Takeout Engine", "competitor-takeout-engine"],
   ["The Event & Webinar-to-Pipeline Engine", "event-webinar-to-pipeline-engine"],

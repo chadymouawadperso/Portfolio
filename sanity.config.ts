@@ -23,6 +23,7 @@ export default defineConfig({
             S.listItem().title("Experience page").id("experiencePage").child(S.document().schemaType("experiencePage").documentId("experiencePage")),
             S.listItem().title("About page").id("aboutPage").child(S.document().schemaType("aboutPage").documentId("aboutPage")),
             S.listItem().title("GTM Playbooks page").id("playbooksPage").child(S.document().schemaType("playbooksPage").documentId("playbooksPage")),
+            S.listItem().title("Playbook · Full-Funnel Advertising Engine").id("pbFullFunnelAds").child(S.document().schemaType("playbookPage").documentId("pbFullFunnelAds").initialValueTemplate("pb-fa")),
             S.listItem().title("Playbook · Website Visitor Engine").id("pbWebsiteVisitor").child(S.document().schemaType("playbookPage").documentId("pbWebsiteVisitor").initialValueTemplate("pb-wv")),
             S.listItem().title("Playbook · Competitor Takeout Engine").id("pbCompetitorTakeout").child(S.document().schemaType("playbookPage").documentId("pbCompetitorTakeout").initialValueTemplate("pb-ct")),
             S.listItem().title("Playbook · Event & Webinar Engine").id("pbEventWebinar").child(S.document().schemaType("playbookPage").documentId("pbEventWebinar").initialValueTemplate("pb-ev")),

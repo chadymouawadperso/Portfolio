@@ -2,7 +2,7 @@ import { legalCopy } from "./legal-copy";
 import type { Metadata, Viewport } from "next";
 import type { Lang } from "./i18n";
 import { SITE_URL, INDEXABLE, alternates } from "./site";
-import { getAbout, getContent, getExperience, getMethodology, getPbAm, getPbCt, getPbDr, getPbEv, getPbWv, getPlaybooks } from "./content";
+import { getAbout, getContent, getExperience, getMethodology, getPbAm, getPbCt, getPbDr, getPbEv, getPbFa, getPbWv, getPlaybooks } from "./content";
 
 // Bump a version when an image changes, so LinkedIn and others re-fetch it instead of using their cached copy.
 const OG_VERSION: Record<string, string> = { experience: "2" };
@@ -105,6 +105,7 @@ async function playbookMetadata(lang: Lang, slug: string, w: { m_title: string; 
   };
 }
 
+export const pbFaMetadata = async (lang: Lang) => playbookMetadata(lang, "full-funnel-b2b-advertising-engine", (await getPbFa(lang)).w);
 export const pbWvMetadata = async (lang: Lang) => playbookMetadata(lang, "high-intent-website-visitor-engine", (await getPbWv(lang)).w);
 export const pbCtMetadata = async (lang: Lang) => playbookMetadata(lang, "competitor-takeout-engine", (await getPbCt(lang)).w);
 export const pbAmMetadata = async (lang: Lang) => playbookMetadata(lang, "account-manager-expansion-engine", (await getPbAm(lang)).w);

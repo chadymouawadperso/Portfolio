@@ -10,8 +10,8 @@ import { ArrowDown, ArrowRight, ArrowUpRight } from "./Icons";
 
 const PATHS = { en: "/gtm-playbooks", fr: "/fr/gtm-playbooks" };
 
-// Number of dots in each card's mini motif (Website, Competitor, Events, Account expansion, Dormant).
-const MOTIF: Record<string, number> = { w: 4, c: 2, e: 3, a: 5, d: 6 };
+// Number of dots in each card's mini motif (Advertising, Website, Competitor, Events, Account expansion, Dormant).
+const MOTIF: Record<string, number> = { f: 3, w: 4, c: 2, e: 3, a: 5, d: 6 };
 
 function Download() {
   return (
@@ -33,7 +33,7 @@ function Row({ it, p }: { it: PlaybookItem; p: PlaybooksDict }) {
         <p className="hook">{p[`h_${it.key}`]}</p>
         <div className="links">
           <a className="link-arrow" href={it.url}><span>{p.read}</span><ArrowRight /></a>
-          <a className="link-arrow" href={it.pdf}><span>{p.pdf}</span><Download /></a>
+          {it.pdf ? <a className="link-arrow" href={it.pdf}><span>{p.pdf}</span><Download /></a> : null}
         </div>
       </div>
     </article>
@@ -67,11 +67,11 @@ export default async function Playbooks({ lang }: { lang: Lang }) {
                 <a className="link-arrow" href={links.methodology}><span>{p.cta_think}</span><ArrowRight /></a>
               </div>
             </div>
-            {/* Hero: the five playbooks as a fanned hand of colored cards; they take turns lifting, hover pulls one up */}
-            <figure className="mh-vis h5" id="h5" aria-hidden="true">
+            {/* Hero: the playbooks as a fanned hand of colored cards; they take turns lifting, hover pulls one up */}
+            <figure className={`mh-vis h5 n${items.length}`} id="h5" aria-hidden="true">
               <div className="h5-in">
                 {items.map((it, i) => (
-                  <a key={it.key} className={`pc pc-${it.key}`} href={it.url} tabIndex={-1} style={{ "--i": i - 2 } as React.CSSProperties}>
+                  <a key={it.key} className={`pc pc-${it.key}`} href={it.url} tabIndex={-1} style={{ "--i": i - (items.length - 1) / 2 } as React.CSSProperties}>
                     <i className={`mo mo-${it.key}`}>{Array.from({ length: MOTIF[it.key] ?? 0 }, (_, j) => <b key={j} />)}</i>
                     <p>{p[`nl_${it.key}`]}</p>
                     <span>{p[it.group]}</span>

@@ -57,7 +57,7 @@ export function initExploded(reduce: boolean, once: Once, cleanups: (() => void)
   }
 }
 
-/** GTM Playbooks hero: the five cards take turns lifting until the visitor hovers the hand. */
+/** GTM Playbooks hero: the cards take turns lifting until the visitor hovers the hand. */
 export function initHand(reduce: boolean, cleanups: (() => void)[]) {
   const box = document.getElementById("h5");
   if (!box || reduce) return;

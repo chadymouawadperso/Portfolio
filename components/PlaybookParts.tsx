@@ -60,7 +60,7 @@ export function PlaybookHero({ w, title, pdf, hub, visual, index }: { w: W; titl
           <p className="subtitle">{w.sub}</p>
           <p className="mh-lead">{w.lead}</p>
           <div className="cta-row">
-            <a className="btn" href={pdf}><span>{w.pdf}</span><Download /></a>
+            <a className="btn" href={pdf}><span>{w.pdf}</span>{pdf.startsWith("#") ? <ArrowDown /> : <Download />}</a>
             <a className="link-arrow" href={hub}><span>{w.all}</span><ArrowRight /></a>
           </div>
         </div>
@@ -240,7 +240,7 @@ export function Closing({ w, base, pdf, hub, next }: { w: W; base: Content; pdf:
         <p className="sub">{w.c_q}</p>
         <div className="cta-row">
           <a className="btn" href={links.linkedin} target="_blank" rel="noopener"><span>{t.cta_connect}</span><ArrowUpRight /></a>
-          <a className="link-arrow" href={pdf}><span>{w.c_pdf}</span><ArrowDown /></a>
+          {pdf.startsWith("#") ? null : <a className="link-arrow" href={pdf}><span>{w.c_pdf}</span><ArrowDown /></a>}
         </div>
         <nav className="np" aria-label={w.np_next}>
           <a href={hub}><span className="np-k">{w.np_all}</span><b>GTM Playbooks</b></a>
