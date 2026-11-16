@@ -2,7 +2,7 @@
 // Sanity overrides any text filled in the Studio (document "Playbook · Competitor Takeout Engine").
 export const pbCtCopy = {
   en: {
-    h1l: "Win customers|from your|competitors.",
+    h1l: "Win competitor|customers.",
     m_title: "Win Customers from Competitors · Chady Mouawad",
     m_desc: "A 12-step B2B playbook for competitor takeout: find the accounts comparing alternatives, check fit and timing, and run a structured displacement motion.",
     kick: "GTM Playbook · The Competitor Takeout Engine",
@@ -218,7 +218,7 @@ export const pbCtCopy = {
     np_next: "Next playbook",
   },
   fr: {
-    h1l: "Conquérir|les clients de|vos concurrents.",
+    h1l: "Gagnez les|clients rivaux.",
     m_title: "Conquérir les clients de vos concurrents · Chady Mouawad",
     m_desc: "Un playbook B2B en 12 étapes pour remplacer un concurrent : repérer les comptes qui comparent, vérifier le timing et lancer une démarche structurée.",
     kick: "Playbook GTM · The Competitor Takeout Engine",

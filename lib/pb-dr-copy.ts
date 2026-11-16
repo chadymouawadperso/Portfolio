@@ -2,7 +2,7 @@
 // Sanity overrides any text filled in the Studio (document "Playbook · Dormant Customer Reactivation Engine").
 export const pbDrCopy = {
   en: {
-    h1l: "Reactivate|inactive B2B|customers.",
+    h1l: "Win back|B2B customers.",
     m_title: "Reactivate Inactive B2B Customers · Chady Mouawad",
     m_desc: "A 13-step playbook to win back B2B customers who stopped ordering: understand why they went quiet, re-engage them, and route replies to the Account Manager.",
     kick: "GTM Playbook · The Dormant Customer Reactivation Engine",
@@ -221,7 +221,7 @@ export const pbDrCopy = {
     np_all: "All GTM playbooks",
   },
   fr: {
-    h1l: "Relancer|vos clients|inactifs.",
+    h1l: "Reconquérez|vos clients B2B.",
     m_title: "Relancer les clients inactifs · Chady Mouawad",
     m_desc: "Un playbook en 13 étapes pour reconquérir les clients B2B qui ne commandent plus : comprendre pourquoi, reprendre contact, alerter l’Account Manager.",
     kick: "Playbook GTM · The Dormant Customer Reactivation Engine",

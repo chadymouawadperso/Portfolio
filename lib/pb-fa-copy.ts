@@ -2,7 +2,7 @@
 // Sanity overrides any field filled in the Studio (document "Playbook · Full-Funnel Advertising Engine").
 export const pbFaCopy = {
   en: {
-    h1l: "A B2B paid|media strategy|built for pipeline.",
+    h1l: "Full-funnel|ad strategy.",
     m_title: "B2B Paid Media Strategy for Pipeline · Chady Mouawad",
     m_desc: "A 12-step B2B paid media strategy: give each channel one job, reach the whole buying group, hand engaged accounts to sales, and judge ads on pipeline.",
     np_next: "Next playbook",
@@ -219,7 +219,7 @@ export const pbFaCopy = {
     r4s: "How did opportunities and pipeline in reached accounts compare with accounts advertising did not reach?",
   },
   fr: {
-    h1l: "Une stratégie|paid media B2B|qui crée du pipeline.",
+    h1l: "Stratégie ads|full-funnel.",
     m_title: "Stratégie paid media B2B orientée pipeline · Chady Mouawad",
     m_desc: "Une stratégie paid media B2B en 12 étapes : un rôle par canal, tout le comité d’achat touché, les comptes engagés transmis aux sales, et un pilotage au pipeline.",
     np_next: "Playbook suivant",

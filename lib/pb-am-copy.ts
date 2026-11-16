@@ -2,7 +2,7 @@
 // Sanity overrides any text filled in the Studio (document "Playbook · Account Manager Expansion Engine").
 export const pbAmCopy = {
   en: {
-    h1l: "Grow your|existing customer|accounts.",
+    h1l: "Grow existing|accounts.",
     m_title: "Grow Existing Customer Accounts · Chady Mouawad",
     m_desc: "A 10-step B2B playbook that helps Account Managers reach more of the right people in their accounts and expand them, without automating the relationship.",
     kick: "GTM Playbook · The Account Manager Expansion Engine",
@@ -209,7 +209,7 @@ export const pbAmCopy = {
     np_all: "All GTM playbooks",
   },
   fr: {
-    h1l: "Développer|vos comptes|clients existants.",
+    h1l: "Développez vos|comptes clients.",
     m_title: "Développer les comptes clients existants · Chady Mouawad",
     m_desc: "Un playbook B2B en 10 étapes pour aider les Account Managers à toucher plus de bons interlocuteurs dans leurs comptes, sans automatiser la relation.",
     kick: "Playbook GTM · The Account Manager Expansion Engine",

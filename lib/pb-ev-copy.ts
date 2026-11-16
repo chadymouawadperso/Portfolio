@@ -2,7 +2,7 @@
 // Sanity overrides any text filled in the Studio (document "Playbook · Event & Webinar Engine").
 export const pbEvCopy = {
   en: {
-    h1l: "Follow up|trade show and|event leads.",
+    h1l: "Follow up|event leads.",
     m_title: "Trade Show and Event Lead Follow-Up · Chady Mouawad",
     m_desc: "A 13-step B2B playbook to turn trade shows, events and webinars into qualified pipeline: score accounts, not attendees, and activate sales fast.",
     kick: "GTM Playbook · The Event & Webinar-to-Pipeline Engine",
@@ -241,7 +241,7 @@ export const pbEvCopy = {
     np_all: "All GTM playbooks",
   },
   fr: {
-    h1l: "Suivre les leads|après un salon|ou un événement.",
+    h1l: "Exploitez vos|leads salon.",
     m_title: "Suivi des leads après un salon ou un événement · Chady Mouawad",
     m_desc: "Un playbook B2B en 13 étapes pour transformer salons, événements et webinars en pipeline qualifié : scorer les comptes, pas les participants.",
     kick: "Playbook GTM · The Event & Webinar-to-Pipeline Engine",

@@ -2,7 +2,7 @@
 // Sanity overrides any field filled in the Studio (document "Playbook · Website Visitor Engine").
 export const pbWvCopy = {
   en: {
-    h1l: "Identify the|companies visiting|your website.",
+    h1l: "Identify your|site visitors.",
     m_title: "Identify Companies Visiting Your Website · Chady Mouawad",
     m_desc: "A 12-step B2B playbook to identify the companies visiting your website, prioritize them on fit and timing, warm them with advertising, and get sales to act while interest is live.",
     np_next: "Next playbook",
@@ -212,7 +212,7 @@ export const pbWvCopy = {
     u_nd: "Not designed for consumer traffic, or for teams that want an alert on every visit.",
   },
   fr: {
-    h1l: "Identifier les|entreprises qui|visitent votre site.",
+    h1l: "Identifiez vos|visiteurs B2B.",
     m_title: "Identifier les entreprises qui visitent votre site · Chady Mouawad",
     m_desc: "Un playbook B2B en 12 étapes pour identifier les entreprises qui visitent votre site, les prioriser, les préparer avec la publicité et faire agir les sales au bon moment.",
     np_next: "Playbook suivant",
